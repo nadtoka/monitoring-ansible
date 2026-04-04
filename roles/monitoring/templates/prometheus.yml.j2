@@ -1,0 +1,56 @@
+# roles/monitoring/templates/prometheus.yml.j2
+global:
+  scrape_interval: 15s # How often to fetch metrics
+
+scrape_configs:
+  # 1. Hardware metrics from your server
+  - job_name: 'node-exporter'
+    static_configs:
+{% for host in groups['all'] %}
+      - targets: ['{{ hostvars[host].ansible_host }}:9100']
+        labels:
+          alias: '{{ host }}'
+{% endfor %}
+
+  # 2. Website monitoring (status codes, SSL, etc.)
+  - job_name: 'website-monitoring'
+    metrics_path: /probe
+    params:
+      module: [http_2xx] # Check for 200 status OK
+    static_configs:
+      - targets:
+{% for site in monitored_sites %}
+        - '{{ site }}'
+{% endfor %}
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115 # Address of the blackbox exporter
+
+  # 3. VictoriaMetrics self-monitoring
+  - job_name: 'victoria-metrics'
+    static_configs:
+      - targets: ['victoriametrics:8428'] 
+
+  # 4. MariaDB monitoring
+{% for host in groups['all'] if hostvars[host].has_mysql | default(false) %}
+{% if loop.first %}
+  - job_name: 'mysql'
+    static_configs:
+{% endif %}
+      - targets: ['{{ hostvars[host].ansible_host }}:9104']
+        labels:
+          alias: '{{ host }}'
+{% endfor %}
+
+  # 5. Docker monitoring
+  - job_name: 'cadvisor'
+    static_configs:
+{% for host in groups['all'] if hostvars[host].is_swarm_manager | default(false) %}
+      - targets: ['{{ hostvars[host].ansible_host }}:8080']
+        labels:
+          alias: '{{ host }}'
+{% endfor %}

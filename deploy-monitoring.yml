@@ -1,0 +1,10 @@
+---
+# deploy-monitoring.yml
+- name: Deploy Monitoring Stack
+  hosts: all
+  become: true
+  roles:
+    - role: docker
+      when: install_method | default('docker') != 'binary'
+      
+    - role: monitoring

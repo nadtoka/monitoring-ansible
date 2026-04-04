@@ -1,0 +1,12 @@
+# roles/grafana/files/dashboard.yml
+apiVersion: 1
+providers:
+  - name: 'Default Provisioning'
+    orgId: 1
+    folder: ''
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    options:
+      # Path INSIDE the Grafana container where JSON files will be mounted
+      path: /var/lib/grafana/dashboards

@@ -1,0 +1,39 @@
+# SSH and Sudo credentials (standard Ansible variables)
+ansible_user: "user"
+ansible_become_pass: "SecurePass"
+ansible_ssh_private_key_file: "~/.ssh/id_ed25519"
+
+# PBS credentials
+vault_pbs_user: "user-pbs"
+vault_pbs_pass: "SecurePass"
+
+# AWS credentials
+vault_aws_user: "user"
+vault_swarm_manager_ip: "192.0.0.1"
+vault_aws_ssh_key: "~/.ssh/id_ed25519"
+vault_aws_ssh_port: 22
+
+# Application secrets
+grafana_admin_password: "SecurePass"
+
+# MySQL Exporter passowrd
+vault_mysql_exporter_password: "SecurePass"
+
+# List of sites to monitor (can be a real YAML list now)
+monitored_sites:
+  - "https://google.com"
+  - "https://cloudflare.com"
+  - "https://youtube.com"
+  - "https://facebook.com"
+
+# List of servers to monitor
+vault_ip_activecollab: "192.168.0.1"
+vault_ip_t800_db: "192.168.0.2"
+vault_ip_elastic: "192.168.0.3"
+vault_ip_paperless: "192.168.0.4"
+vault_ip_npm: "192.168.0.5"
+vault_ip_shared_hosting: "192.168.0.6"
+vault_ip_morkva2: "192.168.0.7"
+vault_ip_eyeofsauron: "192.168.0.8"
+vault_ip_pbs: "192.168.0.9"
+vault_ip_skynet: "192.168.0.10"

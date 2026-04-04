@@ -1,0 +1,30 @@
+# Ansible Secrets
+group_vars/all/vault.yml
+# Тимчасові файли, які створює Ansible при редагуванні ваулта
+group_vars/all/vault.yml.retry
+.ansible_vault
+.env
+*.retry
+*.vault_pass
+group_vars/all/vault.yml.unp*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS specific (macOS)
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor Specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# SSH keys 
+*.pem
+*.key
+id_rsa*

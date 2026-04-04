@@ -1,0 +1,106 @@
+---
+# ==========================================
+# NODE EXPORTER SECTION (Runs on all hosts)
+# ==========================================
+
+# Install Node Exporter as a native system service (e.g., for PBS/Proxmox)
+- name: Install Node Exporter via APT (Binary)
+  ansible.builtin.apt:
+    name: prometheus-node-exporter
+    state: present
+    update_cache: yes
+  when: install_method | default('docker') == 'binary'
+
+# Deploy Node Exporter as a Docker container (Standard for most servers)
+- name: Deploy Node Exporter via Docker
+  community.docker.docker_container:
+    name: node-exporter
+    image: prom/node-exporter:latest
+    network_mode: host
+    restart_policy: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($|/)'
+  when: install_method | default('docker') == 'docker'
+
+# ==========================================
+# CENTRAL MONITORING SECTION (EyeOfSauron only)
+# ==========================================
+
+# Create required directories for Grafana and VictoriaMetrics
+- name: Create Grafana provisioning directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ docker_compose_dir }}/grafana/provisioning/dashboards"
+    - "{{ docker_compose_dir }}/grafana/provisioning/datasources"
+    - "{{ docker_compose_dir }}/grafana/dashboards"
+  when: is_central | default(false)
+
+# Configure dashboard provisioning
+- name: Copy provisioning config for dashboards
+  ansible.builtin.copy:
+    src: dashboard.yml
+    dest: "{{ docker_compose_dir }}/grafana/provisioning/dashboards/dashboard.yml"
+    mode: '0644'
+  when: is_central | default(false)
+  notify: Restart Grafana
+
+# Upload JSON dashboard files to the server
+- name: Copy JSON dashboard files
+  ansible.builtin.copy:
+    src: dashboards/
+    dest: "{{ docker_compose_dir }}/grafana/dashboards/"
+    mode: '0644'
+  when: is_central | default(false)
+  notify: Restart Grafana
+
+# Generate docker-compose.yml from template
+- name: Deploy docker-compose.yml template
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ docker_compose_dir }}/docker-compose.yml"
+    mode: '0644'
+  when: is_central | default(false)
+
+# Generate prometheus.yml from template (with all hosts and aliases)
+- name: Deploy prometheus.yml config
+  ansible.builtin.template:
+    src: prometheus.yml.j2
+    dest: "{{ docker_compose_dir }}/prometheus.yml"
+    mode: '0644'
+  when: is_central | default(false)
+  notify: Restart VictoriaMetrics
+
+# Configure VictoriaMetrics as a default Grafana datasource
+- name: Copy VictoriaMetrics datasource config
+  ansible.builtin.copy:
+    src: datasource.yml
+    dest: "{{ docker_compose_dir }}/grafana/provisioning/datasources/datasource.yml"
+    mode: '0644'
+  when: is_central | default(false)
+  notify: Restart Grafana
+
+# Launch the monitoring stack using Docker Compose
+- name: Start monitoring stack with Docker Compose
+  ansible.builtin.command:
+    cmd: docker compose up -d
+    chdir: "{{ docker_compose_dir }}"
+  register: compose_output
+  changed_when: "'Started' in compose_output.stdout or 'Created' in compose_output.stdout"
+  when: is_central | default(false)
+
+# Import MySQL 
+- name: Import MySQL Exporter tasks
+  import_tasks: mysql_exporter.yml
+
+# Docker monitoring
+- name: Import Cadvisor Exporter tasks
+  import_tasks: swarm_monitoring.yml

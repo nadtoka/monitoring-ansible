@@ -1,0 +1,6 @@
+# group_vars/all/settings.yml
+victoriametrics_version: "v1.101.0"
+grafana_version: "10.4.1"
+victoriametrics_port: 8428
+grafana_port: 3000
+docker_compose_dir: "/home/{{ ansible_user }}/monitoring"

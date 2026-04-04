@@ -1,0 +1,43 @@
+# roles/monitoring/templates/docker-compose.yml.j2
+
+services:
+  victoriametrics:
+    image: victoriametrics/victoria-metrics:{{ victoriametrics_version }}
+    container_name: victoriametrics
+    ports:
+      - "{{ victoriametrics_port }}:8428"
+    volumes:
+      - vmdata:/storage
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - "--storageDataPath=/storage"
+      - "--retentionPeriod=1y"
+      - "--promscrape.config=/etc/prometheus/prometheus.yml" # Start scraping!
+    restart: always
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:latest
+    container_name: blackbox-exporter
+    ports:
+      - "9115:9115"
+    restart: always
+
+  grafana:
+    image: grafana/grafana:{{ grafana_version }}
+    container_name: grafana
+    ports:
+      - "{{ grafana_port }}:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD={{ grafana_admin_password }}
+    volumes:
+      - grafanadata:/var/lib/grafana
+      - ./grafana/provisioning/dashboards/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml:ro
+      - ./grafana/provisioning/datasources/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - victoriametrics
+    restart: always
+
+volumes:
+  vmdata:
+  grafanadata:

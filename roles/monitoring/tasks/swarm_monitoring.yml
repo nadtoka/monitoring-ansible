@@ -1,0 +1,46 @@
+- name: Create monitoring overlay network
+  community.docker.docker_network:
+    name: monitoring_network
+    driver: overlay
+    attachable: yes
+  when: is_swarm_manager | default(false)
+
+- name: Deploy cAdvisor as Swarm Global Service
+  community.docker.docker_swarm_service:
+    name: cadvisor
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    mode: global
+    networks:
+      - monitoring_network  
+    publish:
+      - published_port: 8080
+        target_port: 8080
+    limits:
+      cpus: '0.20'
+      memory: 256M
+    reservations:
+      cpus: '0.10'
+      memory: 128M
+    mounts:
+      - source: /
+        target: /rootfs
+        type: bind
+        readonly: yes
+      - source: /var/run
+        target: /var/run
+        type: bind
+        readonly: no
+      - source: /sys
+        target: /sys
+        type: bind
+        readonly: yes
+      - source: /var/lib/docker
+        target: /var/lib/docker
+        type: bind
+        readonly: yes
+    command: /usr/bin/cadvisor
+    args:
+      - "--docker_only=true"
+      - "--housekeeping_interval=30s"
+      - "--disable_metrics=disk,tcp,udp,percpu,sched"
+  when: is_swarm_manager | default(false)

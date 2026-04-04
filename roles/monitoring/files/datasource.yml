@@ -1,0 +1,10 @@
+# roles/monitoring/files/datasource.yml
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    url: http://victoriametrics:8428
+    access: proxy
+    isDefault: true
+    editable: true

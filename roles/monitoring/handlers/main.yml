@@ -1,0 +1,10 @@
+---
+# roles/monitoring/handlers/main.yml
+- name: Restart VictoriaMetrics
+  ansible.builtin.command:
+    cmd: docker compose restart victoriametrics
+    chdir: "{{ docker_compose_dir }}"
+- name: Restart Grafana
+  ansible.builtin.command:
+    cmd: docker compose restart grafana
+    chdir: "{{ docker_compose_dir }}"

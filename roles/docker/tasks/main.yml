@@ -1,0 +1,37 @@
+---
+# ==========================================
+# DOCKER INSTALLATION AND CONFIGURATION
+# ==========================================
+
+# Check if Docker is already installed
+- name: Check if Docker is installed
+  ansible.builtin.shell: command -v docker
+  register: docker_installed
+  changed_when: false
+  failed_when: false
+
+# Download the official installation script if Docker is missing
+- name: Download Docker install script
+  ansible.builtin.get_url:
+    url: https://get.docker.com
+    dest: /tmp/get-docker.sh
+    mode: '0755'
+  when: docker_installed.rc != 0
+
+# Run the installation script (requires sudo)
+- name: Install Docker
+  ansible.builtin.command: /tmp/get-docker.sh
+  become: true
+  when: docker_installed.rc != 0
+
+# Add your user to the docker group
+- name: Ensure user is in docker group
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+  become: true
+
+# Reset connection to apply group changes immediately
+- name: Reset ssh connection to apply new group permissions
+  ansible.builtin.meta: reset_connection
