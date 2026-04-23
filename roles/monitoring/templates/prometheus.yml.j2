@@ -35,7 +35,7 @@ scrape_configs:
     static_configs:
       - targets: ['victoriametrics:8428'] 
 
-  # 4. MariaDB monitoring
+# 4. MariaDB monitoring
 {% for host in groups['all'] if hostvars[host].has_mysql | default(false) %}
 {% if loop.first %}
   - job_name: 'mysql'
@@ -44,6 +44,8 @@ scrape_configs:
       - targets: ['{{ hostvars[host].ansible_host }}:9104']
         labels:
           alias: '{{ host }}'
+          project: 'activecollab'
+          desc: 'Galera Cluster'
 {% endfor %}
 
   # 5. Docker monitoring
@@ -51,6 +53,30 @@ scrape_configs:
     static_configs:
 {% for host in groups['all'] if hostvars[host].is_swarm_manager | default(false) %}
       - targets: ['{{ hostvars[host].ansible_host }}:8080']
+        labels:
+          alias: '{{ host }}'
+{% endfor %}
+
+# 6. Kubernetes State Monitoring (ActiveCollab k8s & Aragorn k3s)
+{% for host in groups['all'] if hostvars[host].has_k8s | default(false) or hostvars[host].has_k3s | default(false) %}
+{% if loop.first %}
+  - job_name: 'kubernetes-state'
+    static_configs:
+{% endif %}
+      - targets: ['{{ hostvars[host].ansible_host }}:31080']
+        labels:
+          alias: '{{ host }}'
+{% endfor %}
+
+  # 7. ArgoCD Metrics (Aragorn only)
+{% for host in groups['all'] if hostvars[host].has_argocd | default(false) %}
+{% if loop.first %}
+  - job_name: 'argocd-metrics'
+    static_configs:
+{% endif %}
+      - targets: 
+        - '{{ hostvars[host].ansible_host }}:31082' # Application Controller
+        - '{{ hostvars[host].ansible_host }}:31083' # Repo Server
         labels:
           alias: '{{ host }}'
 {% endfor %}

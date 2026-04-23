@@ -10,6 +10,7 @@
     state: present
     update_cache: yes
   when: install_method | default('docker') == 'binary'
+  tags: ['node-exporter']
 
 # Deploy Node Exporter as a Docker container (Standard for most servers)
 - name: Deploy Node Exporter via Docker
@@ -27,6 +28,7 @@
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($|/)'
   when: install_method | default('docker') == 'docker'
+  tags: ['node-exporter']
 
 # ==========================================
 # CENTRAL MONITORING SECTION (EyeOfSauron only)
