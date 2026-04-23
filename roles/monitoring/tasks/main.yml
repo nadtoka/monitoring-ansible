@@ -81,6 +81,37 @@
   when: is_central | default(false)
   notify: Restart VictoriaMetrics
 
+# Create folders for alertmanager and vmaler
+- name: Create monitoring sub-directories
+  ansible.builtin.file:
+    path: "{{ docker_compose_dir }}/{{ item }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+  loop:
+    - alertmanager
+    - vmalert
+  when: is_central | default(false)
+
+# Generate rules for vmalert
+- name: Create vmalert rules config
+  ansible.builtin.template:
+    src: rules.yml.j2
+    dest: "{{ docker_compose_dir }}/vmalert/rules.yml"
+    mode: '0644'
+  when: is_central | default(false)
+  notify: Restart vmalert
+
+# Generate conf for Alertmanager
+- name: Create Alertmanager config
+  ansible.builtin.template:
+    src: alertmanager.yml.j2
+    dest: "{{ docker_compose_dir }}/alertmanager/alertmanager.yml"
+    mode: '0644'
+  when: is_central | default(false)
+  notify: Restart Alertmanager
+
 # Configure VictoriaMetrics as a default Grafana datasource
 - name: Copy VictoriaMetrics datasource config
   ansible.builtin.copy:

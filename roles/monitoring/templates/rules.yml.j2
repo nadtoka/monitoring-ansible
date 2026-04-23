@@ -1,0 +1,82 @@
+{% raw %}
+groups:
+  - name: HostStatus
+    rules:
+      - alert: InstanceDown
+        expr: up == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Сервер {{ $labels.instance }} ({{ $labels.alias }}) недоступний"
+          description: "Node Exporter не відповідає більше 2 хвилин."
+
+      - alert: HostLowDiskSpace
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Мало місця на диску на {{ $labels.alias }}"
+          description: "На розділі / залишилося менше 10% вільного місця (зараз: {{ $value | printf \"%.2f\" }}%)."
+
+      - alert: HostHighCpuLoad
+        expr: 100 - (avg by(instance, alias) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 90
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Високе навантаження CPU на {{ $labels.alias }}"
+          description: "CPU завантажений на {{ $value | printf \"%.2f\" }}% протягом останніх 10 хвилин."
+
+  - name: NetworkAndTraffic
+    rules:
+      - alert: HighNetworkTrafficIn
+        expr: sum by(instance, alias) (rate(node_network_receive_bytes_total{device!="lo"}[5m])) > 104857600
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Високий вхідний трафік на {{ $labels.alias }}"
+          description: "Потік даних перевищує 100 MB/s (зараз: {{ $value | humanize1024 }}B/s)."
+
+  - name: BlackboxAlerts
+    rules:
+      - alert: WebsiteDown
+        expr: probe_success == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Сайт {{ $labels.instance }} лежить!"
+          description: "HTTP перевірка для {{ $labels.instance }} повернула помилку."
+
+      - alert: WebsiteSlowResponse
+        expr: probe_duration_seconds > 5
+        for: 3m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Сайт {{ $labels.instance }} гальмує"
+          description: "Час відповіді сайту більше 5 секунд: {{ $value | printf \"%.2f\" }}с."
+
+  - name: MySQL_Galera
+    rules:
+      - alert: MySQLDown
+        expr: mysql_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "MySQL на {{ $labels.alias }} впав"
+          description: "Експортер не може підключитися до бази на ноді {{ $labels.instance }}."
+
+      - alert: GaleraClusterSizeAlert
+        expr: mysql_global_status_wsrep_cluster_size < 3
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Проблема з кластером Галера!"
+          description: "Розмір кластера зменшився до {{ $value }}. Можлива втрата кворуму."
+{% endraw %}
