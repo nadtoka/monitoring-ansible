@@ -44,7 +44,7 @@ scrape_configs:
       - targets: ['{{ hostvars[host].ansible_host }}:9104']
         labels:
           alias: '{{ host }}'
-          project: 'activecollab'
+          project: 'galera-cluster'
           desc: 'Galera Cluster'
 {% endfor %}
 
