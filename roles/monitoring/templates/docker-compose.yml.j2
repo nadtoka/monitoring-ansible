@@ -12,7 +12,8 @@ services:
     command:
       - "--storageDataPath=/storage"
       - "--retentionPeriod=1y"
-      - "--promscrape.config=/etc/prometheus/prometheus.yml" # Start scraping!
+      - "--promscrape.config=/etc/prometheus/prometheus.yml"
+      - "-vmalert.proxyURL=http://vmalert:8880"
     restart: always
 
   blackbox-exporter:
@@ -22,7 +23,6 @@ services:
       - "9115:9115"
     restart: always
 
-  # Правила та перевірка алертів
   vmalert:
     container_name: vmalert
     image: victoriametrics/vmalert:v1.101.0
@@ -36,6 +36,8 @@ services:
       - "-datasource.url=http://victoriametrics:8428"
       - "-notifier.url=http://alertmanager:9093"
       - "-rule=/etc/alerts/rules.yml"
+      - "-httpListenAddr=0.0.0.0:8880"
+      - "-http.disableResponseCompression"
     restart: always
 
   # Обробка та маршрутизація алертів
