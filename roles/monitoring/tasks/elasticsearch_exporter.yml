@@ -1,0 +1,15 @@
+---
+# roles/monitoring/tasks/elasticsearch_exporter.yml
+
+- name: Deploy Elasticsearch Exporter via Docker
+  community.docker.docker_container:
+    name: elasticsearch_exporter
+    image: prometheuscommunity/elasticsearch-exporter:latest
+    network_mode: host
+    restart_policy: unless-stopped
+    command:
+      - '--es.uri=http://remote_monitoring_user:{{ vault_elastic_monitoring_password }}@localhost:9200'
+      - '--es.all'
+      - '--es.indices'
+  when: has_elasticsearch | default(false)
+  tags: ['elasticsearch-exporter']

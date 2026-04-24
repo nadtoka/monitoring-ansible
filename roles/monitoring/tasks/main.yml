@@ -112,10 +112,10 @@
   when: is_central | default(false)
   notify: Restart Alertmanager
 
-# Configure VictoriaMetrics as a default Grafana datasource
-- name: Copy VictoriaMetrics datasource config
-  ansible.builtin.copy:
-    src: datasource.yml
+# Configure Grafana datasources (VictoriaMetrics, vmalert, Alertmanager, Elasticsearch)
+- name: Template Grafana datasource config
+  ansible.builtin.template:
+    src: datasource.yml.j2
     dest: "{{ docker_compose_dir }}/grafana/provisioning/datasources/datasource.yml"
     mode: '0644'
   when: is_central | default(false)
@@ -133,6 +133,10 @@
 # Import MySQL 
 - name: Import MySQL Exporter tasks
   import_tasks: mysql_exporter.yml
+
+# Import ElasticSearch Exporter tasks
+- name: Import ElasticSearch Exporter tasks
+  import_tasks: elasticsearch_exporter.yml
 
 # Docker monitoring
 - name: Import Cadvisor Exporter tasks

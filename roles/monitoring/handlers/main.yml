@@ -3,24 +3,24 @@
 
 - name: Restart VictoriaMetrics
   ansible.builtin.command:
-    cmd: docker compose up -d victoriametrics
+    cmd: docker compose restart victoriametrics
     chdir: "{{ docker_compose_dir }}"
   when: is_central | default(false)
 
 - name: Restart Grafana
   ansible.builtin.command:
-    cmd: docker compose up -d grafana
+    cmd: docker compose restart grafana
     chdir: "{{ docker_compose_dir }}"
   when: is_central | default(false)
 
 - name: Restart vmalert
   ansible.builtin.command:
-    cmd: docker compose up -d vmalert
+    cmd: docker compose restart vmalert
     chdir: "{{ docker_compose_dir }}"
   when: is_central | default(false)
 
 - name: Restart Alertmanager
   ansible.builtin.command:
-    cmd: docker compose up -d alertmanager
+    cmd: docker compose restart alertmanager
     chdir: "{{ docker_compose_dir }}"
   when: is_central | default(false)

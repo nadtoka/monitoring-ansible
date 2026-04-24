@@ -80,3 +80,16 @@ scrape_configs:
         labels:
           alias: '{{ host }}'
 {% endfor %}
+
+# 8. ElasticSearch monitoring
+{% for host in groups['all'] if hostvars[host].has_elasticsearch | default(false) %}
+{% if loop.first %}
+  - job_name: 'elasticsearch'
+    static_configs:
+{% endif %}
+      - targets: ['{{ hostvars[host].ansible_host }}:9114']
+        labels:
+          alias: '{{ host }}'
+          project: 't-800'
+{% endfor %}
+

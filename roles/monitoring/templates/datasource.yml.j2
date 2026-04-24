@@ -1,0 +1,44 @@
+# roles/monitoring/files/datasource.yml
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    url: http://victoriametrics:8428
+    access: proxy
+    isDefault: true
+    editable: true
+  - name: vmalert
+    type: prometheus
+    url: http://vmalert:8880
+    access: proxy
+    editable: true
+    jsonData:
+      manageAlerts: true
+      prometheusType: "Prometheus"
+      cacheLevel: "High"
+  - name: Alertmanager
+    type: alertmanager
+    url: http://alertmanager:9093
+    access: proxy
+    editable: true
+    jsonData:
+      implementation: prometheus
+  - name: elasticsearch
+    type: elasticsearch
+    url: http://{{ vault_ip_elastic }}:9200
+    access: proxy
+    editable: true
+    basicAuth: true
+    basicAuthUser: elastic
+    secureJsonData:
+      basicAuthPassword: "{{ vault_elastic_admin_password }}"
+    jsonData:
+      esVersion: "8.0+"
+      timeField: "@timestamp"
+      index: "logs-*"
+      dataStream: true
+      logMessageField: "message"
+      logLevelField: "log.level"
+      maxConcurrentShardRequests: 5
+      includeFrozen: false

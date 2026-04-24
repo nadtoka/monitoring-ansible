@@ -13,6 +13,10 @@ vault_swarm_manager_ip: "192.0.0.1"
 vault_aws_ssh_key: "~/.ssh/id_ed25519"
 vault_aws_ssh_port: 22
 
+# Elastic admin and remote_monitoring_user passwords
+vault_elastic_admin_password: "SecurePass"
+vault_elastic_monitoring_password: "SecurePass"
+
 # Application secrets
 grafana_admin_password: "SecurePass"
 
@@ -28,7 +32,6 @@ monitored_sites:
 
 # List of servers to monitor
 vault_ip_activecollab: "192.168.0.1"
-vault_ip_t800_db: "192.168.0.2"
 vault_ip_elastic: "192.168.0.3"
 vault_ip_paperless: "192.168.0.4"
 vault_ip_npm: "192.168.0.5"
@@ -37,3 +40,6 @@ vault_ip_morkva2: "192.168.0.7"
 vault_ip_eyeofsauron: "192.168.0.8"
 vault_ip_pbs: "192.168.0.9"
 vault_ip_skynet: "192.168.0.10"
+vault_ip_galera_db1: "192.168.1.1"
+vault_ip_galera_db2: "192.168.1.2"
+vault_ip_galera_db3: "192.168.1.3"
