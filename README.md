@@ -54,6 +54,14 @@ Infrastructure as Code (IaC) repository for deploying a modular, high-performanc
 
 ---
 
+🔑 SSH & Connection Logic
+
+- Aliased Hosts: For most servers, Ansible uses your default SSH user from which you run ansible playbooks and  local ~/.ssh/config settings (aliases, users, and keys).
+- Special Nodes (AWS in my case): Defined explicitly in inventories/production/hosts.yml with specific ansible_user and ansible_ssh_private_key_file from the Vault.
+- Global Default: You can override the default user for all unmapped nodes by adding remote_user = <your_user> to ansible.cfg.
+
+---
+
 ## ⚡ Quick Start
 
 ### 1. 🔐 Secret Management (Vault)
@@ -95,6 +103,19 @@ has_mysql: true
 Enable Elasticsearch monitoring:
 ```yaml
 has_elasticsearch: true
+```
+Enable Kubernetes monitoring: 
+```yaml
+has_k8s: true
+```
+
+Enable ArgoCD metrics:
+```yaml
+has_argocd: true
+```
+Install via binary (no Docker):
+```yaml
+install_method: "binary"
 ```
 
 Assign as central monitoring node:
@@ -141,7 +162,7 @@ ansible-playbook -i inventories/production/hosts.yml deploy-monitoring.yml --lim
 | 2322  | Elasticsearch Overview                         | ES Cluster health              |
 | 20016 | MySQL 8.0 Overview                             | Database performance           |
 | 21743 | cAdvisor - Docker Containers Overview          | Container metrics              |
-|       | Alerts Overview (vmalert)                      | Alerting rules status          |
+|       | Alerts Overview (vmalert)                      | Alerting                       |
 
 ---
 
@@ -162,5 +183,6 @@ Use firewall rules or cloud security groups (AWS SG, etc.).
 - Dashboards are provisioned automatically via Ansible
 - Fully compatible with Prometheus ecosystem
 - Designed for scalability across multiple environments
+- vmalert: VictoriaMetrics alerting engine. Now integrated directly via the VictoriaMetrics Proxy (-vmalert.proxyURL), allowing Grafana to access rules and alerts through a single Prometheus-compatible endpoint.
 
 ---
