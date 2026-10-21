@@ -1,24 +1,23 @@
-{% raw %}
 groups:
   - name: HostStatus
     rules:
-      - alert: InstanceDown
+      - alert: HostDown
         expr: up == 0
         for: 2m
         labels:
           severity: critical
         annotations:
-          summary: "Сервер {{ $labels.instance }} ({{ $labels.alias }}) недоступний"
+          summary: "Сервер {{ '{{' }} $labels.instance {{ '}}' }} ({{ '{{' }} $labels.alias {{ '}}' }}) недоступний"
           description: "Node Exporter не відповідає більше 2 хвилин."
 
-      - alert: HostLowDiskSpace
-        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 10
+      - alert: DiskSpaceLow
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} * 100) / node_filesystem_size_bytes{mountpoint="/"} < 15
         for: 5m
         labels:
           severity: warning
         annotations:
-          summary: "Мало місця на диску на {{ $labels.alias }}"
-          description: "На розділі / залишилося менше 10% вільного місця (зараз: {{ $value | printf \"%.2f\" }}%)."
+          summary: "Мало місця на диску на {{ '{{' }} $labels.alias {{ '}}' }}"
+          description: "На розділі / залишилося менше 15% вільного місця (зараз: {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}%)."
 
       - alert: HostHighCpuLoad
         expr: 100 - (avg by(instance, alias) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 90
@@ -26,30 +25,39 @@ groups:
         labels:
           severity: warning
         annotations:
-          summary: "Високе навантаження CPU на {{ $labels.alias }}"
-          description: "CPU завантажений на {{ $value | printf \"%.2f\" }}% протягом останніх 10 хвилин."
+          summary: "Високе навантаження CPU на {{ '{{' }} $labels.alias {{ '}}' }}"
+          description: "CPU завантажений на {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}% протягом останніх 10 хвилин."
 
   - name: NetworkAndTraffic
     rules:
       - alert: HighNetworkTrafficIn
-        expr: sum by(instance, alias) (rate(node_network_receive_bytes_total{device!="lo"}[5m])) > 104857600
+        expr: sum by(instance, alias) (rate(node_network_receive_bytes_total{device!~"^(lo|docker.*|veth.*|br-.*|virbr.*|tun.*|tap.*|cni.*|flannel.*|cali.*)$"}[5m])) > 43750000
         for: 5m
         labels:
           severity: warning
         annotations:
-          summary: "Високий вхідний трафік на {{ $labels.alias }}"
-          description: "Потік даних перевищує 100 MB/s (зараз: {{ $value | humanize1024 }}B/s)."
+          summary: "Високий вхідний трафік на {{ '{{' }} $labels.alias {{ '}}' }}"
+          description: "Вхідний трафік на фізичних інтерфейсах перевищує 350 Mbit/s (зараз: {{ '{{' }} $value | humanize1024 {{ '}}' }}B/s)."
+
+      - alert: MemoryHighUsage
+        expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 < 10
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Мало доступної пам'яті на {{ '{{' }} $labels.alias {{ '}}' }}"
+          description: "Вільно менше 10% оперативної пам'яті (зараз: {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}%)."
 
   - name: BlackboxAlerts
     rules:
       - alert: WebsiteDown
         expr: probe_success == 0
-        for: 1m
+        for: 5m
         labels:
           severity: critical
         annotations:
-          summary: "Сайт {{ $labels.instance }} лежить!"
-          description: "HTTP перевірка для {{ $labels.instance }} повернула помилку."
+          summary: "Сайт {{ '{{' }} $labels.instance {{ '}}' }} лежить!"
+          description: "HTTP перевірка для {{ '{{' }} $labels.instance {{ '}}' }} повернула помилку."
 
       - alert: WebsiteSlowResponse
         expr: probe_duration_seconds > 5
@@ -57,8 +65,17 @@ groups:
         labels:
           severity: warning
         annotations:
-          summary: "Сайт {{ $labels.instance }} гальмує"
-          description: "Час відповіді сайту більше 5 секунд: {{ $value | printf \"%.2f\" }}с."
+          summary: "Сайт {{ '{{' }} $labels.instance {{ '}}' }} гальмує"
+          description: "Час відповіді сайту більше 5 секунд: {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}с."
+
+      - alert: SSLCertificateExpiringSoon
+        expr: probe_ssl_earliest_certificate_expiry - time() < 86400 * 14
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Сертифікат сайту {{ '{{' }} $labels.instance {{ '}}' }} скоро закінчується"
+          description: "До завершення дії сертифіката залишилося менше 14 днів."
 
   - name: MySQL_Galera
     rules:
@@ -68,8 +85,8 @@ groups:
         labels:
           severity: critical
         annotations:
-          summary: "MySQL на {{ $labels.alias }} впав"
-          description: "Експортер не може підключитися до бази на ноді {{ $labels.instance }}."
+          summary: "MySQL на {{ '{{' }} $labels.alias {{ '}}' }} впав"
+          description: "Експортер не може підключитися до бази на ноді {{ '{{' }} $labels.instance {{ '}}' }}."
 
       - alert: GaleraClusterSizeAlert
         expr: mysql_global_status_wsrep_cluster_size < 3
@@ -78,5 +95,4 @@ groups:
           severity: critical
         annotations:
           summary: "Проблема з кластером Галера!"
-          description: "Розмір кластера зменшився до {{ $value }}. Можлива втрата кворуму."
-{% endraw %}
+          description: "Розмір кластера зменшився до {{ '{{' }} $value {{ '}}' }}. Можлива втрата кворуму."

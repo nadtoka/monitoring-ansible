@@ -1,0 +1,76 @@
+import json
+import os
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.request import Request, urlopen
+
+
+WEBHOOK_URL = os.environ["GCHAT_WEBHOOK_URL"]
+MAX_REQUEST_SIZE = 1024 * 1024
+
+
+def format_alert(alert, default_status):
+    labels = alert.get("labels") or {}
+    annotations = alert.get("annotations") or {}
+    status = (alert.get("status") or default_status or "firing").upper()
+    emoji = "🟢" if status == "RESOLVED" else "🔴"
+    alert_name = labels.get("alertname", "Unknown alert")
+    severity = labels.get("severity", "unknown")
+    instance_label = labels.get("instance") or labels.get("job") or "unknown"
+    alias = labels.get("alias")
+    instance = f"{alias} ({instance_label})" if alias else instance_label
+    summary = annotations.get("summary", "-")
+    description = annotations.get("description", "-")
+
+    return "\n".join(
+        [
+            f"{emoji} [{status}] {alert_name}",
+            f"Severity: {severity}",
+            f"Instance: {instance}",
+            f"Summary: {summary}",
+            f"Description: {description}",
+        ]
+    )
+
+
+class AlertmanagerRelayHandler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        try:
+            content_length = int(self.headers.get("Content-Length", "0"))
+            if content_length < 1 or content_length > MAX_REQUEST_SIZE:
+                self.send_error(400, "Invalid request size")
+                return
+
+            payload = json.loads(self.rfile.read(content_length).decode("utf-8"))
+            if not isinstance(payload, dict) or not isinstance(payload.get("alerts", []), list):
+                self.send_error(400, "Expected an Alertmanager JSON object with an alerts array")
+                return
+
+            alerts = payload.get("alerts", [])
+            if alerts:
+                text = "\n\n".join(
+                    format_alert(alert, payload.get("status"))
+                    for alert in alerts
+                    if isinstance(alert, dict)
+                )
+                if text:
+                    body = json.dumps({"text": text}, ensure_ascii=False).encode("utf-8")
+                    request = Request(
+                        WEBHOOK_URL,
+                        data=body,
+                        headers={"Content-Type": "application/json; charset=UTF-8"},
+                        method="POST",
+                    )
+                    with urlopen(request, timeout=10) as response:
+                        response.read()
+
+            self.send_response(200)
+            self.end_headers()
+        except (UnicodeDecodeError, json.JSONDecodeError, ValueError):
+            self.send_error(400, "Invalid JSON request")
+        except Exception as error:
+            print(f"Google Chat relay delivery failed: {type(error).__name__}", flush=True)
+            self.send_error(502, "Google Chat delivery failed")
+
+
+if __name__ == "__main__":
+    ThreadingHTTPServer(("0.0.0.0", 5000), AlertmanagerRelayHandler).serve_forever()

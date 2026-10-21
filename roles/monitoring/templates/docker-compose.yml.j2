@@ -44,6 +44,8 @@ services:
   alertmanager:
     container_name: alertmanager
     image: prom/alertmanager:v0.27.0
+    depends_on:
+      - alertmanager-gchat-relay
     ports:
       - "9093:9093"
     volumes:
@@ -52,6 +54,15 @@ services:
       - "--config.file=/etc/alertmanager/alertmanager.yml"
       - "--storage.path=/alertmanager"
     restart: always
+
+  alertmanager-gchat-relay:
+    image: python:3.12-alpine
+    environment:
+      GCHAT_WEBHOOK_URL: "{{ google_chat_webhook_url }}"
+    volumes:
+      - ./gchat_relay.py:/app/gchat_relay.py:ro
+    command: ["python3", "-u", "/app/gchat_relay.py"]
+    restart: unless-stopped
 
   grafana:
     image: grafana/grafana:{{ grafana_version }}
