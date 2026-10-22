@@ -21,6 +21,14 @@ services:
     container_name: blackbox-exporter
     ports:
       - "9115:9115"
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+      - 192.168.50.1
+    volumes:
+      - ./blackbox.yml:/etc/blackbox_exporter/config.yml:ro
+    command:
+      - "--config.file=/etc/blackbox_exporter/config.yml"
     restart: always
 
   vmalert:

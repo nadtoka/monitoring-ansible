@@ -25,6 +25,12 @@
     chdir: "{{ docker_compose_dir }}"
   when: is_central | default(false)
 
+- name: Restart Blackbox Exporter
+  ansible.builtin.command:
+    cmd: docker compose restart blackbox-exporter
+    chdir: "{{ docker_compose_dir }}"
+  when: is_central | default(false)
+
 - name: Restart Google Chat relay
   ansible.builtin.command:
     cmd: docker compose restart alertmanager-gchat-relay

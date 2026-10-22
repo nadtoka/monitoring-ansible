@@ -51,22 +51,40 @@ groups:
   - name: BlackboxAlerts
     rules:
       - alert: WebsiteDown
-        expr: probe_success == 0
+        expr: probe_success{service_type="website"} == 0
         for: 5m
         labels:
           severity: critical
         annotations:
-          summary: "Сайт {{ '{{' }} $labels.instance {{ '}}' }} лежить!"
+          summary: "Website is DOWN: {{ '{{' }} $labels.instance {{ '}}' }}"
           description: "HTTP перевірка для {{ '{{' }} $labels.instance {{ '}}' }} повернула помилку."
 
+      - alert: ApiDown
+        expr: probe_success{service_type="api"} == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "API is DOWN: {{ '{{' }} $labels.instance {{ '}}' }}"
+          description: "API probe failed for {{ '{{' }} $labels.instance {{ '}}' }}."
+
       - alert: WebsiteSlowResponse
-        expr: probe_duration_seconds > 5
+        expr: probe_duration_seconds{service_type="website"} > 5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Website slow response: {{ '{{' }} $labels.instance {{ '}}' }}"
+          description: "Probe duration exceeded 5s (current: {{ '{{' }} $value | humanizeDuration {{ '}}' }}) for 5m."
+
+      - alert: ApiSlowResponse
+        expr: probe_duration_seconds{service_type="api"} > 2.5
         for: 3m
         labels:
           severity: warning
         annotations:
-          summary: "Сайт {{ '{{' }} $labels.instance {{ '}}' }} гальмує"
-          description: "Час відповіді сайту більше 5 секунд: {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}с."
+          summary: "API slow response: {{ '{{' }} $labels.instance {{ '}}' }}"
+          description: "API probe duration exceeded 2.5s (current: {{ '{{' }} $value | humanizeDuration {{ '}}' }}) for 3m."
 
       - alert: SSLCertificateExpiringSoon
         expr: probe_ssl_earliest_certificate_expiry - time() < 86400 * 14

@@ -1,0 +1,34 @@
+modules:
+  http_2xx:
+    prober: http
+    timeout: 10s
+    http:
+      preferred_ip_protocol: "ip4"
+      ip_protocol_fallback: false
+      valid_status_codes: [200]
+      method: GET
+      no_follow_redirects: false
+      fail_if_not_ssl: false
+
+  http_api_check:
+    prober: http
+    timeout: 10s
+    http:
+      preferred_ip_protocol: "ip4"
+      ip_protocol_fallback: false
+      valid_status_codes: [200, 204, 401]
+      method: GET
+      no_follow_redirects: false
+
+  http_api_post_check:
+    prober: http
+    timeout: 10s
+    http:
+      preferred_ip_protocol: "ip4"
+      ip_protocol_fallback: false
+      valid_status_codes: [200]
+      method: POST
+      headers:
+        Content-Type: application/json
+      body: "{}"
+      no_follow_redirects: false

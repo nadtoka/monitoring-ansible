@@ -1,6 +1,17 @@
 # roles/monitoring/templates/prometheus.yml.j2
 global:
-  scrape_interval: 15s # How often to fetch metrics
+  scrape_interval: 1m # How often to fetch metrics
+
+{% set monitored_api_post_targets = monitored_apis_post | default([]) %}
+{% if monitored_api_post_targets is not sequence or monitored_api_post_targets is string %}
+{% set monitored_api_post_targets = [] %}
+{% endif %}
+{% set monitored_api_post_targets = monitored_api_post_targets | unique | list %}
+{% set monitored_api_get_targets = monitored_apis | default([]) %}
+{% if monitored_api_get_targets is not sequence or monitored_api_get_targets is string %}
+{% set monitored_api_get_targets = [] %}
+{% endif %}
+{% set monitored_api_get_targets = monitored_api_get_targets | reject('in', monitored_api_post_targets) | unique | list %}
 
 scrape_configs:
   # 1. Hardware metrics from your server
@@ -15,14 +26,21 @@ scrape_configs:
   # 2. Website monitoring (status codes, SSL, etc.)
   - job_name: 'website-monitoring'
     metrics_path: /probe
-    params:
-      module: [http_2xx] # Check for 200 status OK
+{% if monitored_sites | default([]) %}
     static_configs:
       - targets:
 {% for site in monitored_sites %}
-        - '{{ site }}'
+          - '{{ site }}'
 {% endfor %}
+        labels:
+          service_type: website
+          probe_method: GET
+          auth_required: "false"
+{% endif %}
     relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_module
+        replacement: http_2xx
       - source_labels: [__address__]
         target_label: __param_target
       - source_labels: [__param_target]
@@ -30,7 +48,82 @@ scrape_configs:
       - target_label: __address__
         replacement: blackbox-exporter:9115 # Address of the blackbox exporter
 
-  # 3. VictoriaMetrics self-monitoring
+  # 3. API monitoring using the public HTTP 2xx probe.
+  - job_name: 'api-monitoring'
+    metrics_path: /probe
+{% if monitored_api_get_targets %}
+    static_configs:
+      - targets:
+{% for api in monitored_api_get_targets %}
+          - '{{ api }}'
+{% endfor %}
+        labels:
+          service_type: api
+          probe_method: GET
+          auth_required: "false"
+{% endif %}
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_module
+        replacement: http_2xx
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+
+  # API endpoint that accepts POST requests with a JSON body.
+{% if monitored_api_post_targets %}
+  - job_name: 'api-post-monitoring'
+    metrics_path: /probe
+    static_configs:
+      - targets:
+{% for api in monitored_api_post_targets %}
+          - '{{ api }}'
+{% endfor %}
+        labels:
+          service_type: api
+          probe_method: POST
+          auth_required: "false"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_module
+        replacement: http_api_post_check
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+{% endif %}
+
+  # Protected API endpoint; HTTP 401 is an expected response.
+  - job_name: 'api-authenticated-monitoring'
+    metrics_path: /probe
+{% if monitored_apis_auth | default([]) %}
+    static_configs:
+      - targets:
+{% for api in monitored_apis_auth %}
+          - '{{ api }}'
+{% endfor %}
+        labels:
+          service_type: api
+          probe_method: GET
+          auth_required: "true"
+{% endif %}
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_module
+        replacement: http_api_check
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+
+  # 4. VictoriaMetrics self-monitoring
   - job_name: 'victoria-metrics'
     static_configs:
       - targets: ['victoriametrics:8428'] 
