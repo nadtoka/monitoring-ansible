@@ -12,12 +12,13 @@ Infrastructure as Code (IaC) repository for deploying a modular, high-performanc
 - **cAdvisor**: Container resource usage (Docker / Swarm)
 - **Docker Swarm Exporter**: Cluster-level monitoring
 - **Blackbox Exporter**: HTTP/HTTPS/ICMP uptime checks
-- **MySQL Exporter**: Database performance metrics
+- **MySQL Exporter**: Database performance metrics (MariaDB / Galera Cluster)
+- **YACE (Yet Another CloudWatch Exporter)**: AWS RDS (MariaDB / Aurora) CloudWatch metrics exporter
 - **Elasticsearch (T-800)**: Centralized logging for infrastructure and application logs
 - **ArgoCD Monitoring**: Tracking GitOps deployments and application health
-- **Kubernetes (K8S) Monitoring**: Deep visibility into cluster metrics and infrastructure
+- **Kubernetes (K8S) Monitoring**: Deep visibility into cluster metrics (`kube-state-metrics` + `cAdvisor`)
 - **vmalert**: VictoriaMetrics alerting tool, executing rules and sending alerts to Alertmanager
-- **Alertmanager**: Handling and routing alerts to external notification channels
+- **Alertmanager + Google Chat Relay**: Handling, routing, and formatting alerts for Google Chat webhooks
 - **PBS Integration**: Proxmox Backup Server monitoring
 
 ---
@@ -38,8 +39,9 @@ Infrastructure as Code (IaC) repository for deploying a modular, high-performanc
 │       ├── files/
 │       │   └── dashboards/  # Static JSON models for Grafana
 │       ├── templates/       # Jinja2 templates for dynamic provisioning
-│       │   ├── datasource.yml.j2  # Multi-source config (VM, ES, vmalert)
-│       │   └── rules.yml.j2       # Alerting rules for vmalert
+│       │   ├── datasource.yml.j2  # Multi-source config (VM, ES, Alertmanager)
+│       │   ├── rules.yml.j2       # Alerting rules for vmalert (Host, Blackbox, MySQL, AWS RDS)
+│       │   └── yace.yml.j2        # AWS CloudWatch Exporter (YACE) configuration for RDS
 │       └── tasks/           # Ansible automation tasks
 └── deploy-monitoring.yml    # Main playbook entry point
 ```
@@ -77,6 +79,8 @@ ansible-vault encrypt group_vars/all/vault.yml
 - `ansible_become_pass` — sudo password  
 - `vault_ip_*` — host IP addresses  
 - `grafana_admin_password` — Grafana admin password  
+- `google_chat_webhook_url` — Google Chat webhook URL for alerts  
+- `vault_aws_yace_access_key` / `vault_aws_yace_secret_key` — AWS IAM read-only credentials (`CloudWatchReadOnlyAccess` + `ResourceGroupsandTagEditorReadOnlyAccess`) for RDS monitoring  
 
 ---
 
@@ -123,6 +127,11 @@ Assign as central monitoring node:
 is_central: true
 ```
 
+Temporarily disable scraping for a powered-off/maintenance host:
+```yaml
+monitoring_enabled: false
+```
+
 ---
 
 ### 3. 🚀 Deployment
@@ -162,6 +171,7 @@ ansible-playbook -i inventories/production/hosts.yml deploy-monitoring.yml --lim
 | 2322  | Elasticsearch Overview                         | ES Cluster health              |
 | 20016 | MySQL 8.0 Overview                             | Database performance           |
 | 21743 | cAdvisor - Docker Containers Overview          | Container metrics              |
+| Custom| AWS RDS - Databases & Connections (YACE)       | AWS RDS CloudWatch metrics     |
 |       | Alerts Overview (vmalert)                      | Alerting                       |
 
 ---
@@ -171,7 +181,11 @@ ansible-playbook -i inventories/production/hosts.yml deploy-monitoring.yml --lim
 Ensure that the following ports are accessible **only from the monitoring server**:
 
 - `9100` — Node Exporter  
-- `8080` — cAdvisor  
+- `9104` — MySQL Exporter  
+- `9114` — Elasticsearch Exporter  
+- `8080` — cAdvisor (Swarm)  
+- `31080` / `31081` — Kubernetes (`kube-state-metrics` & `cAdvisor`)  
+- `31082` / `31083` — ArgoCD Metrics  
 - `9323` — Docker metrics  
 
 Use firewall rules or cloud security groups (AWS SG, etc.).

@@ -22,6 +22,7 @@ datasources:
     jsonData:
       implementation: prometheus
   - name: elasticsearch
+    uid: elasticsearch
     type: elasticsearch
     url: http://{{ vault_ip_elastic }}:9200
     access: proxy

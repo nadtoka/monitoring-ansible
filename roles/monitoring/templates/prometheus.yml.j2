@@ -17,10 +17,14 @@ scrape_configs:
   # 1. Hardware metrics from your server
   - job_name: 'node-exporter'
     static_configs:
-{% for host in groups['all'] %}
+{% for host in groups['all'] if hostvars[host].monitoring_enabled | default(true) %}
       - targets: ['{{ hostvars[host].ansible_host }}:9100']
         labels:
           alias: '{{ host }}'
+{% if hostvars[host].has_mysql | default(false) %}
+          project: 'galera-cluster'
+          desc: 'Galera Cluster'
+{% endif %}
 {% endfor %}
 
   # 2. Website monitoring (status codes, SSL, etc.)
@@ -161,6 +165,17 @@ scrape_configs:
           alias: '{{ host }}'
 {% endfor %}
 
+{% for host in groups['all'] if hostvars[host].has_k8s | default(false) %}
+{% if loop.first %}
+  - job_name: 'kubernetes-cadvisor'
+    static_configs:
+{% endif %}
+      - targets: ['{{ hostvars[host].ansible_host }}:31081']
+        labels:
+          alias: '{{ host }}'
+          node: '{{ host | lower }}'
+{% endfor %}
+
   # 7. ArgoCD Metrics (Aragorn only)
 {% for host in groups['all'] if hostvars[host].has_argocd | default(false) %}
 {% if loop.first %}
@@ -185,4 +200,16 @@ scrape_configs:
           alias: '{{ host }}'
           project: 't-800'
 {% endfor %}
+
+{% if vault_aws_yace_access_key is defined and vault_aws_yace_secret_key is defined %}
+  # 9. AWS RDS monitoring via YACE (CloudWatch Exporter)
+  - job_name: 'aws-rds'
+    scrape_interval: 5m
+    scrape_timeout: 1m
+    static_configs:
+      - targets: ['yace:5000']
+        labels:
+          service_type: 'rds'
+{% endif %}
+
 

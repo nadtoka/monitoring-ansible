@@ -73,7 +73,7 @@
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -87,7 +87,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -98,7 +98,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -180,7 +180,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "elasticsearch_cluster_health_status{cluster=\"$cluster\",color=\"red\"}==1 or (elasticsearch_cluster_health_status{cluster=\"$cluster\",color=\"green\"}==1)+4 or (elasticsearch_cluster_health_status{cluster=\"$cluster\",color=\"yellow\"}==1)+22",
           "format": "time_series",
@@ -196,7 +196,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -278,7 +278,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "count(elasticsearch_breakers_tripped{cluster=\"$cluster\",name=~\"$name\"}>0)",
           "format": "time_series",
@@ -294,7 +294,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -362,7 +362,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "sum (elasticsearch_process_cpu_percent{cluster=\"$cluster\",name=~\"$name\"} ) / count (elasticsearch_process_cpu_percent{cluster=\"$cluster\",name=~\"$name\"} )",
           "format": "time_series",
@@ -381,7 +381,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -449,7 +449,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "sum (elasticsearch_jvm_memory_used_bytes{cluster=\"$cluster\",name=~\"$name\"}) / sum (elasticsearch_jvm_memory_max_bytes{cluster=\"$cluster\",name=~\"$name\"}) * 100",
           "format": "time_series",
@@ -468,7 +468,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "description": "Number of nodes in the cluster",
       "fieldConfig": {
@@ -533,7 +533,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "elasticsearch_cluster_health_number_of_nodes{cluster=\"$cluster\"}",
           "format": "time_series",
@@ -552,7 +552,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "description": "Number of data nodes in the cluster",
       "fieldConfig": {
@@ -617,7 +617,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "elasticsearch_cluster_health_number_of_data_nodes{cluster=\"$cluster\"}",
           "format": "time_series",
@@ -636,7 +636,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "description": "Cluster level changes which have not yet been executed",
       "fieldConfig": {
@@ -706,7 +706,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "elasticsearch_cluster_health_number_of_pending_tasks{cluster=\"$cluster\"}",
           "format": "time_series",
@@ -725,7 +725,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -779,7 +779,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "sum (elasticsearch_process_open_files_count{cluster=\"$cluster\",name=~\"$name\"})",
           "format": "time_series",
@@ -799,7 +799,7 @@
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -813,7 +813,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -824,7 +824,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "description": "The number of primary shards in your cluster. This is an aggregate total across all indices.",
       "fieldConfig": {
@@ -891,7 +891,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "elasticsearch_cluster_health_active_primary_shards{cluster=\"$cluster\"}",
           "format": "time_series",
@@ -908,7 +908,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "description": "Aggregate total of all shards across all indices, which includes replica shards",
       "fieldConfig": {
@@ -974,7 +974,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "elasticsearch_cluster_health_active_shards{cluster=\"$cluster\"}",
           "format": "time_series",
@@ -991,7 +991,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "description": "Count of shards that are being freshly created",
       "fieldConfig": {
@@ -1057,7 +1057,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "elasticsearch_cluster_health_initializing_shards{cluster=\"$cluster\"}",
           "format": "time_series",
@@ -1074,7 +1074,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "description": "The number of shards that are currently moving from one node to another node.",
       "fieldConfig": {
@@ -1140,7 +1140,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "elasticsearch_cluster_health_relocating_shards{cluster=\"$cluster\"}",
           "format": "time_series",
@@ -1157,7 +1157,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "description": "Shards delayed to reduce reallocation overhead",
       "fieldConfig": {
@@ -1223,7 +1223,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "elasticsearch_cluster_health_delayed_unassigned_shards{cluster=\"$cluster\"} ",
           "format": "time_series",
@@ -1240,7 +1240,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "description": "The number of shards that exist in the cluster state, but cannot be found in the cluster itself",
       "fieldConfig": {
@@ -1306,7 +1306,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "elasticsearch_cluster_health_unassigned_shards{cluster=\"$cluster\"} ",
           "format": "time_series",
@@ -1324,7 +1324,7 @@
       "collapsed": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -1338,7 +1338,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -1353,7 +1353,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "editable": true,
       "error": false,
@@ -1403,7 +1403,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "irate(elasticsearch_jvm_gc_collection_seconds_count{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
           "format": "time_series",
@@ -1454,7 +1454,7 @@
       "dashes": false,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "editable": true,
       "error": false,
@@ -1504,7 +1504,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "expr": "irate(elasticsearch_jvm_gc_collection_seconds_sum{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
           "format": "time_series",
@@ -1552,7 +1552,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -1569,7 +1569,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -1606,7 +1606,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_translog_operations{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -1648,7 +1648,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -1685,7 +1685,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_translog_size_in_bytes{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -1725,7 +1725,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -1737,7 +1737,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -1754,7 +1754,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -1791,7 +1791,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_breakers_tripped{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -1833,7 +1833,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -1870,7 +1870,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_breakers_estimated_size_bytes{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -1881,7 +1881,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_breakers_limit_size_bytes{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -1921,7 +1921,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -1933,7 +1933,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -1950,7 +1950,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -1995,7 +1995,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_os_load1{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -2010,7 +2010,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_os_load5{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -2025,7 +2025,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_os_load15{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -2076,7 +2076,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -2121,7 +2121,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_process_cpu_percent{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -2172,7 +2172,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -2217,7 +2217,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_jvm_memory_used_bytes{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -2231,7 +2231,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_jvm_memory_max_bytes{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -2243,7 +2243,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_jvm_memory_pool_peak_used_bytes{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -2290,7 +2290,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -2335,7 +2335,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_jvm_memory_committed_bytes{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -2347,7 +2347,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_jvm_memory_max_bytes{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -2392,7 +2392,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -2404,7 +2404,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -2421,7 +2421,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -2466,7 +2466,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "1-(elasticsearch_filesystem_data_available_bytes{cluster=\"$cluster\",name=~\"$name\"}/elasticsearch_filesystem_data_size_bytes{cluster=\"$cluster\",name=~\"$name\"})",
               "format": "time_series",
@@ -2531,7 +2531,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -2581,7 +2581,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_transport_tx_size_bytes_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -2593,7 +2593,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "-irate(elasticsearch_transport_rx_size_bytes_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -2638,7 +2638,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -2650,7 +2650,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -2667,7 +2667,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "decimals": 2,
           "editable": true,
@@ -2713,7 +2713,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_docs{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -2762,7 +2762,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -2805,7 +2805,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_indexing_index_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -2853,7 +2853,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "description": "Count of deleted documents on this node",
           "editable": true,
@@ -2899,7 +2899,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_docs_deleted{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -2947,7 +2947,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "decimals": 2,
           "editable": true,
@@ -2991,7 +2991,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_merges_docs_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3040,7 +3040,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -3083,7 +3083,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_merges_total_size_bytes_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3129,7 +3129,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -3141,7 +3141,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -3158,7 +3158,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -3201,7 +3201,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_search_query_time_seconds{cluster=\"$cluster\",name=~\"$name\"}[$interval]) ",
               "format": "time_series",
@@ -3249,7 +3249,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -3292,7 +3292,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_indexing_index_time_seconds_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3340,7 +3340,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -3385,7 +3385,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_merges_total_time_seconds_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3433,7 +3433,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -3478,7 +3478,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_store_throttle_time_seconds_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3524,7 +3524,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -3536,7 +3536,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -3553,7 +3553,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -3598,7 +3598,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_indexing_index_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3612,7 +3612,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_search_query_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3624,7 +3624,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_search_fetch_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3636,7 +3636,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_merges_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3648,7 +3648,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_refresh_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3660,7 +3660,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_flush_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3672,7 +3672,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_get_exists_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3684,7 +3684,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_get_missing_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3696,7 +3696,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_get_tota{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3708,7 +3708,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_indexing_delete_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3754,7 +3754,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -3799,7 +3799,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_indexing_index_time_seconds_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3813,7 +3813,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_search_query_time_seconds{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3825,7 +3825,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_search_fetch_time_seconds{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3837,7 +3837,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_merges_total_time_seconds_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3849,7 +3849,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_refresh_time_seconds_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3861,7 +3861,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_flush_time_seconds{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3873,7 +3873,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_get_exists_time_seconds{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3885,7 +3885,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_get_time_seconds{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3897,7 +3897,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_get_missing_time_seconds{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3909,7 +3909,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_indexing_delete_time_seconds_total{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3921,7 +3921,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_indices_get_time_seconds{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -3965,7 +3965,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -3977,7 +3977,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -3994,7 +3994,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -4033,7 +4033,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_thread_pool_rejected_count{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -4077,7 +4077,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -4118,7 +4118,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_thread_pool_active_count{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -4162,7 +4162,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -4204,7 +4204,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_thread_pool_active_count{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -4248,7 +4248,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -4289,7 +4289,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "irate(elasticsearch_thread_pool_completed_count{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -4331,7 +4331,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -4343,7 +4343,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -4360,7 +4360,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -4405,7 +4405,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_fielddata_memory_size_bytes{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -4453,7 +4453,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -4498,7 +4498,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_fielddata_evictions{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -4546,7 +4546,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -4591,7 +4591,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_query_cache_memory_size_bytes{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -4639,7 +4639,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -4684,7 +4684,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_query_cache_evictions{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -4732,7 +4732,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "editable": true,
           "error": false,
@@ -4777,7 +4777,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "rate(elasticsearch_indices_filter_cache_evictions{cluster=\"$cluster\",name=~\"$name\"}[$interval])",
               "format": "time_series",
@@ -4823,7 +4823,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -4835,7 +4835,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -4852,7 +4852,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -4891,7 +4891,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segments_count{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -4933,7 +4933,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -4972,7 +4972,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segments_memory_bytes{cluster=\"$cluster\",name=~\"$name\"}",
               "format": "time_series",
@@ -5012,7 +5012,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -5024,7 +5024,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -5041,7 +5041,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5080,7 +5080,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_docs_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -5122,7 +5122,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5161,7 +5161,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_store_size_bytes_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -5203,7 +5203,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5242,7 +5242,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_store_size_bytes_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -5282,7 +5282,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -5294,7 +5294,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -5311,7 +5311,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5351,7 +5351,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_index_writer_memory_bytes_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -5393,7 +5393,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5433,7 +5433,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_index_writer_memory_bytes_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -5473,7 +5473,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -5485,7 +5485,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -5502,7 +5502,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5539,7 +5539,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_count_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -5581,7 +5581,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5620,7 +5620,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_count_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -5662,7 +5662,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5701,7 +5701,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_memory_bytes_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -5743,7 +5743,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5782,7 +5782,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_memory_bytes_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -5822,7 +5822,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -5834,7 +5834,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -5851,7 +5851,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5890,7 +5890,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_doc_values_memory_bytes_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -5932,7 +5932,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -5971,7 +5971,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_doc_values_memory_bytes_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6011,7 +6011,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -6023,7 +6023,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -6040,7 +6040,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -6079,7 +6079,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_fields_memory_bytes_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6121,7 +6121,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -6160,7 +6160,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_fields_memory_bytes_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6200,7 +6200,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -6212,7 +6212,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -6229,7 +6229,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -6268,7 +6268,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_fixed_bit_set_memory_bytes_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6310,7 +6310,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -6349,7 +6349,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_fixed_bit_set_memory_bytes_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6389,7 +6389,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -6401,7 +6401,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -6418,7 +6418,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -6457,7 +6457,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_norms_memory_bytes_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6499,7 +6499,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -6538,7 +6538,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_norms_memory_bytes_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6578,7 +6578,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -6590,7 +6590,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -6607,7 +6607,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -6646,7 +6646,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_points_memory_bytes_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6688,7 +6688,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -6727,7 +6727,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_points_memory_bytes_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6767,7 +6767,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -6779,7 +6779,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -6796,7 +6796,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -6835,7 +6835,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_terms_memory_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6877,7 +6877,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -6916,7 +6916,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_terms_memory_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -6956,7 +6956,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -6968,7 +6968,7 @@
       "collapsed": true,
       "datasource": {
         "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "victoriametrics"
       },
       "gridPos": {
         "h": 1,
@@ -6985,7 +6985,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -7025,7 +7025,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_version_map_memory_bytes_primary{instance=~\"$instance\"}",
               "format": "time_series",
@@ -7067,7 +7067,7 @@
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "fill": 1,
           "gridPos": {
@@ -7107,7 +7107,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "victoriametrics"
               },
               "expr": "elasticsearch_indices_segment_version_map_memory_bytes_total{instance=~\"$instance\"}",
               "format": "time_series",
@@ -7147,7 +7147,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "victoriametrics"
           },
           "refId": "A"
         }
@@ -7246,7 +7246,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "victoriametrics"
         },
         "definition": "",
         "hide": 0,
@@ -7271,7 +7271,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "victoriametrics"
         },
         "definition": "",
         "hide": 0,
@@ -7296,7 +7296,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "victoriametrics"
         },
         "definition": "",
         "hide": 0,

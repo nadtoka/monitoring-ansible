@@ -1,0 +1,35 @@
+# roles/monitoring/templates/yace.yml.j2
+apiVersion: v1alpha1
+discovery:
+  jobs:
+    - type: AWS/RDS
+      regions:
+        - {{ aws_rds_region | default('us-east-1') }}
+      period: 300
+      length: 300
+      delay: 60
+      metrics:
+        - name: DatabaseConnections
+          statistics: [Average, Maximum]
+        - name: CPUUtilization
+          statistics: [Average, Maximum]
+        - name: FreeableMemory
+          statistics: [Average, Minimum]
+        - name: FreeStorageSpace
+          statistics: [Average, Minimum]
+        - name: ReadIOPS
+          statistics: [Average]
+        - name: WriteIOPS
+          statistics: [Average]
+        - name: ReadLatency
+          statistics: [Average, Maximum]
+        - name: WriteLatency
+          statistics: [Average, Maximum]
+        - name: SwapUsage
+          statistics: [Average, Maximum]
+        - name: DiskQueueDepth
+          statistics: [Average, Maximum]
+        - name: BurstBalance
+          statistics: [Average, Minimum]
+        - name: CPUCreditBalance
+          statistics: [Average, Minimum]

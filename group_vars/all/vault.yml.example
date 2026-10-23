@@ -13,6 +13,10 @@ vault_swarm_manager_ip: "192.0.0.1"
 vault_aws_ssh_key: "~/.ssh/id_ed25519"
 vault_aws_ssh_port: 22
 
+# AWS CloudWatch / YACE (RDS monitoring) credentials
+vault_aws_yace_access_key: "AKIAxxxxxxxxxxxxxxxx"
+vault_aws_yace_secret_key: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
 # Elastic admin and remote_monitoring_user passwords
 vault_elastic_admin_password: "SecurePass"
 vault_elastic_monitoring_password: "SecurePass"
@@ -25,10 +29,18 @@ vault_mysql_exporter_password: "SecurePass"
 
 # List of sites to monitor (can be a real YAML list now)
 monitored_sites:
-  - "https://google.com"
-  - "https://cloudflare.com"
-  - "https://youtube.com"
-  - "https://facebook.com"
+  - "https://example.com"
+  - "https://status.example.com"
+
+monitored_apis:
+  - "https://api.example.com/health"
+  - "https://service.example.internal/api/v1/health"
+
+monitored_apis_auth:
+  - "https://auth-api.example.com"
+
+monitored_apis_post:
+  - "https://api.example.com/search"
 
 # List of servers to monitor
 vault_ip_activecollab: "192.168.0.1"

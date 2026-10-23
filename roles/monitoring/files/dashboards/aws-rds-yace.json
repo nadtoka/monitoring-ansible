@@ -1,0 +1,598 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "AWS RDS MariaDB / Aurora CloudWatch Metrics via YACE",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "id": 1,
+      "panels": [],
+      "title": "Current Overview ($db_instance)",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 50 },
+              { "color": "red", "value": 80 }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 4, "x": 0, "y": 1 },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "title": "Active Connections (Max)",
+      "type": "stat",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_database_connections_maximum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 70 },
+              { "color": "red", "value": 85 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 4, "x": 4, "y": 1 },
+      "id": 3,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "title": "CPU Utilization",
+      "type": "gauge",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_cpuutilization_average{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 268435456 },
+              { "color": "green", "value": 536870912 }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 4, "x": 8, "y": 1 },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "title": "Freeable Memory (RAM)",
+      "type": "stat",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_freeable_memory_minimum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 5368709120 },
+              { "color": "green", "value": 10737418240 }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 4, "x": 12, "y": 1 },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "title": "Free Storage Space",
+      "type": "stat",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_free_storage_space_minimum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 20 },
+              { "color": "green", "value": 50 }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 4, "x": 16, "y": 1 },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "title": "Storage Burst Balance",
+      "type": "stat",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_burst_balance_minimum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "red", "value": null },
+              { "color": "yellow", "value": 15 },
+              { "color": "green", "value": 30 }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 5, "w": 4, "x": 20, "y": 1 },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "textMode": "auto"
+      },
+      "title": "CPU Credit Balance",
+      "type": "stat",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_cpucredit_balance_minimum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 6 },
+      "id": 8,
+      "panels": [],
+      "title": "Database Connections & CPU",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 7 },
+      "id": 9,
+      "options": {
+        "legend": { "calcs": ["min", "mean", "max", "lastNotNull"], "displayMode": "table", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      },
+      "title": "Database Connections",
+      "type": "timeseries",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_database_connections_maximum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} (Max)",
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_database_connections_average{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} (Avg)",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "max": 100,
+          "min": 0,
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 7 },
+      "id": 10,
+      "options": {
+        "legend": { "calcs": ["min", "mean", "max", "lastNotNull"], "displayMode": "table", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      },
+      "title": "CPU Utilization (%)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_cpuutilization_maximum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} (Max)",
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_cpuutilization_average{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} (Avg)",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 15 },
+      "id": 11,
+      "panels": [],
+      "title": "Memory & Storage",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 },
+      "id": 12,
+      "options": {
+        "legend": { "calcs": ["min", "mean", "lastNotNull"], "displayMode": "table", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      },
+      "title": "Freeable Memory & Swap Usage",
+      "type": "timeseries",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_freeable_memory_minimum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} - Freeable Memory",
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_swap_usage_maximum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} - Swap Usage",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 },
+      "id": 13,
+      "options": {
+        "legend": { "calcs": ["min", "mean", "lastNotNull"], "displayMode": "table", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      },
+      "title": "Free Storage Space",
+      "type": "timeseries",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_free_storage_space_minimum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} - Free Storage",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 24 },
+      "id": 14,
+      "panels": [],
+      "title": "Disk I/O (IOPS, Latency & Queue Depth)",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "unit": "iops"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 25 },
+      "id": 15,
+      "options": {
+        "legend": { "calcs": ["mean", "max", "lastNotNull"], "displayMode": "table", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      },
+      "title": "Read / Write IOPS",
+      "type": "timeseries",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_read_iops_average{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} - Read IOPS",
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_write_iops_average{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} - Write IOPS",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 25 },
+      "id": 16,
+      "options": {
+        "legend": { "calcs": ["mean", "max", "lastNotNull"], "displayMode": "table", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      },
+      "title": "Read / Write Latency",
+      "type": "timeseries",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_read_latency_maximum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} - Read Latency (Max)",
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_write_latency_maximum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} - Write Latency (Max)",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "${datasource}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "showPoints": "never"
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 25 },
+      "id": 17,
+      "options": {
+        "legend": { "calcs": ["mean", "max", "lastNotNull"], "displayMode": "table", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      },
+      "title": "Disk Queue Depth",
+      "type": "timeseries",
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "${datasource}" },
+          "expr": "aws_rds_disk_queue_depth_maximum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "legendFormat": "{{dimension_DBInstanceIdentifier}} - Queue Depth (Max)",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 39,
+  "tags": ["aws", "rds", "mariadb", "yace"],
+  "templating": {
+    "list": [
+      {
+        "current": { "selected": true, "text": "Prometheus", "value": "victoriametrics" },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datasource",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": { "selected": true, "text": ["All"], "value": ["$__all"] },
+        "datasource": { "type": "prometheus", "uid": "${datasource}" },
+        "definition": "label_values(aws_rds_database_connections_maximum, dimension_DBInstanceIdentifier)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "RDS Instance",
+        "multi": true,
+        "name": "db_instance",
+        "options": [],
+        "query": {
+          "query": "label_values(aws_rds_database_connections_maximum, dimension_DBInstanceIdentifier)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": { "from": "now-6h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "AWS RDS - Databases & Connections (YACE)",
+  "uid": "aws-rds-yace",
+  "version": 1
+}

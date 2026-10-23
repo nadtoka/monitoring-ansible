@@ -77,7 +77,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -161,7 +161,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -182,7 +182,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -262,7 +262,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "sum(container_memory_usage_bytes{instance=~\"$docker_host\",name=~\".+\"}) by (instance)",
@@ -291,7 +291,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -375,7 +375,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "sum(rate(container_cpu_usage_seconds_total{instance=~\"$docker_host\",name=~\".+\"}[$__rate_interval])) by (name) * 100",
@@ -403,7 +403,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -484,7 +484,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "sum(container_memory_usage_bytes{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}) by (name)",
@@ -500,7 +500,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -581,7 +581,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "sum(container_memory_cache{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}) by (name)",
@@ -610,7 +610,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -694,7 +694,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "sum(rate(container_fs_reads_bytes_total{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
@@ -710,7 +710,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -794,7 +794,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "sum(rate(container_fs_writes_bytes_total{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
@@ -823,7 +823,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -907,7 +907,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "sum(rate(container_network_receive_bytes_total{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
@@ -923,7 +923,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1007,7 +1007,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "sum(rate(container_network_transmit_bytes_total{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
@@ -1036,7 +1036,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1101,7 +1101,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "count by(name) (count_over_time(container_last_seen{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__range]))",
@@ -1127,7 +1127,7 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "Prometheus"
+          "uid": "victoriametrics"
         },
         "definition": "label_values({__name__=~\"container.*\"},instance)",
         "hide": 0,
@@ -1151,7 +1151,7 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "Prometheus"
+          "uid": "victoriametrics"
         },
         "definition": "label_values({__name__=~\"container.*\", instance=~\"$docker_host\"},name)",
         "hide": 0,

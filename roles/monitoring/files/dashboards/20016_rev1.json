@@ -93,7 +93,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -191,7 +191,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "mysql_global_status_threads_connected{desc=\"$desc\", project=\"$project\"}",
@@ -206,7 +206,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -304,7 +304,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "rate(mysql_global_status_commands_total{command=\"select\", project=\"$project\", desc=\"$desc\"}[$__interval])",
@@ -319,7 +319,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -432,7 +432,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "rate(mysql_global_status_commands_total{command=\"update\", project=\"$project\", desc=\"$desc\"}[$__interval])",
@@ -447,7 +447,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -560,7 +560,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "rate(mysql_global_status_commands_total{command=\"insert\", project=\"$project\", desc=\"$desc\"}[$__interval])",
@@ -575,7 +575,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -703,7 +703,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "rate(mysql_global_status_commands_total{command=\"delete\", project=\"$project\", desc=\"$desc\"}[$__interval])",
@@ -744,7 +744,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -798,11 +798,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "time() - node_boot_time_seconds{desc=\"$desc\",project=\"$project\",job=\"node\"}",
+          "expr": "time() - node_boot_time_seconds{desc=\"$desc\",project=\"$project\"}",
           "interval": "",
           "legendFormat": "",
           "range": true,
@@ -815,7 +815,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -989,7 +989,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "(avg by (instance, mode) (irate(node_cpu_seconds_total{desc=\"$desc\",project=\"$project\", mode=~\"system|user|nice|interrupt|iowait|irq|softirq|steel\"}[$interval])) * 100)",
@@ -1005,7 +1005,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1149,7 +1149,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "node_memory_MemTotal_bytes{project=\"$project\",desc=\"$desc\"} - (node_memory_Shmem_bytes{project=\"$project\",desc=\"$desc\"} + node_memory_Buffers_bytes{project=\"$project\",desc=\"$desc\"} + node_memory_Cached_bytes{project=\"$project\",desc=\"$desc\"} + node_memory_MemFree_bytes{project=\"$project\",desc=\"$desc\"})",
@@ -1160,7 +1160,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "node_memory_Buffers_bytes{project=\"$project\",desc=\"$desc\"}",
@@ -1172,7 +1172,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "node_memory_Cached_bytes{project=\"$project\",desc=\"$desc\"}",
@@ -1184,7 +1184,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "node_memory_MemFree_bytes{project=\"$project\",desc=\"$desc\"}",
@@ -1200,7 +1200,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1329,7 +1329,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "node_load1{desc=\"$desc\",project=\"$project\"}",
@@ -1340,7 +1340,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "node_load5{desc=\"$desc\",project=\"$project\"}",
@@ -1351,7 +1351,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "node_load15{desc=\"$desc\",project=\"$project\"}",
@@ -1366,7 +1366,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1484,7 +1484,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -1497,7 +1497,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -1515,7 +1515,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1719,7 +1719,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "node_tcp_connection_states{desc=\"$desc\",project=\"$project\", state!~\".*queued_bytes$\"}",
@@ -1734,7 +1734,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -1817,7 +1817,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -1830,7 +1830,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -1844,7 +1844,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -1858,7 +1858,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -1876,7 +1876,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Disk I/O includes read or write or input/output operations involving a physical disk. It is the speed with which the data transfer takes place between the hard disk drive and RAM.",
       "fieldConfig": {
@@ -2025,7 +2025,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (rate(mysql_global_status_innodb_data_reads{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_data_reads{desc=\"$desc\",project=\"$project\"}[5m]))",
@@ -2037,7 +2037,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (node_name) ((rate(node_vmstat_pgpgout{desc=\"$desc\",project=\"$project\"}[$__interval]) * 1024 or irate(node_vmstat_pgpgout{desc=\"$desc\",project=\"$project\"}[5m]) * 1024))",
@@ -2049,7 +2049,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (node_name) ((rate(node_vmstat_pgpgin{desc=\"$desc\",project=\"$project\"}[$__interval]) * 1024 or irate(node_vmstat_pgpgin{desc=\"$desc\",project=\"$project\"}[5m]) * 1024 ) + (rate(node_vmstat_pgpgout{desc=\"$desc\",project=\"$project\"}[$__interval]) * 1024 or irate(node_vmstat_pgpgout{desc=\"$desc\",project=\"$project\"}[5m]) * 1024))",
@@ -2066,7 +2066,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Shows how much disk was loaded for reads or writes as average number of outstanding requests at different period of time.  High disk load is a good measure of actual storage utilization. Different storage types handle load differently - some will show latency increases on low loads others can handle higher load with no problems.",
       "fieldConfig": {
@@ -2216,7 +2216,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (node_name) (sum(rate(node_disk_read_time_seconds_total{desc=\"$desc\",project=\"$project\"}[$__interval])) or sum(irate(node_disk_read_time_seconds_total{desc=\"$desc\",project=\"$project\"}[5m])) or (sum(rdsosmetrics_diskIO_readIOsPS{desc=\"$desc\",project=\"$project\"})))",
@@ -2228,7 +2228,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (node_name) (sum(rate(node_disk_write_time_seconds_total{desc=\"$desc\",project=\"$project\"}[$__interval])) or sum(irate(node_disk_write_time_seconds_total{desc=\"$desc\",project=\"$project\"}[5m])) or (sum(rdsosmetrics_diskIO_writeIOsPS{desc=\"$desc\",project=\"$project\"})))",
@@ -2240,7 +2240,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (node_name) ((sum(rate(node_disk_read_time_seconds_total{desc=\"$desc\",project=\"$project\"}[$__interval])) or sum(irate(node_disk_read_time_seconds_total{desc=\"$desc\",project=\"$project\"}[5m]))) + (sum(rate(node_disk_write_time_seconds_total{desc=\"$desc\",project=\"$project\"}[$__interval])) or sum(irate(node_disk_write_time_seconds_total{desc=\"$desc\",project=\"$project\"}[5m]))) or (sum(rdsosmetrics_diskIO_writeIOsPS{desc=\"$desc\",project=\"$project\"})) +  (sum(rdsosmetrics_diskIO_readIOsPS{desc=\"$desc\",project=\"$project\"})))",
@@ -2257,7 +2257,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Shows average latency for Reads and Writes IO Devices.  Higher than typical latency for highly loaded storage indicates saturation (overload) and is frequent cause of performance problems.  Higher than normal latency also can indicate internal storage problems.",
       "fieldConfig": {
@@ -2412,7 +2412,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (node_name) ((sum(rate(node_disk_read_time_seconds_total{desc=\"$desc\",project=\"$project\"}[$__interval])) / sum(rate(node_disk_reads_completed_total{desc=\"$desc\",project=\"$project\"}[$__interval]) > 0 )) or (sum(irate(node_disk_read_time_seconds_total{desc=\"$desc\",project=\"$project\"}[5m])) / sum(irate(node_disk_reads_completed_total{desc=\"$desc\",project=\"$project\"}[5m]) > 0 )) or avg_over_time(aws_rds_read_latency_average{desc=\"$desc\",project=\"$project\"}[$__interval])/1000 or avg_over_time(aws_rds_read_latency_average{desc=\"$desc\",project=\"$project\"}[5m])/1000 or avg_over_time(rdsosmetrics_diskIO_readLatency{desc=\"$desc\",project=\"$project\"}[$__interval])/1000 or avg_over_time(rdsosmetrics_diskIO_readLatency{desc=\"$desc\",project=\"$project\"}[5m])/1000)",
@@ -2424,7 +2424,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (node_name) ((sum(rate(node_disk_write_time_seconds_total{desc=\"$desc\",project=\"$project\"}[$__interval])) / sum(rate(node_disk_writes_completed_total{desc=\"$desc\",project=\"$project\"}[$__interval]) > 0 )) or (sum(irate(node_disk_write_time_seconds_total{desc=\"$desc\",project=\"$project\"}[5m])) /  sum(irate(node_disk_writes_completed_total{desc=\"$desc\",project=\"$project\"}[5m]) > 0 )) or (avg_over_time(aws_rds_write_latency_average{desc=\"$desc\",project=\"$project\"}[$__interval])/1000 or avg_over_time(aws_rds_write_latency_average{desc=\"$desc\",project=\"$project\"}[5m])/1000) or (avg_over_time(rdsosmetrics_diskIO_writeLatency{desc=\"$desc\",project=\"$project\"}[$__interval]) or avg_over_time(rdsosmetrics_diskIO_writeLatency{desc=\"$desc\",project=\"$project\"}[5m]))/1000)",
@@ -2436,7 +2436,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (node_name) ((sum(rate(node_disk_read_time_seconds_total{desc=\"$desc\",project=\"$project\"}[1h])) / sum(rate(node_disk_reads_completed_total{desc=\"$desc\",project=\"$project\"}[1h]) > 0 )) or avg_over_time(aws_rds_read_latency_average{desc=\"$desc\",project=\"$project\"}[1h])/1000 or avg_over_time(aws_rds_read_latency_average{desc=\"$desc\",project=\"$project\"}[1h])/1000 or avg_over_time(rdsosmetrics_diskIO_readLatency{desc=\"$desc\",project=\"$project\"}[1h])/1000 or avg_over_time(rdsosmetrics_diskIO_readLatency{desc=\"$desc\",project=\"$project\"}[1h])/1000)",
@@ -2448,7 +2448,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (node_name) ((sum(rate(node_disk_write_time_seconds_total{desc=\"$desc\",project=\"$project\"}[1h])) / sum(rate(node_disk_writes_completed_total{desc=\"$desc\",project=\"$project\"}[1h]) > 0 ))  or (avg_over_time(aws_rds_write_latency_average{desc=\"$desc\",project=\"$project\"}[$__interval])/1000 or avg_over_time(aws_rds_write_latency_average{desc=\"$desc\",project=\"$project\"}[1h])/1000) or (avg_over_time(rdsosmetrics_diskIO_writeLatency{desc=\"$desc\",project=\"$project\"}[$__interval])/1000 or avg_over_time(rdsosmetrics_diskIO_writeLatency{desc=\"$desc\",project=\"$project\"}[1h])/1000))",
@@ -2491,7 +2491,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "**MySQL Uptime**",
       "fieldConfig": {
@@ -2546,7 +2546,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_global_status_uptime{desc=\"$desc\",project=\"$project\"}",
@@ -2561,7 +2561,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -2630,7 +2630,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_version_info{desc=\"$desc\",project=\"$project\"}",
@@ -2647,7 +2647,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "**Current QPS**\n\nBased on the queries reported by MySQL's ``SHOW STATUS`` command, it is the number of statements executed by the server within the last second. This variable includes statements executed within stored programs, unlike the Questions variable. It does not count \n``COM_PING`` or ``COM_STATISTICS`` commands.",
       "fieldConfig": {
@@ -2701,7 +2701,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "rate(mysql_global_status_queries{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -2716,7 +2716,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -2767,7 +2767,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -2784,7 +2784,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "**MySQL Network Traffic**\n\nHere we can see how much network traffic is generated by MySQL. Outbound is network traffic sent from MySQL and Inbound is network traffic MySQL has received.",
       "fieldConfig": {
@@ -2867,7 +2867,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "rate(mysql_global_status_bytes_received{desc=\"$desc\",project=\"$project\"}[$interval]) or irate(mysql_global_status_bytes_received{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -2878,7 +2878,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "0 - rate(mysql_global_status_bytes_sent{desc=\"$desc\",project=\"$project\"}[$interval]) or irate(mysql_global_status_bytes_sent{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -2894,7 +2894,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -3006,7 +3006,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_aborted_clients{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -3017,7 +3017,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_aborted_connects{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -3033,7 +3033,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "**MySQL Active Threads**\n\nThreads Connected is the number of open connections, while Threads Running is the number of threads not sleeping.",
       "fieldConfig": {
@@ -3178,7 +3178,7 @@
           "calculatedInterval": "2m",
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "datasourceErrors": {},
           "errors": {},
@@ -3197,7 +3197,7 @@
           "calculatedInterval": "2m",
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "datasourceErrors": {},
           "errors": {},
@@ -3214,7 +3214,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "avg_over_time(mysql_global_status_threads_running{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -3232,7 +3232,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -3283,7 +3283,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_global_status_threads_cached{desc=\"$desc\",project=\"$project\"}",
@@ -3294,7 +3294,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_global_status_threads_connected{desc=\"$desc\",project=\"$project\"}",
@@ -3306,7 +3306,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_global_status_threads_created{desc=\"$desc\",project=\"$project\"}",
@@ -3318,7 +3318,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_global_status_threads_running{desc=\"$desc\",project=\"$project\"}",
@@ -3334,7 +3334,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -3389,7 +3389,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_global_status_open_tables{desc=\"$desc\",project=\"$project\"}",
@@ -3404,7 +3404,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -3459,7 +3459,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_global_status_open_files{desc=\"$desc\",project=\"$project\"}",
@@ -3474,7 +3474,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -3531,7 +3531,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "max(max_over_time(mysql_global_status_threads_created{desc=\"$desc\",project=\"$project\"}[$interval])/max_over_time(mysql_global_status_connections{desc=\"$desc\",project=\"$project\"}[$interval])) * 100.0",
@@ -3546,7 +3546,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -3603,7 +3603,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "max(max_over_time(mysql_global_status_aborted_connects{desc=\"$desc\",project=\"$project\"}[$interval])/max_over_time(mysql_global_status_connections{desc=\"$desc\",project=\"$project\"}[$interval])) * 100.0",
@@ -3618,7 +3618,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -3675,7 +3675,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "(irate(mysql_global_status_connections{desc=\"$desc\",project=\"$project\"}[$interval])/mysql_global_variables_max_connections{desc=\"$desc\",project=\"$project\"}) * 100.0",
@@ -3690,7 +3690,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -3772,7 +3772,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -3790,7 +3790,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -3872,7 +3872,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_opened_tables{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -3883,7 +3883,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_table_open_cache_hits{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -3895,7 +3895,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_table_open_cache_misses{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -3911,7 +3911,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -3992,7 +3992,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_table_locks_immediate{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4003,7 +4003,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_table_locks_waited{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4019,7 +4019,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -4177,7 +4177,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_select_scan{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4188,7 +4188,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_select_full_join{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4200,7 +4200,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_select_full_range_join{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4212,7 +4212,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_select_range{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4224,7 +4224,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_select_range_check{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4240,7 +4240,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -4383,7 +4383,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_sort_rows{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4394,7 +4394,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_sort_scan{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4406,7 +4406,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_sort_merge_passes{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4418,7 +4418,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_sort_range{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4434,7 +4434,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -4562,7 +4562,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_created_tmp_tables{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4573,7 +4573,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_created_tmp_disk_tables{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4585,7 +4585,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_created_tmp_files{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4601,7 +4601,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -4683,7 +4683,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_handlers_total{desc=\"$desc\",project=\"$project\",handler=~\"commit|prepare|rollback|savepoint|savepoint_rollback\"}[$interval])",
@@ -4698,7 +4698,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -4780,7 +4780,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_handlers_total{desc=\"$desc\",project=\"$project\",handler!~\"commit|prepare|rollback|savepoint|savepoint_rollback\"}[$interval]) > 0",
@@ -4795,7 +4795,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -4923,7 +4923,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_binlog_cache_use{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4934,7 +4934,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_binlog_cache_disk_use{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4946,7 +4946,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "irate(mysql_global_status_binlog_stmt_cache_disk_use{desc=\"$desc\",project=\"$project\"}[$interval])",
@@ -4988,7 +4988,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -5071,7 +5071,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (max_over_time(node_memory_MemTotal_bytes{project=\"$poejct\", desc=\"$desc\"}[$__interval]) or max_over_time(node_memory_MemTotal_bytes{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -5082,7 +5082,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (mysql_global_variables_innodb_buffer_pool_size{project=\"$project\", desc=\"$desc\"})",
@@ -5094,7 +5094,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (max_over_time(mysql_global_variables_innodb_log_buffer_size{project=\"$project\", desc=\"$desc\"}[$__interval]) or max_over_time(mysql_global_variables_innodb_log_buffer_size{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -5106,7 +5106,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (max_over_time(mysql_global_variables_additional_mem_pool_size{project=\"$project\", desc=\"$desc\"}[$__interval]) or max_over_time(mysql_global_variables_additional_mem_pool_size{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -5118,7 +5118,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (max_over_time(mysql_global_status_innodb_mem_dictionary{project=\"$project\", desc=\"$desc\"}[$__interval]) or max_over_time(mysql_global_status_innodb_mem_dictionary{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -5130,7 +5130,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (max_over_time(mysql_global_variables_key_buffer_size{project=\"$project\", desc=\"$desc\"}[$__interval]) or max_over_time(mysql_global_variables_key_buffer_size{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -5142,7 +5142,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (max_over_time(mysql_global_variables_query_cache_size{project=\"$project\", desc=\"$desc\"}[$__interval]) or max_over_time(mysql_global_variables_query_cache_size{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -5154,7 +5154,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (max_over_time(mysql_global_status_innodb_mem_adaptive_hash{project=\"$project\", desc=\"$desc\"}[$__interval]) or max_over_time(mysql_global_status_innodb_mem_adaptive_hash{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -5166,7 +5166,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (max_over_time(mysql_global_variables_tokudb_cache_size{project=\"$project\", desc=\"$desc\"}[$__interval]) or max_over_time(mysql_global_variables_tokudb_cache_size{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -5182,7 +5182,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -5236,7 +5236,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_global_variables_innodb_buffer_pool_size{desc=\"$desc\",project=\"$project\"}",
@@ -5251,7 +5251,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -5307,7 +5307,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "avg by (desc) ((mysql_global_variables_innodb_buffer_pool_size{desc=\"$desc\",project=\"$project\"} * 100)) / on (node_name) (max by () (node_memory_MemTotal_bytes{desc=\"$desc\", project=\"$project\"}))",
@@ -5322,7 +5322,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -5380,7 +5380,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -5397,7 +5397,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -5451,7 +5451,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_global_variables_key_buffer_size{desc=\"$desc\",project=\"$project\"}",
@@ -5466,7 +5466,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -5520,7 +5520,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -5537,7 +5537,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "This Buffer is used for Buidling InnoDB Indexes using Sort algorithm",
       "fieldConfig": {
@@ -5596,7 +5596,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -5613,7 +5613,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -5669,7 +5669,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "mysql_global_status_buffer_pool_pages{desc=\"$desc\",project=\"$project\",state=\"data\"} / on (instance) (mysql_global_status_buffer_pool_pages{desc=\"$desc\",project=\"$project\",state=\"data\"} + on (instance) mysql_global_status_buffer_pool_pages{desc=\"$desc\",project=\"$project\",state=\"free\"} + on (instance) mysql_global_status_buffer_pool_pages{desc=\"$desc\",project=\"$project\",state=\"misc\"}) * 100.0",
@@ -5685,7 +5685,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Combined value of Buffer Pool Read and Write requests",
       "fieldConfig": {
@@ -5740,7 +5740,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "avg by (desc) (irate(mysql_global_status_innodb_buffer_pool_write_requests{desc=\"$desc\",project=\"$project\"}[$interval]))",
@@ -5755,7 +5755,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Buffer Pool Size as Portion of the Data",
       "fieldConfig": {
@@ -5812,7 +5812,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -5830,7 +5830,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "How often buffer pool read requests have to do read from the disk. Keep this percent low for good performance",
       "fieldConfig": {
@@ -5888,7 +5888,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "exemplar": true,
           "expr": "avg by (desc) (irate(mysql_global_status_innodb_buffer_pool_reads{desc=\"$desc\",project=\"$project\"}[$interval])/irate(mysql_global_status_innodb_buffer_pool_read_requests{desc=\"$desc\", project=\"$project\"}[$interval]))",
@@ -5903,7 +5903,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "How Much Indexes Take Compared to Data",
       "fieldConfig": {
@@ -5962,7 +5962,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -5979,7 +5979,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Current Number of InnoDB Tables in database",
       "fieldConfig": {
@@ -6036,7 +6036,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6053,7 +6053,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -6109,7 +6109,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6126,7 +6126,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "If Enabled, By Default every Table will have its own Tablespace represented as its own .idb file  rather than all tables stored in single system tablespace",
       "fieldConfig": {
@@ -6185,7 +6185,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6202,7 +6202,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Total Amount of Space Allocated.    May not exactly match amount of space used on file system but provided great guidance",
       "fieldConfig": {
@@ -6257,7 +6257,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6274,7 +6274,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Space used in All  InnoDB Tables.   Reported Allocated Space Less Free Space",
       "fieldConfig": {
@@ -6329,7 +6329,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6346,7 +6346,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Space Used by Data (Including Primary Key)",
       "fieldConfig": {
@@ -6401,7 +6401,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6418,7 +6418,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Space Used by Secondary Indexes",
       "fieldConfig": {
@@ -6473,7 +6473,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6490,7 +6490,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "How Much Space is Free. Too high value wastes space on disk",
       "fieldConfig": {
@@ -6549,7 +6549,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6566,7 +6566,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Estimated number of Rows in InnoDB Storage Engine. It is not exact value and it can change abruptly as information is updated",
       "fieldConfig": {
@@ -6621,7 +6621,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6638,7 +6638,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Amount of Data Per Row",
       "fieldConfig": {
@@ -6703,7 +6703,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6721,7 +6721,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Index Size Per Row shows how much space we're using for indexes on per row basics",
       "fieldConfig": {
@@ -6786,7 +6786,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6804,7 +6804,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -6858,7 +6858,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6875,7 +6875,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "InnoDB automatically optimized for Dedicated Server Environment (auto scaling cache and some other variables)",
       "fieldConfig": {
@@ -6946,7 +6946,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -6963,7 +6963,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -7034,7 +7034,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -7051,7 +7051,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Refresh InnoDB Statistics when meta-data queries by SHOW TABLE STATUS or INFORMATION_SCHEMA queries.  If Enabled can cause severe performance issues",
       "fieldConfig": {
@@ -7122,7 +7122,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -7139,7 +7139,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -7210,7 +7210,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -7227,7 +7227,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Number of Pages To Sample if Persistent Statistics are Enabled",
       "fieldConfig": {
@@ -7284,7 +7284,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -7301,7 +7301,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Number of Pages To Sample if Persistent Statistics are Disabled",
       "fieldConfig": {
@@ -7358,7 +7358,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -7388,7 +7388,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -7470,7 +7470,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -7487,7 +7487,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -7593,7 +7593,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -7606,7 +7606,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (avg_over_time(mysql_global_status_innodb_buffer_pool_bytes_dirty{project=\"$project\", desc=\"$desc\"}[$__interval]) or avg_over_time(mysql_global_status_innodb_buffer_pool_bytes_dirty{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -7618,7 +7618,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (sum((avg_over_time(mysql_global_status_innodb_buffer_pool_bytes_data{project=\"$project\", desc=\"$desc\"}[$__interval]) or avg_over_time(mysql_global_status_innodb_buffer_pool_bytes_data{project=\"$project\", desc=\"$desc\"}[5m])))*sum(mysql_global_variables_innodb_max_dirty_pages_pct{project=\"$project\", desc=\"$desc\"})/100)",
@@ -7634,7 +7634,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -7770,7 +7770,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -7783,7 +7783,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (rate(mysql_global_status_innodb_pages_read{project=\"$project\", desc=\"$desc\"}[$__interval]) or irate(mysql_global_status_innodb_pages_read{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -7795,7 +7795,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (rate(mysql_global_status_innodb_pages_written{project=\"$project\", desc=\"$desc\"}[$__interval]) or irate(mysql_global_status_innodb_pages_written{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -7811,7 +7811,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -7928,7 +7928,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -7941,7 +7941,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (rate(mysql_global_status_innodb_buffer_pool_write_requests{project=\"$project\", desc=\"$desc\"}[$__interval]) or irate(mysql_global_status_innodb_buffer_pool_write_requests{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -7957,7 +7957,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -8115,7 +8115,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -8128,7 +8128,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (rate(mysql_global_status_innodb_buffer_pool_read_ahead_rnd{project=\"$project\", desc=\"$desc\"}[$__interval]) or irate(mysql_global_status_innodb_buffer_pool_read_ahead_rnd{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -8140,7 +8140,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (rate(mysql_global_status_innodb_buffer_pool_read_ahead_evicted{project=\"$project\", desc=\"$desc\"}[$__interval]) or irate(mysql_global_status_innodb_buffer_pool_read_ahead_evicted{project=\"$project\", desc=\"$desc\"}[5m]))",
@@ -8156,7 +8156,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "fieldConfig": {
         "defaults": {
@@ -8329,7 +8329,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -8346,7 +8346,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "**InnoDB Row Operations**\n\nThis graph allows you to see which operations occur and the number of rows affected per operation. A graph like Queries Per Second will give you an idea of queries, but one query could effect millions of rows.",
       "fieldConfig": {
@@ -8445,7 +8445,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (rate(mysql_global_status_innodb_row_ops_total{project=\"$project\", desc=\"$desc\",operation=\"read\"}[$__interval]) or irate(mysql_global_status_innodb_row_ops_total{desc=\"Systemv 그룹\",project=\"systemv_group\",operation=\"read\"}[5m]))",
@@ -8461,7 +8461,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "**InnoDB Row Operations**\n\nThis graph allows you to see which operations occur and the number of rows affected per operation. A graph like Queries Per Second will give you an idea of queries, but one query could effect millions of rows.",
       "fieldConfig": {
@@ -8650,7 +8650,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc,operation) (rate(mysql_global_status_innodb_row_ops_total{project=\"$project\", desc=\"$desc\",operation!=\"read\"}[$__interval]) or irate(mysql_global_status_innodb_row_ops_total{project=\"$project\", desc=\"$desc\",operation!=\"read\"}[5m]))",
@@ -8679,7 +8679,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "** InnoDB Lock Wait Timeout **\nHow long to wait for row lock before timing out",
       "fieldConfig": {
@@ -8736,7 +8736,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -8753,7 +8753,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "If Disabled InnoDB Will not detect deadlocks but rely on timeouts",
       "fieldConfig": {
@@ -8824,7 +8824,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -8841,7 +8841,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Will Define How mush locking will come from working with Auto Increment Columns",
       "fieldConfig": {
@@ -8916,7 +8916,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -8933,7 +8933,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Whenever to rollback all transaction on timeout or just last statement",
       "fieldConfig": {
@@ -9004,7 +9004,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -9021,7 +9021,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Percent of Active Sections which are blocked due to waiting on InnoDB Row Locks",
       "fieldConfig": {
@@ -9080,7 +9080,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -9097,7 +9097,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -9226,7 +9226,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (rate(mysql_global_status_innodb_row_lock_waits{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_row_lock_waits{desc=\"$desc\",project=\"$project\"}[5m]))",
@@ -9238,7 +9238,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) ((rate(mysql_global_status_innodb_deadlocks{desc=\"$desc\",project=\"$project\"}[$__interval]) or rate(mysql_info_schema_innodb_metrics_lock_lock_deadlocks_total{desc=\"$desc\",project=\"$project\"}[$__interval])) or (irate(mysql_global_status_innodb_deadlocks{desc=\"$desc\",project=\"$project\"}[5m]) or irate(mysql_info_schema_innodb_metrics_lock_lock_deadlocks_total{desc=\"$desc\",project=\"$project\"}[5m])))",
@@ -9250,7 +9250,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (desc) (rate(mysql_info_schema_innodb_metrics_lock_lock_timeouts_total{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_info_schema_innodb_metrics_lock_lock_timeouts_total{desc=\"$desc\",project=\"$project\"}[5m]))",
@@ -9266,7 +9266,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -9410,7 +9410,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (service_name) (rate(mysql_global_status_innodb_row_lock_time{desc=\"$desc\",project=\"$project\"}[$__interval])/rate(mysql_global_status_innodb_row_lock_waits{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_row_lock_time{desc=\"$desc\",project=\"$project\"}[5m])/irate(mysql_global_status_innodb_row_lock_waits{desc=\"$desc\",project=\"$project\"}[5m]))",
@@ -9426,7 +9426,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Average Number of Sessions blocked from proceeding due to waiting on row level lock",
       "fieldConfig": {
@@ -9544,7 +9544,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (service_name) (rate(mysql_global_status_innodb_row_lock_time{desc=\"$desc\",project=\"$project\"}[$__interval])/1000 or irate(mysql_global_status_innodb_row_lock_time{desc=\"$desc\",project=\"$project\"}[5m])/1000)",
@@ -9556,7 +9556,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (service_name) (((avg_over_time(mysql_global_status_threads_running{desc=\"$desc\",project=\"$project\"}[$__interval]))or (avg_over_time(mysql_global_status_threads_running{desc=\"$desc\",project=\"$project\"}[5m]))))",
@@ -9585,7 +9585,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -9640,7 +9640,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -9657,7 +9657,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -9712,7 +9712,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -9729,7 +9729,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -9784,7 +9784,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -9801,7 +9801,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -9857,7 +9857,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -9874,7 +9874,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -9930,7 +9930,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -9947,7 +9947,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -10003,7 +10003,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -10020,7 +10020,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -10076,7 +10076,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -10093,7 +10093,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "Note: Due to difference in timing of Row Write and Data Write the value may be misleading on short intervals",
       "fieldConfig": {
@@ -10149,7 +10149,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -10166,7 +10166,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -10278,7 +10278,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (service_name) (rate(mysql_global_status_innodb_data_read{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_data_read{desc=\"$desc\",project=\"$project\"}[5m]))",
@@ -10290,7 +10290,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (service_name) (rate(mysql_global_status_innodb_data_written{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_data_written{desc=\"$desc\",project=\"$project\"}[5m]))",
@@ -10302,7 +10302,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (service_name) ((rate(mysql_global_status_innodb_data_read{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_data_read{desc=\"$desc\",project=\"$project\"}[5m]))+ (rate(mysql_global_status_innodb_data_written{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_data_written{desc=\"$desc\",project=\"$project\"}[5m])))",
@@ -10319,7 +10319,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "**InnoDB I/O**\n\n_Data Writes_ - The total number of InnoDB data writes._Data Reads_ - The total number of InnoDB data reads (OS file reads)._Log Writes_ - The number of physical writes to the InnoDB redo log file._Data Fsyncs_ - The number of fsync() operations. The frequency of fsync() calls is influenced by the setting of the `innodb_flush_method` configuration option.",
       "fieldConfig": {
@@ -10437,7 +10437,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (service_name) (rate(mysql_global_status_innodb_log_writes{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_log_writes{desc=\"$desc\",project=\"$project\"}[5m]))",
@@ -10449,7 +10449,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (service_name) (rate(mysql_global_status_innodb_os_log_written{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_os_log_written{desc=\"$desc\",project=\"$project\"}[5m]))",
@@ -10466,7 +10466,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "Prometheus"
+        "uid": "victoriametrics"
       },
       "description": "",
       "fieldConfig": {
@@ -10576,7 +10576,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (service_name) (rate(mysql_global_status_innodb_data_fsyncs{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_data_fsyncs{desc=\"$desc\",project=\"$project\"}[5m]))",
@@ -10588,7 +10588,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "Prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
           "expr": "avg by (service_name) (rate(mysql_global_status_innodb_os_log_fsyncs{desc=\"$desc\",project=\"$project\"}[$__interval]) or irate(mysql_global_status_innodb_os_log_fsyncs{desc=\"$desc\",project=\"$project\"}[5m]))",
@@ -10610,12 +10610,16 @@
   "templating": {
     "list": [
       {
-        "current": {},
+        "current": {
+          "selected": true,
+          "text": "galera-cluster",
+          "value": "galera-cluster"
+        },
         "datasource": {
           "type": "prometheus",
-          "uid": "Prometheus"
+          "uid": "victoriametrics"
         },
-        "definition": "label_values(project)",
+        "definition": "label_values(mysql_up, project)",
         "hide": 0,
         "includeAll": false,
         "label": "project",
@@ -10623,7 +10627,7 @@
         "name": "project",
         "options": [],
         "query": {
-          "query": "label_values(project)",
+          "query": "label_values(mysql_up, project)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -10633,12 +10637,16 @@
         "type": "query"
       },
       {
-        "current": {},
+        "current": {
+          "selected": true,
+          "text": "Galera Cluster",
+          "value": "Galera Cluster"
+        },
         "datasource": {
           "type": "prometheus",
-          "uid": "Prometheus"
+          "uid": "victoriametrics"
         },
-        "definition": "label_values(desc)",
+        "definition": "label_values(mysql_up, desc)",
         "hide": 0,
         "includeAll": false,
         "label": "desc",
@@ -10646,7 +10654,7 @@
         "name": "desc",
         "options": [],
         "query": {
-          "query": "label_values(desc)",
+          "query": "label_values(mysql_up, desc)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
