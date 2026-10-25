@@ -90,7 +90,7 @@ services:
 
 {% if vault_aws_yace_access_key is defined and vault_aws_yace_secret_key is defined %}
   yace:
-    image: quay.io/prometheuscommunity/yet-another-cloudwatch-exporter:{{ yace_version | default('v0.61.2') }}
+    image: quay.io/prometheuscommunity/yet-another-cloudwatch-exporter:{{ yace_version | default('v0.68.0') }}
     container_name: yace
     ports:
       - "5000:5000"
@@ -103,6 +103,7 @@ services:
     command:
       - "--config.file=/tmp/config.yml"
       - "--listen-address=:5000"
+      - "--disable-account-alias-lookup"
     restart: always
 {% endif %}
 

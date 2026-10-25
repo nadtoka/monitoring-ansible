@@ -1,35 +1,63 @@
 # roles/monitoring/templates/yace.yml.j2
 apiVersion: v1alpha1
-discovery:
-  jobs:
-    - type: AWS/RDS
-      regions:
-        - {{ aws_rds_region | default('us-east-1') }}
-      period: 300
-      length: 300
-      delay: 60
-      metrics:
-        - name: DatabaseConnections
-          statistics: [Average, Maximum]
-        - name: CPUUtilization
-          statistics: [Average, Maximum]
-        - name: FreeableMemory
-          statistics: [Average, Minimum]
-        - name: FreeStorageSpace
-          statistics: [Average, Minimum]
-        - name: ReadIOPS
-          statistics: [Average]
-        - name: WriteIOPS
-          statistics: [Average]
-        - name: ReadLatency
-          statistics: [Average, Maximum]
-        - name: WriteLatency
-          statistics: [Average, Maximum]
-        - name: SwapUsage
-          statistics: [Average, Maximum]
-        - name: DiskQueueDepth
-          statistics: [Average, Maximum]
-        - name: BurstBalance
-          statistics: [Average, Minimum]
-        - name: CPUCreditBalance
-          statistics: [Average, Minimum]
+static:
+  - namespace: AWS/RDS
+    name: rds-mariadb
+    regions:
+      - {{ aws_rds_region | default('us-east-1') }}
+    dimensions:
+      - name: DBInstanceIdentifier
+        value: {{ aws_rds_instance_identifier | default('production-databases') }}
+    metrics:
+      - name: DatabaseConnections
+        statistics: [Average, Maximum]
+        period: 300
+        length: 300
+      - name: CPUUtilization
+        statistics: [Average, Maximum]
+        period: 300
+        length: 300
+      - name: FreeableMemory
+        statistics: [Average, Minimum]
+        period: 300
+        length: 300
+      - name: FreeStorageSpace
+        statistics: [Average, Minimum]
+        period: 300
+        length: 300
+      - name: ReadIOPS
+        statistics: [Average]
+        period: 300
+        length: 300
+      - name: WriteIOPS
+        statistics: [Average]
+        period: 300
+        length: 300
+      - name: ReadLatency
+        statistics: [Average, Maximum]
+        period: 300
+        length: 300
+      - name: WriteLatency
+        statistics: [Average, Maximum]
+        period: 300
+        length: 300
+      - name: SwapUsage
+        statistics: [Average, Maximum]
+        period: 300
+        length: 300
+      - name: DiskQueueDepth
+        statistics: [Average, Maximum]
+        period: 300
+        length: 300
+      - name: NetworkReceiveThroughput
+        statistics: [Average]
+        period: 300
+        length: 300
+      - name: NetworkTransmitThroughput
+        statistics: [Average]
+        period: 300
+        length: 300
+      - name: BinLogDiskUsage
+        statistics: [Average]
+        period: 300
+        length: 300
