@@ -117,16 +117,25 @@ groups:
 
   - name: AWS_RDS
     rules:
-      - alert: RDSHighConnections
+      - alert: RDSHighConnectionsWarning
         expr: aws_rds_database_connections_maximum > 80
         for: 5m
         labels:
           severity: warning
         annotations:
-          summary: "Висока кількість підключень до RDS ({{ '{{' }} $labels.dimension_DBInstanceIdentifier {{ '}}' }})"
-          description: "Кількість активних конекшенів досягла {{ '{{' }} $value | printf \"%.0f\" {{ '}}' }} (поріг: 80)."
+          summary: "Підвищена кількість підключень до RDS ({{ '{{' }} $labels.dimension_DBInstanceIdentifier {{ '}}' }})"
+          description: "Кількість активних конекшенів перевищила 80 (зараз: {{ '{{' }} $value | printf \"%.0f\" {{ '}}' }})."
 
-      - alert: RDSHighCPU
+      - alert: RDSHighConnectionsCritical
+        expr: aws_rds_database_connections_maximum > 120
+        for: 3m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Критична кількість підключень до RDS ({{ '{{' }} $labels.dimension_DBInstanceIdentifier {{ '}}' }})!"
+          description: "Кількість активних конекшенів перевищила 120 (зараз: {{ '{{' }} $value | printf \"%.0f\" {{ '}}' }}). Можливе вичерпання пулу підключень."
+
+      - alert: RDSHighCPUWarning
         expr: aws_rds_cpuutilization_average > 85
         for: 10m
         labels:
@@ -135,20 +144,38 @@ groups:
           summary: "Високе навантаження CPU на RDS ({{ '{{' }} $labels.dimension_DBInstanceIdentifier {{ '}}' }})"
           description: "CPU інстансу бази завантажений на {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}% протягом 10 хвилин."
 
-      - alert: RDSLowStorageSpace
+      - alert: RDSHighCPUCritical
+        expr: aws_rds_cpuutilization_average > 95
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Критичне навантаження CPU на RDS ({{ '{{' }} $labels.dimension_DBInstanceIdentifier {{ '}}' }})!"
+          description: "CPU інстансу бази завантажений на {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}% протягом 5 хвилин. Загроза зависання бази."
+
+      - alert: RDSLowStorageSpaceWarning
+        expr: aws_rds_free_storage_space_minimum < 10737418240
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Закінчується вільне місце на диску RDS ({{ '{{' }} $labels.dimension_DBInstanceIdentifier {{ '}}' }})"
+          description: "На диску RDS залишилося менше 10 ГБ вільного місця (зараз: {{ '{{' }} $value | humanize1024 {{ '}}' }}B)."
+
+      - alert: RDSLowStorageSpaceCritical
         expr: aws_rds_free_storage_space_minimum < 5368709120
         for: 5m
         labels:
           severity: critical
         annotations:
-          summary: "Мало вільного місця на диску RDS ({{ '{{' }} $labels.dimension_DBInstanceIdentifier {{ '}}' }})"
+          summary: "Критично мало місця на диску RDS ({{ '{{' }} $labels.dimension_DBInstanceIdentifier {{ '}}' }})!"
           description: "На диску RDS залишилося менше 5 ГБ вільного місця (зараз: {{ '{{' }} $value | humanize1024 {{ '}}' }}B)."
 
       - alert: RDSLowFreeableMemory
-        expr: aws_rds_freeable_memory_minimum < 268435456
+        expr: aws_rds_freeable_memory_minimum < 524288000
         for: 5m
         labels:
           severity: warning
         annotations:
           summary: "Мало вільної RAM на RDS ({{ '{{' }} $labels.dimension_DBInstanceIdentifier {{ '}}' }})"
-          description: "Доступно менше 256 МБ оперативної пам'яті на RDS (зараз: {{ '{{' }} $value | humanize1024 {{ '}}' }}B)."
+          description: "Доступно менше 500 МБ оперативної пам'яті на RDS (зараз: {{ '{{' }} $value | humanize1024 {{ '}}' }}B)."
