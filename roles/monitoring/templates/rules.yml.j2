@@ -2,13 +2,13 @@ groups:
   - name: HostStatus
     rules:
       - alert: HostDown
-        expr: up == 0
-        for: 2m
+        expr: up{job="node-exporter"} == 0
+        for: 5m
         labels:
           severity: critical
         annotations:
           summary: "Сервер {{ '{{' }} $labels.instance {{ '}}' }} ({{ '{{' }} $labels.alias {{ '}}' }}) недоступний"
-          description: "Node Exporter не відповідає більше 2 хвилин."
+          description: "Node Exporter не відповідає більше 5 хвилин."
 
       - alert: DiskSpaceLow
         expr: (node_filesystem_avail_bytes{mountpoint="/"} * 100) / node_filesystem_size_bytes{mountpoint="/"} < 15
@@ -20,24 +20,35 @@ groups:
           description: "На розділі / залишилося менше 15% вільного місця (зараз: {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}%)."
 
       - alert: HostHighCpuLoad
-        expr: 100 - (avg by(instance, alias) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 90
-        for: 10m
+        expr: 100 - (avg by(instance, alias) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 95
+        for: 15m
         labels:
           severity: warning
         annotations:
           summary: "Високе навантаження CPU на {{ '{{' }} $labels.alias {{ '}}' }}"
-          description: "CPU завантажений на {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}% протягом останніх 10 хвилин."
+          description: "CPU завантажений на {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}% протягом останніх 15 хвилин."
 
   - name: NetworkAndTraffic
     rules:
+      # Загальний поріг для всіх серверів (350 Mbit/s)
       - alert: HighNetworkTrafficIn
-        expr: sum by(instance, alias) (rate(node_network_receive_bytes_total{device!~"^(lo|docker.*|veth.*|br-.*|virbr.*|tun.*|tap.*|cni.*|flannel.*|cali.*)$"}[5m])) > 43750000
+        expr: sum by(instance, alias) (rate(node_network_receive_bytes_total{device!~"^(lo|docker.*|veth.*|br-.*|virbr.*|tun.*|tap.*|cni.*|flannel.*|cali.*)$"}[5m])) > 43750000 and on(alias) (node_uname_info{alias!="AWS-Swarm-Node"})
         for: 5m
         labels:
           severity: warning
         annotations:
           summary: "Високий вхідний трафік на {{ '{{' }} $labels.alias {{ '}}' }}"
           description: "Вхідний трафік на фізичних інтерфейсах перевищує 350 Mbit/s (зараз: {{ '{{' }} $value | humanize1024 {{ '}}' }}B/s)."
+
+      # Окремий поріг для AWS-Swarm-Node (500 Mbit/s = 62.5 MB/s)
+      - alert: HighNetworkTrafficInAWSSwarm
+        expr: sum by(instance, alias) (rate(node_network_receive_bytes_total{device!~"^(lo|docker.*|veth.*|br-.*|virbr.*|tun.*|tap.*|cni.*|flannel.*|cali.*)$"}[5m])) > 62500000 and on(alias) (node_uname_info{alias="AWS-Swarm-Node"})
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Високий вхідний трафік на {{ '{{' }} $labels.alias {{ '}}' }}"
+          description: "Вхідний трафік на AWS Swarm перевищує 500 Mbit/s (зараз: {{ '{{' }} $value | humanize1024 {{ '}}' }}B/s)."
 
       - alert: MemoryHighUsage
         expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 < 10
@@ -78,13 +89,13 @@ groups:
           description: "Probe duration exceeded 5s (current: {{ '{{' }} $value | humanizeDuration {{ '}}' }}) for 5m."
 
       - alert: ApiSlowResponse
-        expr: probe_duration_seconds{service_type="api"} > 2.5
-        for: 3m
+        expr: probe_duration_seconds{service_type="api"} > 3
+        for: 4m
         labels:
           severity: warning
         annotations:
           summary: "API slow response: {{ '{{' }} $labels.instance {{ '}}' }}"
-          description: "API probe duration exceeded 2.5s (current: {{ '{{' }} $value | humanizeDuration {{ '}}' }}) for 3m."
+          description: "API probe duration exceeded 3s (current: {{ '{{' }} $value | humanizeDuration {{ '}}' }}) for 4m."
 
       - alert: SSLCertificateExpiringSoon
         expr: probe_ssl_earliest_certificate_expiry - time() < 86400 * 14

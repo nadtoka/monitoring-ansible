@@ -192,12 +192,13 @@
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "red", "value": null },
-              { "color": "yellow", "value": 20 },
-              { "color": "green", "value": 50 }
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 536870912 },
+              { "color": "red", "value": 2147483648 }
             ]
           },
-          "unit": "percent"
+          "decimals": 1,
+          "unit": "decbytes"
         },
         "overrides": []
       },
@@ -211,12 +212,12 @@
         "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
         "textMode": "auto"
       },
-      "title": "Storage Burst Balance",
+      "title": "BinLog Disk Usage",
       "type": "stat",
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${datasource}" },
-          "expr": "aws_rds_burst_balance_minimum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "expr": "aws_rds_bin_log_disk_usage_average{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
           "legendFormat": "{{dimension_DBInstanceIdentifier}}",
           "refId": "A"
         }
@@ -230,12 +231,11 @@
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "red", "value": null },
-              { "color": "yellow", "value": 15 },
-              { "color": "green", "value": 30 }
+              { "color": "blue", "value": null }
             ]
           },
-          "unit": "short"
+          "decimals": 1,
+          "unit": "Bps"
         },
         "overrides": []
       },
@@ -249,12 +249,12 @@
         "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
         "textMode": "auto"
       },
-      "title": "CPU Credit Balance",
+      "title": "Network Rx Throughput",
       "type": "stat",
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "${datasource}" },
-          "expr": "aws_rds_cpucredit_balance_minimum{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
+          "expr": "aws_rds_network_receive_throughput_average{dimension_DBInstanceIdentifier=~\"$db_instance\"}",
           "legendFormat": "{{dimension_DBInstanceIdentifier}}",
           "refId": "A"
         }
@@ -407,7 +407,8 @@
             "lineWidth": 2,
             "showPoints": "never"
           },
-          "unit": "bytes"
+          "decimals": 2,
+          "unit": "decbytes"
         },
         "overrides": []
       },
