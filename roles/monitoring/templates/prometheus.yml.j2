@@ -148,7 +148,7 @@ scrape_configs:
   # 5. Docker monitoring
   - job_name: 'cadvisor'
     static_configs:
-{% for host in groups['all'] if hostvars[host].is_swarm_manager | default(false) %}
+{% for host in groups['all'] if hostvars[host].has_cadvisor | default(false) or hostvars[host].is_swarm_manager | default(false) %}
       - targets: ['{{ hostvars[host].ansible_host }}:8080']
         labels:
           alias: '{{ host }}'

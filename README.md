@@ -172,6 +172,7 @@ ansible-playbook -i inventories/production/hosts.yml deploy-monitoring.yml --lim
 | 20016 | MySQL 8.0 Overview                             | Database performance           |
 | 21743 | cAdvisor - Docker Containers Overview          | Container metrics              |
 | Custom| AWS RDS - Databases & Connections (YACE)       | AWS RDS CloudWatch metrics     |
+| Custom| AWS SES - Deliverability & Reputation (YACE)   | SES bounce, complaint & volume |
 |       | Alerts Overview (vmalert)                      | Alerting                       |
 
 ---

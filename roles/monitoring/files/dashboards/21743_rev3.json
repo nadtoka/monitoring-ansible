@@ -1129,7 +1129,7 @@
           "type": "prometheus",
           "uid": "victoriametrics"
         },
-        "definition": "label_values({__name__=~\"container.*\"},instance)",
+        "definition": "label_values({job=\"cadvisor\"},instance)",
         "hide": 0,
         "includeAll": true,
         "label": "Docker Host",
@@ -1138,7 +1138,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values({__name__=~\"container.*\"},instance)",
+          "query": "label_values({job=\"cadvisor\"},instance)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1153,7 +1153,7 @@
           "type": "prometheus",
           "uid": "victoriametrics"
         },
-        "definition": "label_values({__name__=~\"container.*\", instance=~\"$docker_host\"},name)",
+        "definition": "label_values({job=\"cadvisor\", instance=~\"$docker_host\"},name)",
         "hide": 0,
         "includeAll": true,
         "label": "Container Name",
@@ -1162,7 +1162,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values({__name__=~\"container.*\", instance=~\"$docker_host\"},name)",
+          "query": "label_values({job=\"cadvisor\", instance=~\"$docker_host\"},name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,

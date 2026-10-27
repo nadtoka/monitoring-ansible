@@ -190,3 +190,41 @@ groups:
         annotations:
           summary: "Мало вільної RAM на RDS ({{ '{{' }} $labels.dimension_DBInstanceIdentifier {{ '}}' }})"
           description: "Доступно менше 500 МБ оперативної пам'яті на RDS (зараз: {{ '{{' }} $value | humanize1024 {{ '}}' }}B)."
+
+  - name: AWS_SES
+    rules:
+      - alert: SESHighBounceRateWarning
+        expr: aws_ses_reputation_bounce_rate_average * 100 > 5
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Підвищений SES Bounce Rate ({{ '{{' }} $labels.region {{ '}}' }})"
+          description: "Рівень відмов (Bounce Rate) перевищив 5% (зараз: {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}%). Рекомендується перевірити валідність бази отримувачів."
+
+      - alert: SESHighBounceRateCritical
+        expr: aws_ses_reputation_bounce_rate_average * 100 > 8
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Критичний SES Bounce Rate ({{ '{{' }} $labels.region {{ '}}' }})!"
+          description: "Рівень відмов досяг {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}% (критичний поріг AWS: 10%). Загроза блокування відправки листів!"
+
+      - alert: SESHighComplaintRateWarning
+        expr: aws_ses_reputation_complaint_rate_average * 100 > 0.05
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Підвищений SES Complaint Rate ({{ '{{' }} $labels.region {{ '}}' }})"
+          description: "Рівень скарг на спам перевищив 0.05% (зараз: {{ '{{' }} $value | printf \"%.3f\" {{ '}}' }}%)."
+
+      - alert: SESHighComplaintRateCritical
+        expr: aws_ses_reputation_complaint_rate_average * 100 > 0.08
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Критичний SES Complaint Rate ({{ '{{' }} $labels.region {{ '}}' }})!"
+          description: "Рівень скарг на спам досяг {{ '{{' }} $value | printf \"%.3f\" {{ '}}' }}% (максимум AWS: 0.1%). Терміново зупиніть масові розсилки!"

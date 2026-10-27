@@ -61,3 +61,41 @@ static:
         statistics: [Average]
         period: 300
         length: 300
+
+  - namespace: AWS/SES
+    name: ses-account
+    regions:
+      - {{ aws_ses_region | default(aws_rds_region | default('us-east-1')) }}
+    metrics:
+      - name: Send
+        statistics: [Sum]
+        period: 300
+        length: 300
+      - name: Delivery
+        statistics: [Sum]
+        period: 300
+        length: 300
+      - name: Bounce
+        statistics: [Sum]
+        period: 300
+        length: 300
+      - name: Complaint
+        statistics: [Sum]
+        period: 300
+        length: 300
+      - name: Open
+        statistics: [Sum]
+        period: 300
+        length: 300
+      - name: Click
+        statistics: [Sum]
+        period: 300
+        length: 300
+      - name: Reputation.BounceRate
+        statistics: [Average]
+        period: 300
+        length: 300
+      - name: Reputation.ComplaintRate
+        statistics: [Average]
+        period: 300
+        length: 300
