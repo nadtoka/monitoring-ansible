@@ -75,10 +75,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_host_uptime{job=\"pbs-exporter\", instance=\"$instance\"}",
+          "expr": "pbs_host_uptime{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"}",
           "instant": false,
           "range": true,
           "refId": "A"
@@ -264,10 +264,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_snapshot_vm_last_timestamp{job=\"pbs-exporter\", instance=\"$instance\", namespace=~\"$namespace\", datastore=~\"$datastore\", vm_name=~\"$vmname\"} * 1000",
+          "expr": "pbs_snapshot_vm_last_timestamp{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", namespace=~\"$namespace\", datastore=~\"$datastore\", vm_name=~\"$vmname\"} * 1000",
           "format": "table",
           "instant": false,
           "range": true,
@@ -276,10 +276,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_snapshot_vm_last_verify{job=\"pbs-exporter\", instance=\"$instance\", namespace=~\"$namespace\", datastore=~\"$datastore\", vm_name=~\"$vmname\"}",
+          "expr": "pbs_snapshot_vm_last_verify{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", namespace=~\"$namespace\", datastore=~\"$datastore\", vm_name=~\"$vmname\"}",
           "format": "table",
           "hide": false,
           "instant": false,
@@ -417,10 +417,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "sum(pbs_snapshot_count{job=\"pbs-exporter\", instance=\"$instance\"})",
+          "expr": "sum(pbs_snapshot_count{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"})",
           "instant": false,
           "range": true,
           "refId": "A"
@@ -496,10 +496,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_snapshot_count{job=\"pbs-exporter\", instance=\"$instance\", datastore=~\"$datastore\", namespace=~\"$namespace\"}",
+          "expr": "pbs_snapshot_count{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\", namespace=~\"$namespace\"}",
           "format": "table",
           "instant": false,
           "range": true,
@@ -619,10 +619,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_snapshot_vm_count{job=\"pbs-exporter\", instance=\"$instance\", datastore=~\"$datastore\", namespace=~\"$namespace\", vm_name=~\"$vmname\"}",
+          "expr": "pbs_snapshot_vm_count{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\", namespace=~\"$namespace\", vm_name=~\"$vmname\"}",
           "format": "table",
           "instant": false,
           "range": true,
@@ -819,10 +819,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_available{job=\"pbs-exporter\", instance=\"$instance\", datastore=~\"$datastore\"}",
+          "expr": "pbs_available{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\"}",
           "format": "table",
           "instant": false,
           "legendFormat": "__auto",
@@ -832,10 +832,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_size{job=\"pbs-exporter\", instance=\"$instance\", datastore=~\"$datastore\"}",
+          "expr": "pbs_size{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\"}",
           "format": "table",
           "hide": false,
           "instant": false,
@@ -845,10 +845,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_used{job=\"pbs-exporter\", instance=\"$instance\", datastore=~\"$datastore\"}",
+          "expr": "pbs_used{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\"}",
           "format": "table",
           "hide": false,
           "instant": false,
@@ -1031,10 +1031,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "pbs_host_cpu_usage{job=\"pbs-exporter\",instance=\"$instance\"}",
+          "expr": "pbs_host_cpu_usage{job=~\"pbs-exporter|proxmox-backup-server\",instance=\"$instance\"}",
           "instant": false,
           "legendFormat": "usage",
           "range": true,
@@ -1127,10 +1127,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "pbs_host_load1{job=\"pbs-exporter\",instance=\"$instance\"}",
+          "expr": "pbs_host_load1{job=~\"pbs-exporter|proxmox-backup-server\",instance=\"$instance\"}",
           "instant": false,
           "legendFormat": "1m load average",
           "range": true,
@@ -1139,10 +1139,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "pbs_host_load5{job=\"pbs-exporter\",instance=\"$instance\"}",
+          "expr": "pbs_host_load5{job=~\"pbs-exporter|proxmox-backup-server\",instance=\"$instance\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "5m load average",
@@ -1152,10 +1152,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "pbs_host_load15{job=\"pbs-exporter\",instance=\"$instance\"}",
+          "expr": "pbs_host_load15{job=~\"pbs-exporter|proxmox-backup-server\",instance=\"$instance\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "15m load average",
@@ -1263,10 +1263,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_host_memory_used{job=\"pbs-exporter\", instance=\"$instance\"}",
+          "expr": "pbs_host_memory_used{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"}",
           "instant": false,
           "legendFormat": "memory used",
           "range": true,
@@ -1275,10 +1275,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_host_memory_free{job=\"pbs-exporter\", instance=\"$instance\"}",
+          "expr": "pbs_host_memory_free{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "memory free",
@@ -1349,10 +1349,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "pbs_host_memory_used{job=\"pbs-exporter\", instance=\"$instance\"} / pbs_host_memory_total{job=\"pbs-exporter\", instance=\"$instance\"} * 100",
+          "expr": "pbs_host_memory_used{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"} / pbs_host_memory_total{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"} * 100",
           "instant": false,
           "range": true,
           "refId": "A"
@@ -1445,10 +1445,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_host_swap_used{job=\"pbs-exporter\", instance=\"$instance\"}",
+          "expr": "pbs_host_swap_used{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"}",
           "instant": false,
           "legendFormat": "swap used",
           "range": true,
@@ -1457,10 +1457,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_host_swap_free{job=\"pbs-exporter\", instance=\"$instance\"}",
+          "expr": "pbs_host_swap_free{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "swap free",
@@ -1531,10 +1531,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "pbs_host_swap_used{job=\"pbs-exporter\", instance=\"$instance\"} / pbs_host_swap_total{job=\"pbs-exporter\", instance=\"$instance\"} * 100",
+          "expr": "pbs_host_swap_used{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"} / pbs_host_swap_total{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"} * 100",
           "instant": false,
           "range": true,
           "refId": "A"
@@ -1640,7 +1640,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
           "expr": "pbs_host_io_wait{instance=\"$instance\"}",
@@ -1733,10 +1733,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_host_disk_total{job=\"pbs-exporter\", instance=\"$instance\"}",
+          "expr": "pbs_host_disk_total{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"}",
           "format": "time_series",
           "instant": false,
           "legendFormat": "total",
@@ -1746,10 +1746,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_host_disk_used{job=\"pbs-exporter\", instance=\"$instance\"}",
+          "expr": "pbs_host_disk_used{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"}",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -1821,10 +1821,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "pbs_host_disk_used{job=\"pbs-exporter\", instance=\"$instance\"} / pbs_host_disk_total{job=\"pbs-exporter\",instance=\"$instance\"} * 100",
+          "expr": "pbs_host_disk_used{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\"} / pbs_host_disk_total{job=~\"pbs-exporter|proxmox-backup-server\",instance=\"$instance\"} * 100",
           "instant": false,
           "range": true,
           "refId": "A"
@@ -1968,6 +1968,6 @@
   "timezone": "",
   "title": "Proxmox Backup Server",
   "uid": "pbs-exporter",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
