@@ -45,3 +45,9 @@
     - is_central | default(false)
     - vault_aws_yace_access_key is defined
     - vault_aws_yace_secret_key is defined
+
+- name: Restart Postgres Exporter
+  ansible.builtin.systemd:
+    name: prometheus-postgres-exporter
+    state: restarted
+  when: has_postgres | default(false)

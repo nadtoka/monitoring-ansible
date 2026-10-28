@@ -13,6 +13,10 @@ Infrastructure as Code (IaC) repository for deploying a modular, high-performanc
 - **Docker Swarm Exporter**: Cluster-level monitoring
 - **Blackbox Exporter**: HTTP/HTTPS/ICMP uptime checks
 - **MySQL Exporter**: Database performance metrics (MariaDB / Galera Cluster)
+- **PostgreSQL Exporter**: Database metrics and auto-discovery for PostgreSQL instances
+- **PBS Exporter**: Proxmox Backup Server datastores, backup tasks, and verification metrics
+- **GitHub Runners Exporter**: Real-time status and busy states of self-hosted GitHub Actions runners
+- **GitHub Workflows Exporter**: Tracking GitHub Actions pipelines, workflow status, and failure rates
 - **YACE (Yet Another CloudWatch Exporter)**: AWS RDS (MariaDB / Aurora) CloudWatch metrics exporter
 - **Elasticsearch (T-800)**: Centralized logging for infrastructure and application logs
 - **ArgoCD Monitoring**: Tracking GitOps deployments and application health
@@ -80,6 +84,12 @@ ansible-vault encrypt group_vars/all/vault.yml
 - `vault_ip_*` — host IP addresses  
 - `grafana_admin_password` — Grafana admin password  
 - `google_chat_webhook_url` — Google Chat webhook URL for alerts  
+- `vault_postgres_exporter_password` — Password for PostgreSQL monitoring user (`postgres_exporter`)  
+- `vault_pbs_api_token` — Proxmox Backup Server API Token secret  
+- `vault_pbs_token_user` — PBS Token username (default: `monitoring@pbs`)  
+- `vault_pbs_token_name` — PBS Token ID/name (default: `monitoring`)  
+- `vault_github_token` — GitHub Personal Access Token (Fine-grained or Classic) with `Self-hosted runners: Read-only` and `Actions: Read-only`  
+- `vault_github_org` — Target GitHub organization name  
 - `vault_aws_yace_access_key` / `vault_aws_yace_secret_key` — AWS IAM read-only credentials (`CloudWatchReadOnlyAccess` + `ResourceGroupsandTagEditorReadOnlyAccess`) for RDS monitoring  
 
 ---
@@ -102,6 +112,11 @@ is_swarm_manager: true
 Enable MySQL monitoring:
 ```yaml
 has_mysql: true
+```
+
+Enable PostgreSQL monitoring:
+```yaml
+has_postgres: true
 ```
 
 Enable Elasticsearch monitoring:
@@ -168,9 +183,12 @@ ansible-playbook -i inventories/production/hosts.yml deploy-monitoring.yml --lim
 | 14584 | ArgoCD                                         | GitOps deployment monitoring   |
 | 15661 | Kubernetes Cluster (K8S)                       | Infrastructure & Cluster status|
 | 17361 | Logs (Elasticsearch)                           | Log visualization & analysis   |
+| 9628  | PostgreSQL Database                            | PostgreSQL health & performance|
 | 2322  | Elasticsearch Overview                         | ES Cluster health              |
 | 20016 | MySQL 8.0 Overview                             | Database performance           |
 | 21743 | cAdvisor - Docker Containers Overview          | Container metrics              |
+| Custom| Proxmox Backup Server (PBS)                    | Datastores, backups, prune & GC|
+| Custom| GitHub Actions & Runners                       | Self-hosted runners & workflows|
 | Custom| AWS RDS - Databases & Connections (YACE)       | AWS RDS CloudWatch metrics     |
 | Custom| AWS SES - Deliverability & Reputation (YACE)   | SES bounce, complaint & volume |
 |       | Alerts Overview (vmalert)                      | Alerting                       |
@@ -184,6 +202,7 @@ Ensure that the following ports are accessible **only from the monitoring server
 - `9100` — Node Exporter  
 - `9104` — MySQL Exporter  
 - `9114` — Elasticsearch Exporter  
+- `9187` — PostgreSQL Exporter  
 - `8080` — cAdvisor (Swarm)  
 - `31080` / `31081` — Kubernetes (`kube-state-metrics` & `cAdvisor`)  
 - `31082` / `31083` — ArgoCD Metrics  

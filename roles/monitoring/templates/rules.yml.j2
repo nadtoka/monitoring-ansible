@@ -228,3 +228,65 @@ groups:
         annotations:
           summary: "Критичний SES Complaint Rate ({{ '{{' }} $labels.region {{ '}}' }})!"
           description: "Рівень скарг на спам досяг {{ '{{' }} $value | printf \"%.3f\" {{ '}}' }}% (максимум AWS: 0.1%). Терміново зупиніть масові розсилки!"
+
+{% if vault_github_token is defined and vault_github_org is defined %}
+  - name: GitHubRunners
+    rules:
+      - alert: GitHubRunnerOffline
+        expr: github_runner_status == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "GitHub Actions Runner офлайн ({{ '{{' }} $labels.name {{ '}}' }})"
+          description: "Раннер {{ '{{' }} $labels.name {{ '}}' }} (ID: {{ '{{' }} $labels.id {{ '}}' }}) знаходиться в статусі offline понад 5 хвилин."
+
+      - alert: GitHubAPIRateLimitLow
+        expr: github_ratelimit_remaining < 300
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Закінчується ліміт GitHub API ({{ '{{' }} $labels.org | default('foodtolive') {{ '}}' }})"
+          description: "Залишилося менше 300 запитів до GitHub API (поточний залишок: {{ '{{' }} $value {{ '}}' }})."
+{% endif %}
+
+{% if vault_pbs_api_token is defined %}
+  - name: ProxmoxBackupServer
+    rules:
+      - alert: PBSDown
+        expr: pbs_up == 0
+        for: 3m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Proxmox Backup Server недоступний!"
+          description: "pbs-exporter не може підключитися до API Proxmox Backup Server вже 3 хвилини."
+
+      - alert: PBSDatastoreDiskSpaceWarning
+        expr: (pbs_available / pbs_size) * 100 < 15
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Мало місця на Datastore PBS ({{ '{{' }} $labels.datastore {{ '}}' }})"
+          description: "На датасторі {{ '{{' }} $labels.datastore {{ '}}' }} залишилося менше 15% вільного місця."
+
+      - alert: PBSDatastoreDiskSpaceCritical
+        expr: (pbs_available / pbs_size) * 100 < 5
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Критично мало місця на Datastore PBS ({{ '{{' }} $labels.datastore {{ '}}' }})!"
+          description: "На датасторі {{ '{{' }} $labels.datastore {{ '}}' }} залишилося менше 5% місця! Загроза зупинки резервного копіювання!"
+
+      - alert: PBSBackupFailed
+        expr: pbs_snapshot_vm_last_verify == 0
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Помилка верифікації бекапу PBS ({{ '{{' }} $labels.vm_name {{ '}}' }})"
+          description: "Останній бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) на датасторі {{ '{{' }} $labels.datastore {{ '}}' }} не пройшов верифікацію."
+{% endif %}

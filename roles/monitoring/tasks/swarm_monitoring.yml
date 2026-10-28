@@ -1,3 +1,11 @@
+- name: Install Docker SDK for Python (required by community.docker swarm modules)
+  ansible.builtin.apt:
+    name: python3-docker
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  when: is_swarm_manager | default(false)
+
 - name: Create monitoring overlay network
   community.docker.docker_network:
     name: monitoring_network
@@ -13,7 +21,7 @@
     networks:
       - monitoring_network  
     publish:
-      - published_port: 8080
+      - published_port: "{{ cadvisor_port | default(8080) }}"
         target_port: 8080
     limits:
       cpus: '0.20'

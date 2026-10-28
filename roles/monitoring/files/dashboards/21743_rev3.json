@@ -165,7 +165,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(rate(container_cpu_usage_seconds_total{instance=~\"$docker_host\",name=~\".+\"}[$__rate_interval])) by(instance) ",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{alias=~\"$docker_host\",name=~\".+\"}[$__rate_interval])) by (alias) ",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": false,
@@ -265,7 +265,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "sum(container_memory_usage_bytes{instance=~\"$docker_host\",name=~\".+\"}) by (instance)",
+          "expr": "sum(container_memory_usage_bytes{alias=~\"$docker_host\",name=~\".+\"}) by (alias)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -378,7 +378,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "sum(rate(container_cpu_usage_seconds_total{instance=~\"$docker_host\",name=~\".+\"}[$__rate_interval])) by (name) * 100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{alias=~\"$docker_host\",name=~\".+\"}[$__rate_interval])) by (name) * 100",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -487,7 +487,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "sum(container_memory_usage_bytes{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}) by (name)",
+          "expr": "sum(container_memory_usage_bytes{alias=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}) by (name)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -584,7 +584,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "sum(container_memory_cache{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}) by (name)",
+          "expr": "sum(container_memory_cache{alias=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}) by (name)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -697,7 +697,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "sum(rate(container_fs_reads_bytes_total{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
+          "expr": "sum(rate(container_fs_reads_bytes_total{alias=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -797,7 +797,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "sum(rate(container_fs_writes_bytes_total{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
+          "expr": "sum(rate(container_fs_writes_bytes_total{alias=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -910,7 +910,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "sum(rate(container_network_receive_bytes_total{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
+          "expr": "sum(rate(container_network_receive_bytes_total{alias=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -1010,7 +1010,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "sum(rate(container_network_transmit_bytes_total{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
+          "expr": "sum(rate(container_network_transmit_bytes_total{alias=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__rate_interval])) by (name)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -1104,7 +1104,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "code",
-          "expr": "count by(name) (count_over_time(container_last_seen{instance=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__range]))",
+          "expr": "count by(name) (count_over_time(container_last_seen{alias=~\"$docker_host\",name=~\"$container_name\",name=~\".+\"}[$__range]))",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -1129,7 +1129,7 @@
           "type": "prometheus",
           "uid": "victoriametrics"
         },
-        "definition": "label_values({job=\"cadvisor\"},instance)",
+        "definition": "label_values({job=\"cadvisor\"},alias)",
         "hide": 0,
         "includeAll": true,
         "label": "Docker Host",
@@ -1138,7 +1138,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values({job=\"cadvisor\"},instance)",
+          "query": "label_values({job=\"cadvisor\"},alias)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1153,7 +1153,7 @@
           "type": "prometheus",
           "uid": "victoriametrics"
         },
-        "definition": "label_values({job=\"cadvisor\", instance=~\"$docker_host\"},name)",
+        "definition": "label_values({job=\"cadvisor\", alias=~\"$docker_host\"},name)",
         "hide": 0,
         "includeAll": true,
         "label": "Container Name",
@@ -1162,7 +1162,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values({job=\"cadvisor\", instance=~\"$docker_host\"},name)",
+          "query": "label_values({job=\"cadvisor\", alias=~\"$docker_host\"},name)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,

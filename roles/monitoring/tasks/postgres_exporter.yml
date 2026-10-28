@@ -1,0 +1,45 @@
+---
+# roles/monitoring/tasks/postgres_exporter.yml
+- name: Install PostgreSQL Exporter via APT (Binary)
+  ansible.builtin.apt:
+    name: prometheus-postgres-exporter
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  when: has_postgres | default(false)
+
+- name: Create postgres_exporter user in PostgreSQL
+  become_user: postgres
+  ansible.builtin.shell: |
+    psql -c "DO \$\$
+    BEGIN
+      IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'postgres_exporter') THEN
+        CREATE ROLE postgres_exporter WITH LOGIN PASSWORD '{{ vault_postgres_exporter_password }}';
+      ELSE
+        ALTER ROLE postgres_exporter WITH PASSWORD '{{ vault_postgres_exporter_password }}';
+      END IF;
+      GRANT pg_monitor TO postgres_exporter;
+    END
+    \$\$;"
+  register: pg_user_result
+  changed_when: "'CREATE ROLE' in pg_user_result.stdout or 'ALTER ROLE' in pg_user_result.stdout"
+  when: has_postgres | default(false)
+
+- name: Configure prometheus-postgres-exporter environment
+  ansible.builtin.copy:
+    dest: /etc/default/prometheus-postgres-exporter
+    content: |
+      DATA_SOURCE_NAME="user=postgres_exporter password='{{ vault_postgres_exporter_password }}' host=127.0.0.1 port=5432 dbname=postgres sslmode=disable"
+      ARGS="--auto-discover-databases"
+    owner: root
+    group: root
+    mode: '0600'
+  notify: Restart Postgres Exporter
+  when: has_postgres | default(false)
+
+- name: Ensure prometheus-postgres-exporter service is started and enabled
+  ansible.builtin.systemd:
+    name: prometheus-postgres-exporter
+    state: started
+    enabled: yes
+  when: has_postgres | default(false)

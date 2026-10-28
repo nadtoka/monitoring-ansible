@@ -171,3 +171,7 @@
 # Docker monitoring
 - name: Import Cadvisor Exporter tasks
   import_tasks: swarm_monitoring.yml
+
+# Import PostgreSQL Exporter tasks
+- name: Import PostgreSQL Exporter tasks
+  import_tasks: postgres_exporter.yml

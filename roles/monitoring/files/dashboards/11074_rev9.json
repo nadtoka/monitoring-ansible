@@ -114,7 +114,16 @@
       "type": "row"
     },
     {
-      "columns": [],
+      "columns": [
+        {
+          "text": "Hostname",
+          "value": "nodename"
+        },
+        {
+          "text": "IP（Link to details）",
+          "value": "instance"
+        }
+      ],
       "datasource": "Prometheus",
       "description": "Partition utilization, disk read, disk write, download bandwidth, upload bandwidth, if there are multiple network cards or multiple partitions, it is the value of the network card or partition with the highest utilization rate collected.\n\nCurrEstab: The number of TCP connections whose current status is ESTABLISHED or CLOSE-WAIT.",
       "fieldConfig": {
@@ -134,7 +143,7 @@
       "pageSize": null,
       "showHeader": true,
       "sort": {
-        "col": 31,
+        "col": 0,
         "desc": false
       },
       "styles": [
@@ -462,7 +471,7 @@
       ],
       "targets": [
         {
-          "expr": "node_uname_info{origin_prometheus=~\"$origin_prometheus\",job=~\"$job\"} - 0",
+          "expr": "label_replace(label_replace(label_replace(label_replace(label_replace(label_replace(label_replace(label_replace(label_replace(label_replace(label_replace(label_replace(label_replace(label_replace(label_replace(node_uname_info{origin_prometheus=~\"$origin_prometheus\",job=~\"$job\"} - 0, \"nodename\", \"01 prod-swarm-aws\", \"nodename\", \"^prod-swarm-aws$\"), \"nodename\", \"02 morkva\", \"nodename\", \"^morkva$\"), \"nodename\", \"03 shared\", \"nodename\", \"^shared$\"), \"nodename\", \"04 pbs\", \"nodename\", \"^pbs$\"), \"nodename\", \"05 activecollab\", \"nodename\", \"^activecollab$\"), \"nodename\", \"06 eyeofsauron\", \"nodename\", \"^eyeofsauron$\"), \"nodename\", \"07 github-harbor\", \"nodename\", \"^github-harbor$\"), \"nodename\", \"08 postgres-db\", \"nodename\", \"^postgres-db$\"), \"nodename\", \"09 galera-db1\", \"nodename\", \"^galera-db1$\"), \"nodename\", \"10 galera-db2\", \"nodename\", \"^galera-db2$\"), \"nodename\", \"11 galera-db3\", \"nodename\", \"^galera-db3$\"), \"nodename\", \"12 elasticsearch\", \"nodename\", \"^elasticsearch$\"), \"nodename\", \"13 proxy\", \"nodename\", \"^proxy$\"), \"nodename\", \"14 paperless\", \"nodename\", \"^paperless$\"), \"nodename\", \"15 aragorn\", \"nodename\", \"^aragorn$\")",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -3942,5 +3951,5 @@
   "timezone": "browser",
   "title": "Server Monitoring",
   "uid": "xfpJB9FGz",
-  "version": 2
+  "version": 5
 }

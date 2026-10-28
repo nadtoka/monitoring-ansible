@@ -149,7 +149,7 @@ scrape_configs:
   - job_name: 'cadvisor'
     static_configs:
 {% for host in groups['all'] if hostvars[host].has_cadvisor | default(false) or hostvars[host].is_swarm_manager | default(false) %}
-      - targets: ['{{ hostvars[host].ansible_host }}:8080']
+      - targets: ['{{ hostvars[host].ansible_host }}:{{ hostvars[host].cadvisor_port | default(8080) }}']
         labels:
           alias: '{{ host }}'
 {% endfor %}
@@ -201,6 +201,18 @@ scrape_configs:
           project: 't-800'
 {% endfor %}
 
+# 9. PostgreSQL monitoring
+{% for host in groups['all'] if hostvars[host].has_postgres | default(false) %}
+{% if loop.first %}
+  - job_name: 'postgres'
+    static_configs:
+{% endif %}
+      - targets: ['{{ hostvars[host].ansible_host }}:9187']
+        labels:
+          alias: '{{ host }}'
+          service_type: 'postgres'
+{% endfor %}
+
 {% if vault_aws_yace_access_key is defined and vault_aws_yace_secret_key is defined %}
   # 9. AWS RDS monitoring via YACE (CloudWatch Exporter)
   - job_name: 'aws-rds'
@@ -210,6 +222,40 @@ scrape_configs:
       - targets: ['yace:5000']
         labels:
           service_type: 'rds'
+{% endif %}
+
+{% if vault_github_token is defined and vault_github_org is defined %}
+  # 10. GitHub Actions Runners monitoring
+  - job_name: 'github-runners'
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['githubrunner-exporter:9090']
+        labels:
+          service_type: 'github-runners'
+          org: '{{ vault_github_org }}'
+
+  # 11. GitHub Actions Workflows & Pipelines monitoring
+  - job_name: 'github-workflows'
+    scrape_interval: 1m
+    scrape_timeout: 30s
+    static_configs:
+      - targets: ['github-workflow-exporter:8080']
+        labels:
+          service_type: 'github-workflows'
+          org: '{{ vault_github_org }}'
+{% endif %}
+
+{% if vault_pbs_api_token is defined %}
+  # 12. Proxmox Backup Server (PBS) monitoring
+  - job_name: 'proxmox-backup-server'
+    scrape_interval: 1m
+    scrape_timeout: 30s
+    static_configs:
+      - targets: ['pbs-exporter:10019']
+        labels:
+          service_type: 'pbs'
+          alias: 'PBS'
 {% endif %}
 
 

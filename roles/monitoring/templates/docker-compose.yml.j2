@@ -11,7 +11,7 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     command:
       - "--storageDataPath=/storage"
-      - "--retentionPeriod=1y"
+      - "--retentionPeriod=6"
       - "--promscrape.config=/etc/prometheus/prometheus.yml"
       - "-vmalert.proxyURL=http://vmalert:8880"
     restart: always
@@ -104,6 +104,46 @@ services:
       - "--config.file=/tmp/config.yml"
       - "--listen-address=:5000"
       - "--disable-account-alias-lookup"
+    restart: always
+{% endif %}
+
+{% if vault_github_token is defined and vault_github_org is defined %}
+  githubrunner-exporter:
+    image: ghcr.io/mkrakowitzer/githubrunner_exporter:latest
+    container_name: githubrunner-exporter
+    ports:
+      - "9095:9090"
+    environment:
+      - GITHUB_TOKEN={{ vault_github_token }}
+      - GITHUB_ORG={{ vault_github_org }}
+      - GITHUB_INTERVAL=30
+    restart: always
+
+  github-workflow-exporter:
+    image: webdevops/github-workflow-exporter:latest
+    container_name: github-workflow-exporter
+    ports:
+      - "9096:8080"
+    environment:
+      - GITHUB_TOKEN={{ vault_github_token }}
+      - GITHUB_ORGANIZATION={{ vault_github_org }}
+      - SCRAPE_TIME=2m
+      - GITHUB_WORKFLOWS_TIMEFRAME=72h
+    restart: always
+{% endif %}
+
+{% if vault_pbs_api_token is defined %}
+  pbs-exporter:
+    image: ghcr.io/natrontech/pbs-exporter:latest
+    container_name: pbs-exporter
+    ports:
+      - "10019:10019"
+    environment:
+      - PBS_ENDPOINT=https://{{ vault_ip_pbs }}:8007
+      - PBS_USERNAME={{ vault_pbs_token_user | default('monitoring@pbs') }}
+      - PBS_API_TOKEN_NAME={{ vault_pbs_token_name | default('monitoring') }}
+      - PBS_API_TOKEN={{ vault_pbs_api_token }}
+      - PBS_INSECURE=true
     restart: always
 {% endif %}
 
