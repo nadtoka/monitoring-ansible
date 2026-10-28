@@ -267,7 +267,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_snapshot_vm_last_timestamp{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", namespace=~\"$namespace\", datastore=~\"$datastore\", vm_name=~\"$vmname\"} * 1000",
+          "expr": "pbs_snapshot_vm_last_timestamp{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\", vm_name=~\".*\"} * 1000",
           "format": "table",
           "instant": false,
           "range": true,
@@ -279,7 +279,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_snapshot_vm_last_verify{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", namespace=~\"$namespace\", datastore=~\"$datastore\", vm_name=~\"$vmname\"}",
+          "expr": "pbs_snapshot_vm_last_verify{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\", vm_name=~\".*\"}",
           "format": "table",
           "hide": false,
           "instant": false,
@@ -499,7 +499,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_snapshot_count{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\", namespace=~\"$namespace\"}",
+          "expr": "pbs_snapshot_count{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\"}",
           "format": "table",
           "instant": false,
           "range": true,
@@ -622,7 +622,7 @@
             "uid": "victoriametrics"
           },
           "editorMode": "builder",
-          "expr": "pbs_snapshot_vm_count{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\", namespace=~\"$namespace\", vm_name=~\"$vmname\"}",
+          "expr": "pbs_snapshot_vm_count{job=~\"pbs-exporter|proxmox-backup-server\", instance=\"$instance\", datastore=~\"$datastore\", vm_name=~\".*\"}",
           "format": "table",
           "instant": false,
           "range": true,
@@ -1893,70 +1893,6 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
-      },
-      {
-        "allValue": ".+",
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "victoriametrics"
-        },
-        "definition": "label_values(pbs_snapshot_count{datastore=~\"$datastore\"},namespace)",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Namespace",
-        "multi": true,
-        "name": "namespace",
-        "options": [],
-        "query": {
-          "query": "label_values(pbs_snapshot_count{datastore=~\"$datastore\"},namespace)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "allValue": ".+",
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "victoriametrics"
-        },
-        "definition": "label_values(pbs_snapshot_vm_count{namespace=~\"$namespace\",datastore=~\"$datastore\"},vm_name)",
-        "hide": 0,
-        "includeAll": true,
-        "label": "VM Name",
-        "multi": true,
-        "name": "vmname",
-        "options": [],
-        "query": {
-          "query": "label_values(pbs_snapshot_vm_count{namespace=~\"$namespace\",datastore=~\"$datastore\"},vm_name)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
       }
     ]
   },
@@ -1968,6 +1904,6 @@
   "timezone": "",
   "title": "Proxmox Backup Server",
   "uid": "pbs-exporter",
-  "version": 3,
+  "version": 5,
   "weekStart": ""
 }
