@@ -282,13 +282,31 @@ groups:
           description: "На датасторі {{ '{{' }} $labels.datastore {{ '}}' }} залишилося менше 5% місця! Загроза зупинки резервного копіювання!"
 
       - alert: PBSBackupFailed
-        expr: pbs_snapshot_vm_last_verify == 0
+        expr: pbs_snapshot_vm_last_verify{datastore!="b2-offsite"} == 0
         for: 15m
         labels:
           severity: warning
         annotations:
           summary: "Помилка верифікації бекапу PBS ({{ '{{' }} $labels.vm_name {{ '}}' }})"
           description: "Останній бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) на датасторі {{ '{{' }} $labels.datastore {{ '}}' }} не пройшов верифікацію."
+
+      - alert: PBSBackupTooOldDaily
+        expr: (time() - pbs_snapshot_vm_last_timestamp{datastore="hddmirror-pbs-data"}) > 86400 * 2
+        for: 1h
+        labels:
+          severity: critical
+        annotations:
+          summary: "Бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} застарів (понад 2 дні)!"
+          description: "Останній бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) на датасторі {{ '{{' }} $labels.datastore {{ '}}' }} був створений більше 48 годин тому."
+
+      - alert: PBSBackupTooOldB2
+        expr: (time() - pbs_snapshot_vm_last_timestamp{datastore="b2-offsite"}) > 86400 * 16
+        for: 2h
+        labels:
+          severity: warning
+        annotations:
+          summary: "Офсайт-бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} застарів (понад 16 днів)"
+          description: "Останній офсайт-бекап у Backblaze B2 для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) був створений більше 16 днів тому."
 {% endif %}
 
 {% if vault_pve_token_value is defined and vault_pve_host is defined and pve_monitoring_enabled | default(true) %}
@@ -329,4 +347,22 @@ groups:
         annotations:
           summary: "Мало місця на сховищі Proxmox ({{ '{{' }} $labels.storage {{ '}}' }})"
           description: "На сховищі {{ '{{' }} $labels.storage {{ '}}' }} на ноді {{ '{{' }} $labels.node {{ '}}' }} залишилося менше 15% вільного місця."
+
+      - alert: ProxmoxStorageOffline
+        expr: pve_storage_active == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Сховище Proxmox недоступне ({{ '{{' }} $labels.storage {{ '}}' }})!"
+          description: "Сховище {{ '{{' }} $labels.storage {{ '}}' }} на ноді {{ '{{' }} $labels.node {{ '}}' }} знаходиться в неактивному/офлайн стані понад 5 хвилин."
+
+      - alert: ProxmoxGuestDown
+        expr: pve_up{id=~"(qemu|lxc)/.+"} == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Proxmox гість зупинений (ID: {{ '{{' }} $labels.id {{ '}}' }})"
+          description: "Віртуальна машина або контейнер {{ '{{' }} $labels.id {{ '}}' }} на ноді {{ '{{' }} $labels.node {{ '}}' }} зупинена понад 5 хвилин."
 {% endif %}
