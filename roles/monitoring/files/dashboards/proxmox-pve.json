@@ -724,7 +724,7 @@
             "type": "prometheus",
             "uid": "victoriametrics"
           },
-          "expr": "pve_cpu_usage_ratio{instance=\"$instance\"} / pve_cpu_usage_limit and on(id) pve_node_info",
+          "expr": "pve_cpu_usage_ratio{instance=\"$instance\"} / pve_cpu_usage_limit{instance=\"$instance\"} and on(id) pve_node_info",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -805,7 +805,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "pve_cpu_usage_limit and on(id) pve_node_info",
+          "expr": "pve_cpu_usage_limit{instance=\"$instance\"} and on(id) pve_node_info",
           "format": "table",
           "instant": true,
           "legendFormat": "__auto",
@@ -1017,7 +1017,7 @@
             "type": "prometheus",
             "uid": "victoriametrics"
           },
-          "expr": "pve_memory_usage_bytes{instance=\"$instance\"} / pve_memory_size_bytes and on(id) pve_node_info",
+          "expr": "pve_memory_usage_bytes{instance=\"$instance\"} / pve_memory_size_bytes{instance=\"$instance\"} and on(id) pve_node_info",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -1900,7 +1900,7 @@
             "type": "prometheus",
             "uid": "victoriametrics"
           },
-          "expr": "((rate(pve_disk_write_bytes{instance=\"$instance\"}[5m]) + rate(pve_disk_read_bytes[5m])) * on(id, instance) group_left(name, type) pve_guest_info) and on(id, instance) pve_up == 1",
+          "expr": "((rate(pve_disk_write_bytes{instance=\"$instance\"}[5m]) + rate(pve_disk_read_bytes{instance=\"$instance\"}[5m])) * on(id, instance) group_left(name, type) pve_guest_info) and on(id, instance) pve_up == 1",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
