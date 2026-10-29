@@ -7,3 +7,7 @@ aws_rds_instance_identifier: "production-databases"
 victoriametrics_port: 8428
 grafana_port: 3000
 docker_compose_dir: "/home/{{ ansible_user }}/monitoring"
+
+# Feature toggles
+pve_monitoring_enabled: true
+pbs_monitoring_enabled: true

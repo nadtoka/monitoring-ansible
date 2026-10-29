@@ -2,9 +2,20 @@
 # deploy-monitoring.yml
 - name: Deploy Monitoring Stack
   hosts: all
-  become: true
-  roles:
-    - role: docker
+  gather_facts: false
+  tasks:
+    - name: Skip disabled hosts
+      ansible.builtin.meta: end_host
+      when: not (monitoring_enabled | default(true) | bool)
+
+    - name: Gather facts for enabled hosts
+      ansible.builtin.setup:
+
+    - name: Include Docker role
+      ansible.builtin.include_role:
+        name: docker
       when: install_method | default('docker') != 'binary'
-      
-    - role: monitoring
+
+    - name: Include Monitoring role
+      ansible.builtin.include_role:
+        name: monitoring

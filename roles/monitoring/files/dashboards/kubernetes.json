@@ -6512,8 +6512,8 @@
   "refresh": "",
   "schemaVersion": 39,
   "tags": [
-    "Prometheus",
-    "Kubernetes"
+    "containers",
+    "kubernetes"
   ],
   "templating": {
     "list": [
@@ -6532,7 +6532,7 @@
         "definition": "label_values(kube_node_info,origin_prometheus)",
         "hide": 0,
         "includeAll": false,
-        "label": "K8S",
+        "label": "Source",
         "multi": false,
         "name": "origin_prometheus",
         "options": [],
@@ -6563,7 +6563,7 @@
         "definition": "label_values(kube_node_info{origin_prometheus=~\"$origin_prometheus\"},node)",
         "hide": 0,
         "includeAll": true,
-        "label": "Nodes",
+        "label": "Node",
         "multi": false,
         "name": "Node",
         "options": [],
@@ -6625,7 +6625,7 @@
         "definition": "label_values(kube_pod_container_info{origin_prometheus=~\"$origin_prometheus\",namespace=~\"$NameSpace\"},container)",
         "hide": 0,
         "includeAll": true,
-        "label": "Microservice (Container Name)",
+        "label": "Container",
         "multi": false,
         "name": "Container",
         "options": [],
@@ -6701,7 +6701,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "K8S",
+  "title": "Kubernetes Cluster (K8S)",
   "uid": "bfjzn1lqw13i8b",
   "version": 1,
   "weekStart": ""

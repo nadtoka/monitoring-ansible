@@ -387,7 +387,10 @@
   "refresh": "5s",
   "schemaVersion": 37,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "logs",
+    "elasticsearch"
+  ],
   "templating": {
     "list": [
       {
@@ -416,7 +419,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Elasticsearch logs",
+  "title": "Elasticsearch Logs",
   "uid": "dU1u39N4z",
   "version": 8,
   "weekStart": "",

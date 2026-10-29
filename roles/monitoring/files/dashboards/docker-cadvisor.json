@@ -1077,7 +1077,7 @@
           "color": "rgba(255,0,255,0.7)"
         },
         "filterValues": {
-          "le": 1e-9
+          "le": 1e-09
         },
         "legend": {
           "show": true
@@ -1118,8 +1118,9 @@
   "refresh": "5s",
   "schemaVersion": 39,
   "tags": [
-    "cadvisor",
-    "docker"
+    "containers",
+    "docker",
+    "cadvisor"
   ],
   "templating": {
     "list": [
@@ -1179,7 +1180,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "cAdvisor exporter - Docker containers Overview",
+  "title": "Docker Containers (cAdvisor)",
   "uid": "ae3c41d7-cea5-4cca-a918-5708706b4d1a",
   "version": 20,
   "weekStart": ""

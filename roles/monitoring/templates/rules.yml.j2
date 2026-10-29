@@ -251,7 +251,7 @@ groups:
           description: "Залишилося менше 300 запитів до GitHub API (поточний залишок: {{ '{{' }} $value {{ '}}' }})."
 {% endif %}
 
-{% if vault_pbs_api_token is defined %}
+{% if vault_pbs_api_token is defined and pbs_monitoring_enabled | default(true) %}
   - name: ProxmoxBackupServer
     rules:
       - alert: PBSDown
@@ -289,4 +289,44 @@ groups:
         annotations:
           summary: "Помилка верифікації бекапу PBS ({{ '{{' }} $labels.vm_name {{ '}}' }})"
           description: "Останній бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) на датасторі {{ '{{' }} $labels.datastore {{ '}}' }} не пройшов верифікацію."
+{% endif %}
+
+{% if vault_pve_token_value is defined and vault_pve_host is defined and pve_monitoring_enabled | default(true) %}
+  - name: ProxmoxVE
+    rules:
+      - alert: ProxmoxNodeDown
+        expr: pve_node_online == 0
+        for: 3m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Нода Proxmox VE офлайн ({{ '{{' }} $labels.node {{ '}}' }})!"
+          description: "Нода Proxmox {{ '{{' }} $labels.node {{ '}}' }} не відповідає більше 3 хвилин."
+
+      - alert: ProxmoxNodeHighCpuLoad
+        expr: (pve_node_cpu_usage * 100) > 90
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Високе навантаження CPU на ноді Proxmox ({{ '{{' }} $labels.node {{ '}}' }})"
+          description: "Завантаження CPU ноди перевищує 90% (зараз: {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}%)."
+
+      - alert: ProxmoxNodeMemoryLow
+        expr: ((pve_node_memory_total_bytes - pve_node_memory_used_bytes) / pve_node_memory_total_bytes) * 100 < 10
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Закінчується оперативна пам'ять на ноді Proxmox ({{ '{{' }} $labels.node {{ '}}' }})"
+          description: "Вільної пам'яті на ноді залишилося менше 10%."
+
+      - alert: ProxmoxStorageSpaceLow
+        expr: ((pve_storage_total_bytes - pve_storage_used_bytes) / pve_storage_total_bytes) * 100 < 15 and on(storage) (pve_storage_active == 1)
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Мало місця на сховищі Proxmox ({{ '{{' }} $labels.storage {{ '}}' }})"
+          description: "На сховищі {{ '{{' }} $labels.storage {{ '}}' }} на ноді {{ '{{' }} $labels.node {{ '}}' }} залишилося менше 15% вільного місця."
 {% endif %}

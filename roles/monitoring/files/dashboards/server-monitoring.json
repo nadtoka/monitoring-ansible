@@ -3678,9 +3678,9 @@
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
-    "Prometheus",
-    "node_exporter",
-    "StarsL.cn"
+    "servers",
+    "node-exporter",
+    "infrastructure"
   ],
   "templating": {
     "list": [
@@ -3713,7 +3713,7 @@
         "definition": "label_values(node_uname_info{origin_prometheus=~\"$origin_prometheus\"}, job)",
         "hide": 0,
         "includeAll": false,
-        "label": "JOB",
+        "label": "Job",
         "multi": false,
         "name": "job",
         "options": [],
@@ -3782,7 +3782,7 @@
         "definition": "label_values(node_network_info{origin_prometheus=~\"$origin_prometheus\",device!~'tap.*|veth.*|br.*|docker.*|virbr.*|lo.*|cni.*'},device)",
         "hide": 0,
         "includeAll": true,
-        "label": "NIC",
+        "label": "NIC Interface",
         "multi": true,
         "multiFormat": "regex values",
         "name": "device",

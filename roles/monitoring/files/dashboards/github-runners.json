@@ -773,7 +773,9 @@
         "footer": {
           "countRows": false,
           "fields": "",
-          "reducer": ["sum"],
+          "reducer": [
+            "sum"
+          ],
           "show": false
         },
         "showHeader": true,
@@ -925,9 +927,8 @@
   "schemaVersion": 39,
   "tags": [
     "github",
-    "ci/cd",
-    "runners",
-    "pipelines"
+    "ci-cd",
+    "runners"
   ],
   "templating": {
     "list": []

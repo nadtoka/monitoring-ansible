@@ -132,7 +132,7 @@ services:
     restart: always
 {% endif %}
 
-{% if vault_pbs_api_token is defined %}
+{% if vault_pbs_api_token is defined and pbs_monitoring_enabled | default(true) %}
   pbs-exporter:
     image: ghcr.io/natrontech/pbs-exporter:latest
     container_name: pbs-exporter
@@ -144,6 +144,20 @@ services:
       - PBS_API_TOKEN_NAME={{ vault_pbs_token_name | default('monitoring') }}
       - PBS_API_TOKEN={{ vault_pbs_api_token }}
       - PBS_INSECURE=true
+    restart: always
+{% endif %}
+
+{% if vault_pve_token_value is defined and vault_pve_host is defined and pve_monitoring_enabled | default(true) %}
+  pve-exporter:
+    image: prompve/prometheus-pve-exporter:latest
+    container_name: pve-exporter
+    ports:
+      - "9221:9221"
+    environment:
+      - PVE_USER={{ vault_pve_user | default('pve-monitoring@pve') }}
+      - PVE_TOKEN_NAME={{ vault_pve_token_name | default('monitoring') }}
+      - PVE_TOKEN_VALUE={{ vault_pve_token_value }}
+      - PVE_VERIFY_SSL=false
     restart: always
 {% endif %}
 

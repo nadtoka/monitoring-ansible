@@ -15,6 +15,7 @@ Infrastructure as Code (IaC) repository for deploying a modular, high-performanc
 - **MySQL Exporter**: Database performance metrics (MariaDB / Galera Cluster)
 - **PostgreSQL Exporter**: Database metrics and auto-discovery for PostgreSQL instances
 - **PBS Exporter**: Proxmox Backup Server datastores, backup tasks, and verification metrics
+- **Proxmox VE Exporter**: Cluster, node, VM, and storage metrics via Proxmox REST API (Read-Only)
 - **GitHub Runners Exporter**: Real-time status and busy states of self-hosted GitHub Actions runners
 - **GitHub Workflows Exporter**: Tracking GitHub Actions pipelines, workflow status, and failure rates
 - **YACE (Yet Another CloudWatch Exporter)**: AWS RDS (MariaDB / Aurora) CloudWatch metrics exporter
@@ -88,6 +89,10 @@ ansible-vault encrypt group_vars/all/vault.yml
 - `vault_pbs_api_token` — Proxmox Backup Server API Token secret  
 - `vault_pbs_token_user` — PBS Token username (default: `monitoring@pbs`)  
 - `vault_pbs_token_name` — PBS Token ID/name (default: `monitoring`)  
+- `vault_pve_host` — Proxmox VE host IP / FQDN  
+- `vault_pve_user` — Proxmox VE monitoring user (default: `pve-monitoring@pve`)  
+- `vault_pve_token_name` — Proxmox VE API Token ID (default: `monitoring`)  
+- `vault_pve_token_value` — Proxmox VE API Token Secret  
 - `vault_github_token` — GitHub Personal Access Token (Fine-grained or Classic) with `Self-hosted runners: Read-only` and `Actions: Read-only`  
 - `vault_github_org` — Target GitHub organization name  
 - `vault_aws_yace_access_key` / `vault_aws_yace_secret_key` — AWS IAM read-only credentials (`CloudWatchReadOnlyAccess` + `ResourceGroupsandTagEditorReadOnlyAccess`) for RDS monitoring  
@@ -142,9 +147,15 @@ Assign as central monitoring node:
 is_central: true
 ```
 
-Temporarily disable scraping for a powered-off/maintenance host:
+Temporarily disable host from monitoring and playbook execution (e.g. powered-off/maintenance):
 ```yaml
 monitoring_enabled: false
+```
+
+Feature toggles for external services (in `group_vars/all/settings.yml`):
+```yaml
+pve_monitoring_enabled: false  # Disable Proxmox VE monitoring exporter & dashboard
+pbs_monitoring_enabled: false  # Disable Proxmox Backup Server monitoring exporter & dashboard
 ```
 
 ---
@@ -176,22 +187,25 @@ ansible-playbook -i inventories/production/hosts.yml deploy-monitoring.yml --lim
 
 | ID    | Name                                           | Purpose                        |
 |-------|------------------------------------------------|--------------------------------|
-| 10229 | VictoriaMetrics - Single Node                  | Metrics storage monitoring     |
-| 11074 | Node Exporter Full (StarsL.cn)                 | Server & hardware metrics      |
-| 13106 | Galera Cluster Monitoring (MySQL)              | Database cluster health        |
-| 13659 | Blackbox Exporter (HTTP Prober)                | Uptime & endpoint monitoring   |
-| 14584 | ArgoCD                                         | GitOps deployment monitoring   |
-| 15661 | Kubernetes Cluster (K8S)                       | Infrastructure & Cluster status|
-| 17361 | Logs (Elasticsearch)                           | Log visualization & analysis   |
-| 9628  | PostgreSQL Database                            | PostgreSQL health & performance|
-| 2322  | Elasticsearch Overview                         | ES Cluster health              |
-| 20016 | MySQL 8.0 Overview                             | Database performance           |
-| 21743 | cAdvisor - Docker Containers Overview          | Container metrics              |
-| Custom| Proxmox Backup Server (PBS)                    | Datastores, backups, prune & GC|
-| Custom| GitHub Actions & Runners                       | Self-hosted runners & workflows|
-| Custom| AWS RDS - Databases & Connections (YACE)       | AWS RDS CloudWatch metrics     |
-| Custom| AWS SES - Deliverability & Reputation (YACE)   | SES bounce, complaint & volume |
-|       | Alerts Overview (vmalert)                      | Alerting                       |
+| File | Dashboard Title (Grafana) | Description |
+| :--- | :--- | :--- |
+| `server-monitoring.json` | Server Monitoring | Server & hardware metrics (Node Exporter) |
+| `proxmox-pve.json` | Proxmox VE (Cluster & VMs) | Cluster, nodes, VMs & LXC stats |
+| `proxmox-pbs.json` | Proxmox Backup Server | Datastores, backups, prune & GC |
+| `github-runners.json` | GitHub Actions & Runners | Self-hosted runners & workflows |
+| `postgres.json` | PostgreSQL Database | PostgreSQL health & performance |
+| `mysql.json` | MySQL Database | MySQL database performance |
+| `galera.json` | Galera Cluster | MariaDB / Galera cluster health |
+| `docker-cadvisor.json` | Docker Containers (cAdvisor) | Container metrics & resource usage |
+| `kubernetes.json` | Kubernetes Cluster (K8S) | K8s infrastructure & cluster status |
+| `argocd.json` | ArgoCD | GitOps deployment monitoring |
+| `elasticsearch.json` | Elasticsearch Overview | ES Cluster health & shards |
+| `elasticsearch-logs.json` | Elasticsearch Logs | Log visualization & analysis |
+| `blackbox-http.json` | Blackbox Exporter (HTTP Prober) | Uptime & endpoint monitoring |
+| `aws-rds-yace.json` | AWS RDS - Databases & Connections (YACE) | AWS RDS CloudWatch metrics |
+| `aws-ses-yace.json` | AWS SES - Deliverability & Reputation | SES bounce, complaint & volume |
+| `victoriametrics.json` | VictoriaMetrics - Single Node | Metrics storage monitoring |
+| `*` | Alerts Overview (vmalert) | Alerting |
 
 ---
 

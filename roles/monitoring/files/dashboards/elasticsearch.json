@@ -7159,8 +7159,8 @@
   "refresh": false,
   "schemaVersion": 39,
   "tags": [
-    "elasticsearch",
-    "App"
+    "databases",
+    "elasticsearch"
   ],
   "templating": {
     "list": [
@@ -7251,7 +7251,7 @@
         "definition": "",
         "hide": 0,
         "includeAll": false,
-        "label": "Сluster",
+        "label": "Cluster",
         "multi": false,
         "name": "cluster",
         "options": [],
@@ -7276,7 +7276,7 @@
         "definition": "",
         "hide": 0,
         "includeAll": true,
-        "label": "Node name",
+        "label": "Node Name",
         "multi": true,
         "name": "name",
         "options": [],
@@ -7301,7 +7301,7 @@
         "definition": "",
         "hide": 0,
         "includeAll": false,
-        "label": "Source of metrics",
+        "label": "Instance",
         "multi": false,
         "name": "instance",
         "options": [],
@@ -7345,7 +7345,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "ElasticSearch",
+  "title": "Elasticsearch Overview",
   "uid": "cfk1e9klzdhc0c",
   "version": 1,
   "weekStart": ""

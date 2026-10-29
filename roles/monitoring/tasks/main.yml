@@ -64,6 +64,24 @@
   when: is_central | default(false)
   notify: Restart Grafana
 
+- name: Remove unused Proxmox VE dashboard if PVE is disabled
+  ansible.builtin.file:
+    path: "{{ docker_compose_dir }}/grafana/dashboards/proxmox-pve.json"
+    state: absent
+  when:
+    - is_central | default(false)
+    - pve_monitoring_enabled | default(true) == false or vault_pve_token_value is not defined
+  notify: Restart Grafana
+
+- name: Remove unused PBS dashboard if PBS is disabled
+  ansible.builtin.file:
+    path: "{{ docker_compose_dir }}/grafana/dashboards/proxmox-pbs.json"
+    state: absent
+  when:
+    - is_central | default(false)
+    - pbs_monitoring_enabled | default(true) == false or vault_pbs_api_token is not defined
+  notify: Restart Grafana
+
 # Generate docker-compose.yml from template
 - name: Deploy docker-compose.yml template
   ansible.builtin.template:

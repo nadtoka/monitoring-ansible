@@ -3720,7 +3720,11 @@
   "refresh": false,
   "schemaVersion": 30,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "ci-cd",
+    "argocd",
+    "kubernetes"
+  ],
   "templating": {
     "list": [
       {
@@ -3733,7 +3737,7 @@
         "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": null,
+        "label": "Datasource",
         "multi": false,
         "name": "datasource",
         "options": [],
@@ -3752,7 +3756,7 @@
         "error": null,
         "hide": 0,
         "includeAll": true,
-        "label": null,
+        "label": "Namespace",
         "multi": false,
         "name": "namespace",
         "options": [],
@@ -3781,7 +3785,7 @@
         "description": null,
         "error": null,
         "hide": 0,
-        "label": null,
+        "label": "Interval",
         "name": "interval",
         "options": [
           {
@@ -3846,7 +3850,7 @@
         "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": null,
+        "label": "Grouping",
         "multi": false,
         "name": "grouping",
         "options": [
@@ -3879,7 +3883,7 @@
         "error": null,
         "hide": 0,
         "includeAll": true,
-        "label": null,
+        "label": "Cluster",
         "multi": false,
         "name": "cluster",
         "options": [],
@@ -3907,7 +3911,7 @@
         "error": null,
         "hide": 0,
         "includeAll": true,
-        "label": null,
+        "label": "Health Status",
         "multi": false,
         "name": "health_status",
         "options": [
@@ -3962,7 +3966,7 @@
         "error": null,
         "hide": 0,
         "includeAll": true,
-        "label": null,
+        "label": "Sync Status",
         "multi": false,
         "name": "sync_status",
         "options": [

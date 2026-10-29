@@ -844,8 +844,9 @@
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
+    "monitoring",
     "blackbox",
-    "prometheus"
+    "network"
   ],
   "templating": {
     "list": [
@@ -903,7 +904,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Blackbox Exporter (HTTP prober)",
+  "title": "Blackbox Exporter (HTTP Prober)",
   "uid": "NEzutrbMk",
   "version": 15
 }

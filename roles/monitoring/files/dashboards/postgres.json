@@ -2935,15 +2935,14 @@
   "schemaVersion": 19,
   "style": "dark",
   "tags": [
-    "postgres",
-    "db",
-    "stats"
+    "databases",
+    "postgres"
   ],
   "templating": {
     "list": [
       {
         "hide": 0,
-        "label": "datasource",
+        "label": "Datasource",
         "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
@@ -3069,7 +3068,7 @@
         "definition": "",
         "hide": 0,
         "includeAll": true,
-        "label": "Lock table",
+        "label": "Lock Mode",
         "multi": true,
         "name": "mode",
         "options": [],

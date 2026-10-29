@@ -1396,9 +1396,9 @@
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
+    "databases",
     "mysql",
-    "galera",
-    "mariadb"
+    "galera"
   ],
   "templating": {
     "list": [
@@ -1419,7 +1419,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Galera/MariaDB - Overview",
+  "title": "Galera Cluster",
   "uid": "pXgz0qFGk",
   "version": 2
 }

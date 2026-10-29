@@ -10606,7 +10606,10 @@
   "refresh": "30s",
   "schemaVersion": 37,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "databases",
+    "mysql"
+  ],
   "templating": {
     "list": [
       {
@@ -10622,7 +10625,7 @@
         "definition": "label_values(mysql_up, project)",
         "hide": 0,
         "includeAll": false,
-        "label": "project",
+        "label": "Project",
         "multi": false,
         "name": "project",
         "options": [],
@@ -10649,7 +10652,7 @@
         "definition": "label_values(mysql_up, desc)",
         "hide": 0,
         "includeAll": false,
-        "label": "desc",
+        "label": "Description",
         "multi": false,
         "name": "desc",
         "options": [],
@@ -10673,7 +10676,7 @@
           "value": "5m"
         },
         "hide": 0,
-        "label": "interval",
+        "label": "Interval",
         "name": "interval",
         "options": [
           {
@@ -10746,7 +10749,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "MySQL 8.0 Overview",
+  "title": "MySQL Database",
   "uid": "h5IVRZ04k",
   "version": 38,
   "weekStart": "",

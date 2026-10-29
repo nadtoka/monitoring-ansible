@@ -8622,7 +8622,9 @@
   "refresh": "",
   "schemaVersion": 42,
   "tags": [
-    "victoriametrics"
+    "monitoring",
+    "victoriametrics",
+    "infrastructure"
   ],
   "templating": {
     "list": [
@@ -8739,7 +8741,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "VictoriaMetrics - single-node",
+  "title": "VictoriaMetrics - Single Node",
   "uid": "wNf0q_kZk",
   "version": 1,
   "weekStart": "",

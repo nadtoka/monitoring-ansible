@@ -1837,7 +1837,10 @@
   "refresh": "30s",
   "schemaVersion": 39,
   "tags": [
-    "proxmox"
+    "proxmox",
+    "pbs",
+    "backups",
+    "infrastructure"
   ],
   "templating": {
     "list": [
@@ -1860,7 +1863,8 @@
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
-        "type": "query"
+        "type": "query",
+        "label": "Instance"
       },
       {
         "allValue": ".+",
@@ -1880,7 +1884,7 @@
         "definition": "label_values(pbs_size,datastore)",
         "hide": 0,
         "includeAll": true,
-        "label": "Datasource",
+        "label": "Datastore",
         "multi": true,
         "name": "datastore",
         "options": [],
