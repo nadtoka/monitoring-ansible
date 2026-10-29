@@ -152,9 +152,9 @@
                   {
                     "options": {
                       "0": {
-                        "color": "red",
+                        "color": "semi-dark-orange",
                         "index": 0,
-                        "text": "NOK"
+                        "text": "Unverified"
                       },
                       "1": {
                         "color": "green",
