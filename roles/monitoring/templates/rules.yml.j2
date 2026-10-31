@@ -247,7 +247,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          summary: "Закінчується ліміт GitHub API ({{ '{{' }} $labels.org | default('foodtolive') {{ '}}' }})"
+          summary: "Закінчується ліміт GitHub API ({{ '{{' }} $labels.org {{ '}}' }})"
           description: "Залишилося менше 300 запитів до GitHub API (поточний залишок: {{ '{{' }} $value {{ '}}' }})."
 {% endif %}
 
