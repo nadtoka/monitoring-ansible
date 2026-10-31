@@ -290,23 +290,41 @@ groups:
           summary: "Помилка верифікації бекапу PBS ({{ '{{' }} $labels.vm_name {{ '}}' }})"
           description: "Останній бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) на датасторі {{ '{{' }} $labels.datastore {{ '}}' }} не пройшов верифікацію."
 
-      - alert: PBSBackupTooOldDaily
-        expr: (time() - pbs_snapshot_vm_last_timestamp{datastore="hddmirror-pbs-data"}) > 86400 * 2
+      # 1. Щоденні бекапи по буднях (Пн-Пт 22:00) на hddmirror-pbs-data
+      # VMs: 100 (ActiveCollab), 101 (ChimpDestroyer), 105 (Morkva), 107 (Shared), 301 (galera-db1), 305 (postgres-db)
+      # Поріг: 4 дні (враховує вихідні дні Суб-Нед + понеділок до вечора)
+      - alert: PBSBackupTooOldWeekdays
+        expr: (time() - pbs_snapshot_vm_last_timestamp{datastore="hddmirror-pbs-data", vm_id=~"100|101|105|107|301|305"}) > 86400 * 4
         for: 1h
         labels:
           severity: critical
         annotations:
-          summary: "Бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} застарів (понад 2 дні)!"
-          description: "Останній бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) на датасторі {{ '{{' }} $labels.datastore {{ '}}' }} був створений більше 48 годин тому."
+          summary: "Бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} застарів (понад 4 дні)!"
+          description: "Останній бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) на датасторі {{ '{{' }} $labels.datastore {{ '}}' }} був створений більше 4 днів тому (графік: будні Пн-Пт)."
 
+      # 2. Щотижневі бекапи по неділях (Нд 22:00) на hddmirror-pbs-data
+      # VMs: 102 (Elasticsearch), 103 (Paperless-ngx), 104 (Proxy), 110 (EyeOfSauron), 221 (Harbor-Github), 222 (Aragorn), 300 (HAProxy-LB1)
+      # Поріг: 9 днів (7 днів цикл + 2 дні буфер)
+      - alert: PBSBackupTooOldWeeklySunday
+        expr: (time() - pbs_snapshot_vm_last_timestamp{datastore="hddmirror-pbs-data", vm_id=~"102|103|104|110|221|222|300"}) > 86400 * 9
+        for: 1h
+        labels:
+          severity: critical
+        annotations:
+          summary: "Недільний бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} застарів (понад 9 днів)!"
+          description: "Останній недільний бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) на датасторі {{ '{{' }} $labels.datastore {{ '}}' }} був створений більше 9 днів тому (графік: щонеділі)."
+
+      # 3. Офсайт-бекапи у Backblaze B2 (1-а та 3-я субота місяця 22:00)
+      # Поріг: 23 дні (інтервал між 3-ю суботою місяця і 1-ю суботою наступного місяця до 21 дня + 2 дні буфер).
+      # Виключаємо SkyNet (ID 200), оскільки він більше не бекапиться.
       - alert: PBSBackupTooOldB2
-        expr: (time() - pbs_snapshot_vm_last_timestamp{datastore="b2-offsite"}) > 86400 * 16
+        expr: (time() - pbs_snapshot_vm_last_timestamp{datastore="b2-offsite", vm_id!="200"}) > 86400 * 23
         for: 2h
         labels:
           severity: warning
         annotations:
-          summary: "Офсайт-бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} застарів (понад 16 днів)"
-          description: "Останній офсайт-бекап у Backblaze B2 для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) був створений більше 16 днів тому."
+          summary: "Офсайт-бекап для VM {{ '{{' }} $labels.vm_name {{ '}}' }} застарів (понад 23 дні)"
+          description: "Останній офсайт-бекап у Backblaze B2 для VM {{ '{{' }} $labels.vm_name {{ '}}' }} (ID: {{ '{{' }} $labels.vm_id {{ '}}' }}) був створений більше 23 днів тому (графік: 1-а та 3-я субота місяця)."
 {% endif %}
 
 {% if vault_pve_token_value is defined and vault_pve_host is defined and pve_monitoring_enabled | default(true) %}
