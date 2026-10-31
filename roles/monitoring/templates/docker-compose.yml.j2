@@ -79,6 +79,9 @@ services:
       - "{{ grafana_port }}:3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD={{ grafana_admin_password }}
+{% if grafana_root_url is defined %}
+      - GF_SERVER_ROOT_URL={{ grafana_root_url }}
+{% endif %}
     volumes:
       - grafanadata:/var/lib/grafana
       - ./grafana/provisioning/dashboards/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml:ro

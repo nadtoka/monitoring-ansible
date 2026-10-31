@@ -23,6 +23,7 @@ vault_elastic_monitoring_password: "SecurePass"
 
 # Application secrets
 grafana_admin_password: "SecurePass"
+grafana_root_url: "http://eye.example.internal:3000"
 
 # MySQL Exporter passowrd
 vault_mysql_exporter_password: "SecurePass"
