@@ -11,13 +11,22 @@ groups:
           description: "Node Exporter не відповідає більше 5 хвилин."
 
       - alert: DiskSpaceLow
-        expr: (node_filesystem_avail_bytes{mountpoint="/"} * 100) / node_filesystem_size_bytes{mountpoint="/"} < 15
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} * 100) / node_filesystem_size_bytes{mountpoint="/"} < 10
         for: 5m
         labels:
           severity: warning
         annotations:
           summary: "Мало місця на диску на {{ '{{' }} $labels.alias {{ '}}' }}"
-          description: "На розділі / залишилося менше 15% вільного місця (зараз: {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}%)."
+          description: "На розділі / залишилося менше 10% вільного місця (зараз: {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}%)."
+
+      - alert: DiskSpaceCritical
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} * 100) / node_filesystem_size_bytes{mountpoint="/"} < 5
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Критично мало місця на диску на {{ '{{' }} $labels.alias {{ '}}' }}!"
+          description: "На розділі / залишилося менше 5% вільного місця (зараз: {{ '{{' }} $value | printf \"%.2f\" {{ '}}' }}%). Загроза переповнення диска!"
 
       - alert: HostHighCpuLoad
         expr: 100 - (avg by(instance, alias) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 95
@@ -376,11 +385,11 @@ groups:
           description: "Сховище {{ '{{' }} $labels.storage {{ '}}' }} на ноді {{ '{{' }} $labels.node {{ '}}' }} знаходиться в неактивному/офлайн стані понад 5 хвилин."
 
       - alert: ProxmoxGuestDown
-        expr: pve_up{id=~"(qemu|lxc)/.+"} == 0
+        expr: (pve_up{id=~"(qemu|lxc)/.+", id!="qemu/200"} == 0) * on(id, instance) group_left(name, node) (pve_guest_info{template!="1"})
         for: 5m
         labels:
           severity: warning
         annotations:
-          summary: "Proxmox гість зупинений (ID: {{ '{{' }} $labels.id {{ '}}' }})"
-          description: "Віртуальна машина або контейнер {{ '{{' }} $labels.id {{ '}}' }} на ноді {{ '{{' }} $labels.node {{ '}}' }} зупинена понад 5 хвилин."
+          summary: "Proxmox гість зупинений ({{ '{{' }} $labels.name {{ '}}' }})"
+          description: "Віртуальна машина або контейнер {{ '{{' }} $labels.name {{ '}}' }} (ID: {{ '{{' }} $labels.id {{ '}}' }}) на ноді {{ '{{' }} $labels.node {{ '}}' }} зупинена понад 5 хвилин."
 {% endif %}
