@@ -112,7 +112,7 @@ services:
 
 {% if vault_aws_rds_endpoint is defined and vault_aws_rds_exporter_password is defined %}
   rds-mysqld-exporter:
-    image: prom/mysqld-exporter:v0.15.1
+    image: prom/mysqld-exporter:v0.14.0
     container_name: rds-mysqld-exporter
     ports:
       - "9105:9104"
@@ -126,6 +126,7 @@ services:
       - "--collect.info_schema.innodb_metrics"
       - "--collect.global_status"
       - "--collect.global_variables"
+      - "--no-collect.slave_status"
     restart: always
 {% endif %}
 
