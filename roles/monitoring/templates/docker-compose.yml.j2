@@ -110,6 +110,25 @@ services:
     restart: always
 {% endif %}
 
+{% if vault_aws_rds_endpoint is defined and vault_aws_rds_exporter_password is defined %}
+  rds-mysqld-exporter:
+    image: prom/mysqld-exporter:v0.15.1
+    container_name: rds-mysqld-exporter
+    ports:
+      - "9105:9104"
+    environment:
+      DATA_SOURCE_NAME: "{{ vault_aws_rds_exporter_user | default('mysqld_exporter') }}:{{ vault_aws_rds_exporter_password }}@({{ vault_aws_rds_endpoint }})/"
+    command:
+      - "--collect.info_schema.processlist"
+      - "--collect.info_schema.tables"
+      - "--collect.info_schema.tablestats"
+      - "--collect.info_schema.userstats"
+      - "--collect.info_schema.innodb_metrics"
+      - "--collect.global_status"
+      - "--collect.global_variables"
+    restart: always
+{% endif %}
+
 {% if vault_github_token is defined and vault_github_org is defined %}
   githubrunner-exporter:
     image: ghcr.io/mkrakowitzer/githubrunner_exporter:latest

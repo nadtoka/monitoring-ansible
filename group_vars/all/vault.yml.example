@@ -17,6 +17,11 @@ vault_aws_ssh_port: 22
 vault_aws_yace_access_key: "AKIAxxxxxxxxxxxxxxxx"
 vault_aws_yace_secret_key: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
+# AWS RDS MySQL Exporter (Internal schema & connection metrics)
+vault_aws_rds_endpoint: "production-databases.xxxxxxxxx.us-east-1.rds.amazonaws.com:3306"
+vault_aws_rds_exporter_user: "mysqld_exporter"
+vault_aws_rds_exporter_password: "SecurePass"
+
 # Elastic admin and remote_monitoring_user passwords
 vault_elastic_admin_password: "SecurePass"
 vault_elastic_monitoring_password: "SecurePass"

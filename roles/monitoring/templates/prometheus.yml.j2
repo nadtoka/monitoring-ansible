@@ -224,6 +224,19 @@ scrape_configs:
           service_type: 'rds'
 {% endif %}
 
+{% if vault_aws_rds_endpoint is defined and vault_aws_rds_exporter_password is defined %}
+  # 9.1 AWS RDS MySQL Exporter (Internal schema & connection metrics)
+  - job_name: 'aws-rds-mysql'
+    scrape_interval: 1m
+    scrape_timeout: 30s
+    static_configs:
+      - targets: ['rds-mysqld-exporter:9104']
+        labels:
+          service_type: 'rds-mysql'
+          alias: 'AWS-RDS'
+          project: 'production-databases'
+{% endif %}
+
 {% if vault_github_token is defined and vault_github_org is defined %}
   # 10. GitHub Actions Runners monitoring
   - job_name: 'github-runners'
