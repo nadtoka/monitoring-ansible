@@ -121,7 +121,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_static{release=\"$release\", instance=\"$instance\"}",
+          "expr": "pg_static{instance=~\"$instance\"}",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -205,7 +205,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_postmaster_start_time_seconds{release=\"$release\", instance=\"$instance\"} * 1000",
+          "expr": "process_start_time_seconds{instance=~\"$instance\"} * 1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -371,7 +371,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "SUM(pg_stat_database_tup_inserted{release=\"$release\", datname=~\"$datname\", instance=~\"$instance\"})",
+          "expr": "SUM(pg_stat_database_tup_inserted{datname=~\"$datname\", instance=~\"$instance\"})",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A",
@@ -536,7 +536,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_settings_max_connections{release=\"$release\", instance=\"$instance\"}",
+          "expr": "pg_settings_max_connections{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -598,7 +598,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(rate(process_cpu_seconds_total{release=\"$release\", instance=\"$instance\"}[5m]) * 1000)",
+          "expr": "avg(rate(process_cpu_seconds_total{instance=~\"$instance\"}[5m]) * 1000)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "CPU Time",
@@ -689,14 +689,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(rate(process_resident_memory_bytes{release=\"$release\", instance=\"$instance\"}[5m]))",
+          "expr": "avg(rate(process_resident_memory_bytes{instance=~\"$instance\"}[5m]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Resident Mem",
           "refId": "A"
         },
         {
-          "expr": "avg(rate(process_virtual_memory_bytes{release=\"$release\", instance=\"$instance\"}[5m]))",
+          "expr": "avg(rate(process_virtual_memory_bytes{instance=~\"$instance\"}[5m]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Virtual Mem",
@@ -788,7 +788,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "process_open_fds{release=\"$release\", instance=\"$instance\"}",
+          "expr": "process_open_fds{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Open FD",
@@ -912,7 +912,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_settings_shared_buffers_bytes{instance=\"$instance\"}",
+          "expr": "pg_settings_shared_buffers_bytes{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -993,7 +993,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_settings_effective_cache_size_bytes{instance=\"$instance\"}",
+          "expr": "pg_settings_effective_cache_size_bytes{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -1074,7 +1074,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_settings_maintenance_work_mem_bytes{instance=\"$instance\"}",
+          "expr": "pg_settings_maintenance_work_mem_bytes{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -1155,7 +1155,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_settings_work_mem_bytes{instance=\"$instance\"}",
+          "expr": "pg_settings_work_mem_bytes{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -1238,7 +1238,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_settings_max_wal_size_bytes{instance=\"$instance\"}",
+          "expr": "pg_settings_max_wal_size_bytes{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -1319,7 +1319,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_settings_random_page_cost{instance=\"$instance\"}",
+          "expr": "pg_settings_random_page_cost{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -1481,7 +1481,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_settings_max_worker_processes{instance=\"$instance\"}",
+          "expr": "pg_settings_max_worker_processes{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -1562,7 +1562,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "pg_settings_max_parallel_workers{instance=\"$instance\"}",
+          "expr": "pg_settings_max_parallel_workers{instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -1733,14 +1733,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(pg_stat_database_xact_commit{instance=\"$instance\", datname=~\"$datname\"}[5m])",
+          "expr": "irate(pg_stat_database_xact_commit{instance=~\"$instance\", datname=~\"$datname\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{datname}} commits",
           "refId": "A"
         },
         {
-          "expr": "irate(pg_stat_database_xact_rollback{instance=\"$instance\", datname=~\"$datname\"}[5m])",
+          "expr": "irate(pg_stat_database_xact_rollback{instance=~\"$instance\", datname=~\"$datname\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{datname}} rollbacks",
@@ -2491,7 +2491,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pg_stat_database_blks_hit{instance=\"$instance\", datname=~\"$datname\"} / (pg_stat_database_blks_read{instance=\"$instance\", datname=~\"$datname\"} + pg_stat_database_blks_hit{instance=\"$instance\", datname=~\"$datname\"})",
+          "expr": "pg_stat_database_blks_hit{instance=~\"$instance\", datname=~\"$datname\"} / (pg_stat_database_blks_read{instance=~\"$instance\", datname=~\"$datname\"} + pg_stat_database_blks_hit{instance=~\"$instance\", datname=~\"$datname\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{ datname }}",
@@ -2579,35 +2579,35 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(pg_stat_bgwriter_buffers_backend{instance=\"$instance\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_buffers_backend{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "buffers_backend",
           "refId": "A"
         },
         {
-          "expr": "irate(pg_stat_bgwriter_buffers_alloc{instance=\"$instance\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_buffers_alloc{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "buffers_alloc",
           "refId": "B"
         },
         {
-          "expr": "irate(pg_stat_bgwriter_buffers_backend_fsync{instance=\"$instance\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_buffers_backend_fsync{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "backend_fsync",
           "refId": "C"
         },
         {
-          "expr": "irate(pg_stat_bgwriter_buffers_checkpoint{instance=\"$instance\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_buffers_checkpoint{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "buffers_checkpoint",
           "refId": "D"
         },
         {
-          "expr": "irate(pg_stat_bgwriter_buffers_clean{instance=\"$instance\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_buffers_clean{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "buffers_clean",
@@ -2695,14 +2695,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(pg_stat_database_conflicts{instance=\"$instance\", datname=~\"$datname\"}[5m])",
+          "expr": "irate(pg_stat_database_conflicts{instance=~\"$instance\", datname=~\"$datname\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{datname}} conflicts",
           "refId": "B"
         },
         {
-          "expr": "irate(pg_stat_database_deadlocks{instance=\"$instance\", datname=~\"$datname\"}[5m])",
+          "expr": "irate(pg_stat_database_deadlocks{instance=~\"$instance\", datname=~\"$datname\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{datname}} deadlocks",
@@ -2790,7 +2790,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(pg_stat_database_temp_bytes{instance=\"$instance\", datname=~\"$datname\"}[5m])",
+          "expr": "irate(pg_stat_database_temp_bytes{instance=~\"$instance\", datname=~\"$datname\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{datname}}",
@@ -2876,14 +2876,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(pg_stat_bgwriter_checkpoint_write_time{instance=\"$instance\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_checkpoint_write_time{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "write_time - Total amount of time that has been spent in the portion of checkpoint processing where files are written to disk.",
           "refId": "B"
         },
         {
-          "expr": "irate(pg_stat_bgwriter_checkpoint_sync_time{instance=\"$instance\"}[5m])",
+          "expr": "irate(pg_stat_bgwriter_checkpoint_sync_time{instance=~\"$instance\"}[5m])",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "sync_time - Total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk.",
@@ -3009,7 +3009,7 @@
         "type": "interval"
       },
       {
-        "allValue": ".*",
+        "allValue": "",
         "current": {},
         "datasource": {
           "type": "prometheus",
@@ -3017,9 +3017,9 @@
         },
         "definition": "label_values(pg_up, instance)",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Instance",
-        "multi": true,
+        "multi": false,
         "name": "instance",
         "options": [],
         "query": "label_values(pg_up, instance)",
