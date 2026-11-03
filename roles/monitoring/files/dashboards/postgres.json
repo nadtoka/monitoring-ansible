@@ -78,8 +78,8 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 2,
-        "w": 4,
+        "h": 3,
+        "w": 8,
         "x": 0,
         "y": 1
       },
@@ -162,9 +162,9 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 2,
-        "w": 4,
-        "x": 4,
+        "h": 3,
+        "w": 8,
+        "x": 8,
         "y": 1
       },
       "id": 28,
@@ -244,10 +244,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 2,
-        "w": 4,
-        "x": 8,
-        "y": 1
+        "h": 3,
+        "w": 8,
+        "x": 0,
+        "y": 4
       },
       "height": "200px",
       "id": 10,
@@ -327,10 +327,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 2,
-        "w": 4,
-        "x": 12,
-        "y": 1
+        "h": 3,
+        "w": 8,
+        "x": 8,
+        "y": 4
       },
       "height": "200px",
       "id": 11,
@@ -410,10 +410,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 2,
-        "w": 4,
+        "h": 3,
+        "w": 8,
         "x": 16,
-        "y": 1
+        "y": 4
       },
       "height": "200px",
       "id": 12,
@@ -493,9 +493,9 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 2,
-        "w": 4,
-        "x": 20,
+        "h": 3,
+        "w": 8,
+        "x": 16,
         "y": 1
       },
       "id": 38,
@@ -565,10 +565,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
+        "h": 8,
+        "w": 12,
         "x": 0,
-        "y": 3
+        "y": 7
       },
       "id": 22,
       "legend": {
@@ -579,7 +579,8 @@
         "min": true,
         "show": true,
         "total": false,
-        "values": true
+        "values": true,
+        "rightSide": false
       },
       "lines": true,
       "linewidth": 1,
@@ -656,10 +657,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 8,
-        "y": 3
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 7
       },
       "id": 24,
       "legend": {
@@ -670,7 +671,8 @@
         "min": true,
         "show": true,
         "total": false,
-        "values": true
+        "values": true,
+        "rightSide": false
       },
       "lines": true,
       "linewidth": 1,
@@ -755,10 +757,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 16,
-        "y": 3
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 15
       },
       "id": 26,
       "legend": {
@@ -769,7 +771,8 @@
         "min": true,
         "show": true,
         "total": false,
-        "values": true
+        "values": true,
+        "rightSide": false
       },
       "lines": true,
       "linewidth": 1,
@@ -843,7 +846,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 23
       },
       "id": 32,
       "panels": [],
@@ -870,9 +873,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 3,
+        "w": 8,
         "x": 0,
-        "y": 11
+        "y": 24
       },
       "id": 40,
       "interval": null,
@@ -951,9 +954,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 11
+        "w": 8,
+        "x": 8,
+        "y": 24
       },
       "id": 42,
       "interval": null,
@@ -1032,9 +1035,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 11
+        "w": 8,
+        "x": 16,
+        "y": 24
       },
       "id": 44,
       "interval": null,
@@ -1113,9 +1116,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 11
+        "w": 8,
+        "x": 0,
+        "y": 27
       },
       "id": 46,
       "interval": null,
@@ -1196,9 +1199,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 12,
-        "y": 11
+        "w": 8,
+        "x": 8,
+        "y": 27
       },
       "id": 48,
       "interval": null,
@@ -1277,9 +1280,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 3,
-        "x": 15,
-        "y": 11
+        "w": 8,
+        "x": 16,
+        "y": 27
       },
       "id": 50,
       "interval": null,
@@ -1358,9 +1361,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2,
-        "x": 18,
-        "y": 11
+        "w": 8,
+        "x": 0,
+        "y": 30
       },
       "id": 52,
       "interval": null,
@@ -1439,9 +1442,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2,
-        "x": 20,
-        "y": 11
+        "w": 8,
+        "x": 8,
+        "y": 30
       },
       "id": 54,
       "interval": null,
@@ -1520,9 +1523,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2,
-        "x": 22,
-        "y": 11
+        "w": 8,
+        "x": 16,
+        "y": 30
       },
       "id": 56,
       "interval": null,
@@ -1587,7 +1590,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 33
       },
       "id": 30,
       "panels": [],
@@ -1603,10 +1606,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
+        "h": 9,
+        "w": 12,
         "x": 0,
-        "y": 15
+        "y": 34
       },
       "id": 1,
       "legend": {
@@ -1615,7 +1618,7 @@
         "current": true,
         "max": true,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sort": "current",
         "sortDesc": true,
@@ -1699,10 +1702,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 8,
-        "y": 15
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 34
       },
       "id": 60,
       "legend": {
@@ -1711,7 +1714,7 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "total": true,
         "values": true
@@ -1797,10 +1800,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 16,
-        "y": 15
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 43
       },
       "id": 8,
       "legend": {
@@ -1809,7 +1812,7 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sideWidth": null,
         "sort": "current",
@@ -1892,10 +1895,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 0,
-        "y": 22
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 43
       },
       "id": 5,
       "legend": {
@@ -1904,7 +1907,7 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sort": "current",
         "sortDesc": true,
@@ -1986,10 +1989,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 8,
-        "y": 22
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 52
       },
       "id": 6,
       "legend": {
@@ -1998,7 +2001,7 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sort": "current",
         "sortDesc": true,
@@ -2081,10 +2084,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 16,
-        "y": 22
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 70
       },
       "id": 3,
       "legend": {
@@ -2094,7 +2097,7 @@
         "hideEmpty": false,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sort": "current",
         "sortDesc": true,
@@ -2177,10 +2180,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
+        "h": 9,
+        "w": 12,
         "x": 0,
-        "y": 29
+        "y": 61
       },
       "id": 14,
       "legend": {
@@ -2189,7 +2192,7 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sort": "total",
         "sortDesc": true,
@@ -2271,10 +2274,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 8,
-        "y": 29
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 61
       },
       "id": 4,
       "legend": {
@@ -2283,7 +2286,7 @@
         "current": true,
         "max": true,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sort": "current",
         "sortDesc": false,
@@ -2365,10 +2368,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 16,
-        "y": 29
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 52
       },
       "id": 7,
       "legend": {
@@ -2377,7 +2380,7 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sort": "current",
         "sortDesc": true,
@@ -2459,10 +2462,10 @@
       "decimals": 2,
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 0,
-        "y": 36
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 70
       },
       "id": 62,
       "legend": {
@@ -2471,7 +2474,7 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "total": false,
         "values": true
@@ -2547,10 +2550,10 @@
       "datasource": "victoriametrics",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 8,
-        "y": 36
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 79
       },
       "id": 64,
       "legend": {
@@ -2559,7 +2562,7 @@
         "current": true,
         "max": true,
         "min": true,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "total": false,
         "values": true
@@ -2663,10 +2666,10 @@
       "decimals": 0,
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 16,
-        "y": 36
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 79
       },
       "id": 66,
       "legend": {
@@ -2675,7 +2678,7 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "total": true,
         "values": true
@@ -2758,10 +2761,10 @@
       "description": "Total amount of data written to temporary files by queries in this database. All temporary files are counted, regardless of why the temporary file was created, and regardless of the log_temp_files setting.",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 8,
+        "h": 9,
+        "w": 12,
         "x": 0,
-        "y": 43
+        "y": 88
       },
       "id": 68,
       "legend": {
@@ -2770,7 +2773,7 @@
         "current": true,
         "max": false,
         "min": false,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "total": true,
         "values": true
@@ -2845,10 +2848,10 @@
       "datasource": "victoriametrics",
       "fill": 1,
       "gridPos": {
-        "h": 7,
-        "w": 16,
-        "x": 8,
-        "y": 43
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 88
       },
       "id": 70,
       "legend": {
@@ -2859,7 +2862,8 @@
         "min": true,
         "show": true,
         "total": false,
-        "values": true
+        "values": true,
+        "rightSide": false
       },
       "lines": true,
       "linewidth": 1,
