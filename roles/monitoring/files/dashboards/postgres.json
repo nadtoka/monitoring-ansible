@@ -2548,128 +2548,13 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "victoriametrics",
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 79
-      },
-      "id": 64,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "irate(pg_stat_bgwriter_buffers_backend{instance=~\"$instance\"}[5m])",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "buffers_backend",
-          "refId": "A"
-        },
-        {
-          "expr": "irate(pg_stat_bgwriter_buffers_alloc{instance=~\"$instance\"}[5m])",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "buffers_alloc",
-          "refId": "B"
-        },
-        {
-          "expr": "irate(pg_stat_bgwriter_buffers_backend_fsync{instance=~\"$instance\"}[5m])",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "backend_fsync",
-          "refId": "C"
-        },
-        {
-          "expr": "irate(pg_stat_bgwriter_buffers_checkpoint{instance=~\"$instance\"}[5m])",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "buffers_checkpoint",
-          "refId": "D"
-        },
-        {
-          "expr": "irate(pg_stat_bgwriter_buffers_clean{instance=~\"$instance\"}[5m])",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "buffers_clean",
-          "refId": "E"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Buffers (bgwriter)",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "victoriametrics",
       "decimals": 0,
       "fill": 1,
       "gridPos": {
-        "h": 9,
+        "x": 0,
+        "y": 79,
         "w": 12,
-        "x": 12,
-        "y": 79
+        "h": 9
       },
       "id": 66,
       "legend": {
@@ -2761,10 +2646,10 @@
       "description": "Total amount of data written to temporary files by queries in this database. All temporary files are counted, regardless of why the temporary file was created, and regardless of the log_temp_files setting.",
       "fill": 1,
       "gridPos": {
-        "h": 9,
+        "x": 12,
+        "y": 79,
         "w": 12,
-        "x": 0,
-        "y": 88
+        "h": 9
       },
       "id": 68,
       "legend": {
@@ -2824,100 +2709,6 @@
           "logBase": 1,
           "max": null,
           "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "victoriametrics",
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 88
-      },
-      "id": 70,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": true,
-        "max": true,
-        "min": true,
-        "show": true,
-        "total": false,
-        "values": true,
-        "rightSide": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "irate(pg_stat_bgwriter_checkpoint_write_time{instance=~\"$instance\"}[5m])",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "write_time - Total amount of time that has been spent in the portion of checkpoint processing where files are written to disk.",
-          "refId": "B"
-        },
-        {
-          "expr": "irate(pg_stat_bgwriter_checkpoint_sync_time{instance=~\"$instance\"}[5m])",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "sync_time - Total amount of time that has been spent in the portion of checkpoint processing where files are synchronized to disk.",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Checkpoint Stats",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ms",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
